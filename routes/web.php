@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PortalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
-Route::get('/detailberita', function () {
-    return view('detailberita');
-});
+Route::get('/', [PortalController::class, 'index'])->name('home');
+Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('home');
