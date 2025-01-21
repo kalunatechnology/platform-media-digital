@@ -370,7 +370,7 @@
 
         .right-sidebar {
             flex: 1;
-            max-width: 20%;
+            max-width: 25%;
         }
 
         .categories,
@@ -382,8 +382,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             /* Add padding to avoid content sticking to the edges */
-            margin: 0 10px 20px 10px;
-            /* Reduce left-right margin */
+            margin: 0 20px 20px 20px;
+            /* Increase left-right margin */
         }
 
         .categories ul,
@@ -483,6 +483,91 @@
             color: #6f42c1;
         }
 
+        /* Latest Post */
+
+        .latest-posts h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel {
+            display: flex;
+            flex-direction: column;
+            /* Arrange items vertically */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .carousel-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            /* Gambar memenuhi kontainer */
+            height: 100%;
+            /* Gambar memenuhi kontainer */
+            object-fit: cover;
+            /* Memastikan gambar tetap proporsional */
+        }
+
+        .image-wrapper {
+            width: 60px;
+            /* Dimensi kotak */
+            height: 60px;
+            /* Dimensi kotak */
+            overflow: hidden;
+            /* Memotong gambar yang berlebih */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            /* Membuat sudut melengkung */
+            background: #f0f0f0;
+            /* Memberikan latar belakang jika gambar belum dimuat */
+        }
+
+        .carousel-item p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px;
+            gap: 5px;
+        }
+
+        .carousel-btn {
+            background-color: #f5f5f5;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background-color: #ddd;
+            transform: scale(1.1);
+        }
 
 
 
@@ -878,26 +963,37 @@
             </div>
 
             <div class="latest-posts">
-                <h3>Latest Posts</h3>
+                <h3>Recent Posts</h3>
                 <div class="carousel-controls">
-                    <button>&lt;</button>
-                    <button>&gt;</button>
+                    <button class="carousel-btn prev">&lt;</button>
+                    <button class="carousel-btn next">&gt;</button>
                 </div>
-                <ul>
-                    <li>
-                        <img src="post-thumbnail.jpg" alt="Post Thumbnail">
-                        <p>Post Title</p>
-                    </li>
-                    <li>
-                        <img src="post-thumbnail.jpg" alt="Post Thumbnail">
-                        <p>Post Title</p>
-                    </li>
-                    <li>
-                        <img src="post-thumbnail.jpg" alt="Post Thumbnail">
-                        <p>Post Title</p>
-                    </li>
-                </ul>
+                <div class="carousel-container">
+    <ul class="carousel">
+        <li class="carousel-item">
+            <div class="image-wrapper">
+                <img src="images/image1.jpg" alt="Post Thumbnail">
             </div>
+            <p>Everything you ever need to know about flowers</p>
+        </li>
+        <li class="carousel-item">
+            <div class="image-wrapper">
+                <img src="images/image2.jpg" alt="Post Thumbnail">
+            </div>
+            <p>Coffee and lemons don’t go together that well</p>
+        </li>
+        <li class="carousel-item">
+            <div class="image-wrapper">
+                <img src="images/image3.jpg" alt="Post Thumbnail">
+            </div>
+            <p>Did you know that plants actually have a secret life?</p>
+        </li>
+    </ul>
+</div>
+
+            </div>
+
+
         </div>
     </div>
 
@@ -952,6 +1048,41 @@
 
         navbarToggle.addEventListener('click', () => {
             navbarLinks.classList.toggle('active');
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.carousel');
+            const items = Array.from(carousel.children);
+            const prevButton = document.querySelector('.carousel-btn.prev');
+            const nextButton = document.querySelector('.carousel-btn.next');
+
+            let currentIndex = 0;
+
+            const updateCarousel = () => {
+                items.forEach((item, index) => {
+                    item.style.display = index >= currentIndex && index < currentIndex + 3 ?
+                        'flex' : 'none';
+                });
+            };
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < items.length - 3) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+
+            updateCarousel(); // Initialize carousel
         });
 
     </script>
