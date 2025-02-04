@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortalController::class, 'index'])->name('home');
 Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('home');
+Route::get('/author', [PortalController::class, 'author'])->name('home');
+Route::get('/category', [PortalController::class, 'category'])->name('category');
+Route::get('category/detailcategory', [PortalController::class, 'detailcategory'])->name('detailcategory');
 
 Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

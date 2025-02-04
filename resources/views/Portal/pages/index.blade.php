@@ -450,6 +450,13 @@
             color: black;
         }
 
+        .author img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
         .author1 {
             display: flex;
             align-items: center;
@@ -464,12 +471,7 @@
             margin-right: 10px;
         }
 
-        .author img {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+
 
         /* Mobile View */
         @media (max-width: 768px) {

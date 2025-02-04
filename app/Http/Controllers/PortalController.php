@@ -15,6 +15,24 @@ class PortalController extends Controller
     public function detailberita ()
     {
 
-        return view("Portal.pages.index");
+        return view("Portal.pages.detailberita");
+    }
+
+    public function author ()
+    {
+
+        return view("Portal.pages.author");
+    }
+
+    public function category ()
+    {
+
+        return view("Portal.pages.category");
+    }
+
+    public function detailcategory ()
+    {
+
+        return view("Portal.pages.detailcategory");
     }
 }
