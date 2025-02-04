@@ -224,7 +224,7 @@
             background-color: whitesmoke;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 10px;
             /* Add padding to avoid content sticking to the edges */
             margin: 0 2px 10px 2px;
             /* Reduce left-right margin */
@@ -233,31 +233,36 @@
         .social-icons1 {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 25px;
+            /* Mengatur agar ikon ditata secara vertikal */
+            gap: 10px;
+            /* Mengurangi jarak antar ikon */
         }
 
         .social-icons1 a {
-            display: block;
-            width: 40px;
-            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s ease;
         }
 
         .social-icons1 a:hover {
             transform: scale(1.1);
+            /* Memberikan efek zoom sedikit pada hover */
         }
 
-        /* Image Styling */
         .social-icon1 {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            transition: filter 0.3s ease;
+            width: 30px;
+            /* Ukuran tetap untuk ikon */
+            height: 30px;
+            /* Ukuran tetap untuk ikon */
+            object-fit: contain;
+            /* Pastikan gambar tidak terdistorsi */
         }
 
-        .social-icon1:hover {
-            filter: grayscale(100%);
+        /* Tambahkan efek hover untuk ikon */
+        .social-icons1 a:hover .social-icon1 {
+            opacity: 0.8;
+            /* Mengurangi opacity saat di-hover */
         }
 
         .main-content {
@@ -332,7 +337,7 @@
         }
 
         .author-info h3 {
-            font-size: 18px;
+            font-size: 24px;
             margin-bottom: 5px;
         }
 
@@ -359,18 +364,268 @@
             cursor: pointer;
         }
 
-        .recent-posts ul {
-            list-style: none;
+        .recent-posts {
+            padding: 20px;
         }
 
-        .recent-posts ul li {
-            margin-bottom: 10px;
-            font-size: 14px;
+        .recent-posts h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
+
+        .articles-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* Hanya satu artikel per baris */
+            gap: 20px;
+        }
+
+        .news-card {
+            display: flex;
+            gap: 15px;
+            /* Ruang antara gambar dan konten */
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            width: 30%;
+            /* Lebar gambar 30% */
+            height: 150px;
+            /* Sesuaikan tinggi gambar */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .category {
+            padding: 2px 6px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .news-content h3 a {
+            display: inline-block;
+            color: black;
+            text-decoration: none;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .news-content h3 a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff5722;
+            transition: width 0.3s ease;
+        }
+
+        .news-content h3 a:hover::after {
+            width: 100%;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+        }
+
+        .author img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .articles-list {
+                grid-template-columns: 1fr;
+                /* Tetap 1 kolom pada tablet */
+            }
+
+            .news-card {
+                flex-direction: column;
+                /* Gambar berada di atas teks pada layar kecil */
+            }
+
+            .news-image {
+                width: 100%;
+                /* Gambar 100% lebar pada tablet */
+                height: 150px;
+                /* Sesuaikan tinggi gambar */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .articles-list {
+                grid-template-columns: 1fr;
+                /* Tetap 1 kolom pada ponsel */
+            }
+
+            .news-card {
+                flex-direction: column;
+                /* Gambar berada di atas teks pada layar kecil */
+            }
+
+            .news-image {
+                width: 100%;
+                /* Gambar 100% lebar pada ponsel */
+                height: 150px;
+                /* Sesuaikan tinggi gambar */
+            }
+        }
+
+
+/* Section Komentar */
+.comment-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-form label {
+    font-size: 16px;
+    color: #333;
+}
+
+.comment-form input,
+.comment-form textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.comment-form button {
+    padding: 10px 15px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.comment-form button:hover {
+    background-color: #e64a19;
+}
+
+.comment-list {
+    margin-top: 30px;
+}
+
+.comment {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+    .comment-form input,
+    .comment-form textarea {
+        font-size: 14px;
+    }
+
+    .comment-form button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .comment-list .comment {
+        padding: 10px;
+    }
+
+    .comment-author {
+        font-size: 13px;
+    }
+
+    .comment-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comment-form input,
+    .comment-form textarea {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .comment-form button {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .comment-list .comment {
+        padding: 8px;
+    }
+}
+
+
+
 
         .right-sidebar {
             flex: 1;
-            max-width: 25%;
+            max-width: 30%;
+            /* Lebarkan sidebar */
         }
 
         .categories,
@@ -381,9 +636,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            /* Add padding to avoid content sticking to the edges */
-            margin: 0 20px 20px 20px;
-            /* Increase left-right margin */
+            /* Padding tetap untuk kenyamanan */
+            margin: 0 40px 20px 40px;
+            /* Tambahkan margin kiri-kanan lebih besar */
+            max-width: 90%;
+            /* Card lebih lebar, sesuaikan proporsi */
+            width: 100%;
+            /* Card memenuhi ruang sidebar */
         }
 
         .categories ul,
@@ -486,9 +745,31 @@
         /* Latest Post */
 
         .latest-posts h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            /* Menyebarkan ruang antara judul dan tombol */
+            align-items: center;
+            /* Menjaga agar tombol dan teks sejajar vertikal */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .carousel-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            color: #ff5722;
+            /* Mengubah warna tombol saat hover */
+        }
+
+        .latest-posts h3 .carousel-btn {
+            margin-left: 20px;
+            /* Memberikan jarak antara tombol dan judul */
         }
 
         .carousel-container {
@@ -509,46 +790,61 @@
         .carousel-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 10px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .carousel-item img {
-            width: 100%;
-            /* Gambar memenuhi kontainer */
-            height: 100%;
-            /* Gambar memenuhi kontainer */
-            object-fit: cover;
-            /* Memastikan gambar tetap proporsional */
+        .carousel-item:hover {
+            transform: translateY(-5px);
+            /* Card melayang sedikit ke atas */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* Bayangan lebih dalam */
         }
 
-        .image-wrapper {
-            width: 60px;
-            /* Dimensi kotak */
-            height: 60px;
-            /* Dimensi kotak */
+        .carousel-item .image-wrapper {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
             overflow: hidden;
-            /* Memotong gambar yang berlebih */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            /* Membuat sudut melengkung */
-            background: #f0f0f0;
-            /* Memberikan latar belakang jika gambar belum dimuat */
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .carousel-item .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+            /* Tambahkan transisi untuk opacity */
+        }
+
+        .carousel-item:hover .image-wrapper img {
+            opacity: 0.7;
+            /* Gambar akan sedikit transparan saat di-hover */
         }
 
         .carousel-item p {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #333;
             margin: 0;
+            font-size: 14px;
+            color: #333;
+            transition: color 0.3s ease;
+            /* Tambahkan transisi untuk warna teks */
         }
+
+        .carousel-item:hover p {
+            color: #ff5722;
+            /* Judul berubah warna menjadi #ff5722 saat di-hover */
+        }
+
 
         .carousel-controls {
             display: flex;
             justify-content: flex-end;
-            margin-top: 5px;
+            margin: 20px 0;
             gap: 5px;
         }
 
@@ -897,7 +1193,7 @@
             <div class="author-profile">
                 <img src="images/user-icon.png" alt="Author">
                 <div class="author-info">
-                    <h3>Author Name</h3>
+                    <h3>John Doe</h3>
                     <p>Short description about the author.</p>
                     <div class="author-actions">
                         <button>View All Posts</button>
@@ -910,13 +1206,78 @@
             <div class="divider"></div>
 
             <div class="recent-posts">
-                <h3>Recent Posts</h3>
-                <ul>
-                    <li>Post 1</li>
-                    <li>Post 2</li>
-                    <li>Post 3</li>
-                </ul>
+                <h3>Artikel Penulis</h3>
+                <div class="articles-list">
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('images/image1.jpg');"></div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #3498db;">Teknologi</span>
+                            <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By John Doe</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('images/image2.jpg');"></div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #e74c3c;">Ekonomi</span>
+                            <h3><a href="#">Ekonomi Digital: Peluang dan Tantangan</a></h3>
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By John Doe</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('images/image3.jpg');"></div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #2ecc71;">Lingkungan</span>
+                            <h3><a href="#">Menyelamatkan Bumi: Langkah-langkah Sederhana</a></h3>
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By John Doe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+                <!-- Berikan Komentar Section -->
+<div class="comment-section">
+    <h3>Berikan Komentar</h3>
+    <form class="comment-form">
+        <label for="comment">Komentar:</label>
+        <textarea id="comment" name="comment" placeholder="Tulis komentar Anda disini..." required></textarea>
+
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Email Anda" required>
+
+        <label for="city">Asal Kota:</label>
+        <input type="text" id="city" name="city" placeholder="Kota Asal Anda" required>
+
+        <button type="submit">Submit Comment</button>
+    </form>
+
+    <!-- Comment List -->
+    <div class="comment-list">
+        <!-- Example of posted comments -->
+        <div class="comment">
+            <div class="comment-author">John Doe (Semarang)</div>
+            <p class="comment-text">Revolusi Teknologi di tahun 2024 sangat menarik, terutama di bidang AI!</p>
+        </div>
+        <div class="comment">
+            <div class="comment-author">Jane Smith (Yogyakarta)</div>
+            <p class="comment-text">Saya setuju dengan perkembangan teknologi yang dijelaskan. Banyak potensi yang bisa dimanfaatkan.</p>
+        </div>
+    </div>
+</div>
+
+
         </div>
 
         <!-- Right Sidebar -->
@@ -963,33 +1324,51 @@
             </div>
 
             <div class="latest-posts">
-                <h3>Recent Posts</h3>
-                <div class="carousel-controls">
+                <h3>
+                    Postingan Terakhir
                     <button class="carousel-btn prev">&lt;</button>
                     <button class="carousel-btn next">&gt;</button>
-                </div>
+                </h3>
                 <div class="carousel-container">
-    <ul class="carousel">
-        <li class="carousel-item">
-            <div class="image-wrapper">
-                <img src="images/image1.jpg" alt="Post Thumbnail">
-            </div>
-            <p>Everything you ever need to know about flowers</p>
-        </li>
-        <li class="carousel-item">
-            <div class="image-wrapper">
-                <img src="images/image2.jpg" alt="Post Thumbnail">
-            </div>
-            <p>Coffee and lemons don’t go together that well</p>
-        </li>
-        <li class="carousel-item">
-            <div class="image-wrapper">
-                <img src="images/image3.jpg" alt="Post Thumbnail">
-            </div>
-            <p>Did you know that plants actually have a secret life?</p>
-        </li>
-    </ul>
-</div>
+                    <ul class="carousel">
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image1.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Everything you ever need to know about flowers</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image2.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Coffee and lemons don’t go together that well</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image3.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Did you know that plants actually have a secret life?</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image2.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Everything you ever need to know about flowers</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image3.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Coffee and lemons don’t go together that well</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="images/image1.jpg" alt="Post Thumbnail">
+                            </div>
+                            <p>Did you know that plants actually have a secret life?</p>
+                        </li>
+                    </ul>
+                </div>
 
             </div>
 
