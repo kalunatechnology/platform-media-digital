@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id', 
+        'photos', 
+        'is_approved',
     ];
 
     /**
@@ -41,4 +44,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Roles::class, 'role_id');
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Articles::class, 'user_id');
+    }
+    public function provinces () 
+    {
+        return $this->belongsTo(Provinsi::class, 'provinces_id');
+    }
+    public function regencies()
+    {
+        return $this->belongsTo(Kota::class, 'regencies_id');
+    }
+    public function districts()
+    {
+        return $this->belongsTo(Kecamatan::class, 'districts_id');
+    }
+    public function villages()
+    {
+        return $this->belongsTo(Kelurahan::class, 'villages_id');
+    }
 }

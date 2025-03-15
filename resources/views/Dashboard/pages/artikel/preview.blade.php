@@ -314,6 +314,9 @@
             width: 90%;
             text-align: justify;
         }
+        .content img {
+            max-width: 120%;
+        }
 
         .divider {
             border-top: 1px solid #ddd;
@@ -1039,28 +1042,10 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                <a href="#">Portal Berita</a>
+                <a href="#">Ini Halaman Preview Konten Artikel Anda</a>
             </div>
-            <ul class="navbar-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Berita</a></li>
-                <li><a href="#">Teknologi</a></li>
-                <li><a href="#">Gaya Hidup</a></li>
-                <li><a href="#">Bisnis</a></li>
-            </ul>
             <div class="navbar-actions">
-                <div class="search-box">
-                    <input type="text" placeholder="Cari berita...">
-                    <button class="search-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"
-                            fill="#555">
-                            <path
-                                d="M796 933 571 709q-32 25-70 39.5T420 763q-92 0-156-64t-64-156q0-92 64-156t156-64q92 0 156 64t64 156q0 45-14.5 83T709 709l225 224q11 11 11 26.5T934 986q-11 11-27 11t-27-11ZM420 663q58 0 98.5-40.5T559 524q0-58-40.5-98.5T420 385q-58 0-98.5 40.5T281 524q0 58 40.5 98.5T420 663Z" />
-                        </svg>
-                    </button>
-                </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="/backoffice/draft_articles" class="btn-login">Kembali ke draft</a>
             </div>
             <button class="navbar-toggle" id="navbar-toggle">
                 <span class="toggle-bar"></span>
@@ -1074,7 +1059,7 @@
 
     <!-- Banner Section -->
     <div class="banner">
-        <img src="{{ asset('images/image1.jpg') }}" alt="News Thumbnail" style="width: 100%; height: 500px; object-fit: cover;">
+        <img src="{{ asset('storage/' . $data->thumbnail) }}" alt="News Thumbnail" style="width: 100%; height: 500px; object-fit: cover;">
     </div>
 
 
@@ -1100,26 +1085,27 @@
     
         <!-- Main Content -->
         <div class="main-content">
-            <div class="category">Teknologi</div>
-            <h1>Judul Berita 1</h1>
+            <div class="category">{{ $data->category->name }}</div>
+            <h1>{{ $data->title }}</h1>
             <div class="meta-info">
-                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
-                <span>By Author Name</span>
+                <img src="{{ $data->user && $data->user->photos ? asset('storage/' . $data->user->photos) : asset('images/user-icon.png') }}" 
+                alt="Author" class="img-fluid rounded-circle" width="100">
+                <span>{{ $data->user->name }}</span>
                 <span>5 comments</span>
                 <span>2 min read</span>
             </div>
     
             <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                <p>{!! $data->content !!}</p>
             </div>
     
             <div class="divider"></div>
     
             <div class="author-profile">
-                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
+                <img src="{{ $data->user && $data->user->photos ? asset('storage/' . $data->user->photos) : asset('images/user-icon.png') }}" 
+                alt="Author" class="img-fluid rounded-circle" width="100">
                 <div class="author-info">
-                    <h3>John Doe</h3>
-                    <p>Short description about the author.</p>
+                    <h3>{{ $data->user->name }}</h3>
                     <div class="author-actions">
                         <button>View All Posts</button>
                         <a href="#">Copy</a>
@@ -1186,7 +1172,7 @@
                     <label for="city">Asal Kota:</label>
                     <input type="text" id="city" name="city" placeholder="Kota Asal Anda" required>
 
-                    <button type="submit">Submit Comment</button>
+                    <button>Submit Comment</button>
                 </form>
 
                 <!-- Comment List -->
@@ -1212,35 +1198,35 @@
                 <h3>Kategori</h3>
                 <ul>
                     <li>
-                        <a href="/kategori/category1" class="category-link category1">
+                        <a href="#" class="category-link category1">
                             Kategori 1
                             <span class="category-count" style="background-color: #ff5733;">12</span>
                         </a>
                     </li>
                     <div class="divider"></div>
                     <li>
-                        <a href="/kategori/category2" class="category-link category2">
+                        <a href="/ada" class="category-link category2">
                             Kategori 2
                             <span class="category-count" style="background-color: #33c3ff;">8</span>
                         </a>
                     </li>
                     <div class="divider"></div>
                     <li>
-                        <a href="/kategori/category3" class="category-link category3">
+                        <a href="#" class="category-link category3">
                             Kategori 3
                             <span class="category-count" style="background-color: #28a745;">20</span>
                         </a>
                     </li>
                     <div class="divider"></div>
                     <li>
-                        <a href="/kategori/category4" class="category-link category4">
+                        <a href="#" class="category-link category4">
                             Kategori 4
                             <span class="category-count" style="background-color: #ffc107;">15</span>
                         </a>
                     </li>
                     <div class="divider"></div>
                     <li>
-                        <a href="/kategori/category5" class="category-link category5">
+                        <a href="#" class="category-link category5">
                             Kategori 5
                             <span class="category-count" style="background-color: #6f42c1;">5</span>
                         </a>
@@ -1316,10 +1302,10 @@
             <div class="custom-footer-center">
                 <h4 class="custom-footer-title">Telusuri</h4>
                 <ul class="custom-footer-links">
-                    <li><a href="/kategori/teknologi">Teknologi</a></li>
-                    <li><a href="/kategori/pariwisata">Pariwisata</a></li>
-                    <li><a href="/kategori/ekonomi">Ekonomi</a></li>
-                    <li><a href="/kategori/olahraga">Olahraga</a></li>
+                    <li><a href="#">Teknologi</a></li>
+                    <li><a href="#">Pariwisata</a></li>
+                    <li><a href="#">Ekonomi</a></li>
+                    <li><a href="#">Olahraga</a></li>
                 </ul>
             </div>
     

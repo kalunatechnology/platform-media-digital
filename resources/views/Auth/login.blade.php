@@ -184,7 +184,11 @@
     <div class="container">
         <div class="form-section">
             <h2>Welcome to asdsa!</h2>
-            <form action="#" method="POST">
+            @error('email')
+            <div class="text-danger">{{ $message }} !!</div>
+            @enderror
+            <form method="POST" action="/login">
+                @csrf
                 <div class="input-group">
                     <input type="email" name="email" class="input" placeholder="Email" required>
                     <i class="bx bx-user"></i>
