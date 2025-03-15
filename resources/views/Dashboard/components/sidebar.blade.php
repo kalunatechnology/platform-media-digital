@@ -18,7 +18,7 @@
         <li class="menu-item">
             <a href="{{ url('/backoffice') }}"><i class="fas fa-home"></i> <span class="menu-text">Home</span></a>
         </li>
-        @if(Session::get('roles') == 'Developer' || Session::get('roles') == 'Author')
+        @if(Session::get('roles') == 'Developer')
         <li class="menu-item dropdownku">
             <a class="nav-link dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -65,6 +65,100 @@
                 </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/usersetting') }}">
                     <i class="fa-solid fa-user"></i> <span class="menu-text">Users Management</span>
+                </a>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url('/backoffice/profile/' . Auth::user()->id) }}"><i class="fa-solid fa-user"></i> <span class="menu-text">Profile</span></a>
+        </li>
+        @endif
+        @if(Session::get('roles') == 'Editor')
+        <li class="menu-item dropdownku">
+            <a class="nav-link dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-file"></i> <span class="menu-text">Content Management </span>
+                <i class="fas fa-angle-down arrow"></i>
+            </a>
+            <ul class="dropdownmenuku" aria-labelledby="DropdownMenuLink">
+                <a class="nav-link baru" href="{{ url('/backoffice/kategori') }}">
+                    <i class="fa-solid fa-list"></i> <span class="menu-text">Categories</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/artikeleditor') }}">
+                    <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(editor)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
+                    <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/sikappolitik') }}">
+                    <i class="fa-solid fa-eye"></i> <span class="menu-text">Article Views</span>
+                </a>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url('/backoffice/profile/' . Auth::user()->id) }}"><i class="fa-solid fa-user"></i> <span class="menu-text">Profile</span></a>
+        </li>
+        @endif
+        @if(Session::get('roles') == 'Admin')
+        <li class="menu-item dropdownku">
+            <a class="nav-link dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-file"></i> <span class="menu-text">Content Management </span>
+                <i class="fas fa-angle-down arrow"></i>
+            </a>
+            <ul class="dropdownmenuku" aria-labelledby="DropdownMenuLink">
+                <a class="nav-link baru" href="{{ url('/backoffice/kategori') }}">
+                    <i class="fa-solid fa-list"></i> <span class="menu-text">Categories</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/artikeladmin') }}">
+                    <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(admin)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
+                    <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/sikappolitik') }}">
+                    <i class="fa-solid fa-eye"></i> <span class="menu-text">Article Views</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/sikappolitik') }}">
+                    <i class="fa-solid fa-chart-simple"></i> <span class="menu-text">Analytics</span>
+                </a>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url('/backoffice') }}"><i class="fa-brands fa-adversal"></i> <span class="menu-text">Banner
+                    Management</span></a>
+        </li>
+        <li class="menu-item dropdownku">
+            <a class="nav-link dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fas fa-cog"></i> <span class="menu-text">System Management</span>
+                <i class="fas fa-angle-down arrow"></i>
+            </a>
+            <ul class="dropdownmenuku" aria-labelledby="DropdownMenuLink">
+                <a class="nav-link baru" href="{{ url('/backoffice/usersetting') }}">
+                    <i class="fa-solid fa-user"></i> <span class="menu-text">Users Management</span>
+                </a>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url('/backoffice/profile/' . Auth::user()->id) }}"><i class="fa-solid fa-user"></i> <span class="menu-text">Profile</span></a>
+        </li>
+        @endif
+        @if(Session::get('roles') == 'Author')
+        <li class="menu-item dropdownku">
+            <a class="nav-link dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-file"></i> <span class="menu-text">Content Management </span>
+                <i class="fas fa-angle-down arrow"></i>
+            </a>
+            <ul class="dropdownmenuku" aria-labelledby="DropdownMenuLink">
+                <a class="nav-link baru" href="{{ url('/backoffice/artikel') }}">
+                    <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
+                    <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/sikappolitik') }}">
+                    <i class="fa-solid fa-eye"></i> <span class="menu-text">Article Views</span>
                 </a>
             </ul>
         </li>

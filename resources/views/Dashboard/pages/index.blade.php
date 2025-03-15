@@ -132,7 +132,7 @@
 
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Detail Data DTD</span>
+        {{-- <span>Detail Data DTD</span> --}}
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;
@@ -262,57 +262,57 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Grafik Customer Map & Revenue -->
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h6>Overview</h6>
-                <canvas id="overviewChart"></canvas>
+        <!-- Grafik Customer Map & Revenue -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h6>Overview</h6>
+                    <canvas id="overviewChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h6>Total Revenue</h6>
+                    <canvas id="revenueChart"></canvas>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h6>Total Revenue</h6>
-                <canvas id="revenueChart"></canvas>
-            </div>
-        </div>
-    </div>
 
-    <div class="row mt-4">
-        <div class="card mb-4" style="width: 100%">
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-hover">
-                        <h5 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">dadasdada</h5>
-                        <thead class="bg-grey1" style="background: #f8fafc">
-                            <tr>
-                                <th class="text-start">No.</th>
-                                <th class="text-start">Jenis Artikel</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        @php
-                        $nomor=1;
-                        @endphp
-                        <tbody>
-                            {{-- @foreach ($card['get_data'] as $kategori) --}}
-                            <tr>
-                                <td>dsad</td>
-                                <td>dsad</td>
-                                {{-- <td class="text-center">{{ $nomor++ }}</td>
-                                <td class="text-center">{{ $kategori->name}}</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="{{ url('/backoffice/' . $kategori->id . '/editkategori') }}"
-                                            class="btn btn-primary btn-sm bg-primary mr-1 text-white">Edit</a>
-                                    </div>
-                                </td> --}}
-                            </tr>
-                            {{-- @endforeach --}}
-                        </tbody>
-                    </table>
+        <div class="row mt-4">
+            <div class="card mb-4" style="width: 100%; margin:0 16px">
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0 table-hover">
+                            <h5 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">dadasdada
+                            </h5>
+                            <thead class="bg-grey1" style="background: #f8fafc">
+                                <tr>
+                                    <th class="text-start">No.</th>
+                                    <th class="text-start">Jenis Artikel</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            @php
+                            $nomor=1;
+                            @endphp
+                            <tbody>
+                                {{-- @foreach ($card['get_data'] as $kategori) --}}
+                                <tr>
+                                    <td>dsad</td>
+                                    <td>dsad</td>
+                                    {{-- <td class="text-center">{{ $nomor++ }}</td>
+                                    <td class="text-center">{{ $kategori->name}}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="{{ url('/backoffice/' . $kategori->id . '/editkategori') }}"
+                                                class="btn btn-primary btn-sm bg-primary mr-1 text-white">Edit</a>
+                                        </div>
+                                    </td> --}}
+                                </tr>
+                                {{-- @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

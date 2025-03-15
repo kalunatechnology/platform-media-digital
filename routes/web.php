@@ -49,6 +49,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
 
     Route::get('/artikeladmin', [DashboardController::class, 'artikeladmin'])->name('artikeladmin');
 
+    Route::get('/artikeleditor', [DashboardController::class, 'artikeleditor'])->name('artikeleditor');
+
     Route::get('/artikel', [DashboardController::class, 'artikel'])->name('artikel');
     Route::get('/addartikel', [DashboardController::class, 'addartikel']);
     Route::post('/addartikel', [DashboardController::class, 'postartikel']);

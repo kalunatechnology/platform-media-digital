@@ -12,7 +12,7 @@
 </style>
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Detail Data DTD</span>
+        <span>Tambah Data User</span>
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;

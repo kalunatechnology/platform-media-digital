@@ -335,6 +335,34 @@ class DashboardController extends Controller
         return view('Dashboard.pages.artikeladmin', ['card' => $card]);
     }
 
+    public function artikeleditor(Request $request)
+    {
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 0)->limit(3)->get();
+        $get_data_published = Articles::where('status', 2)->limit(3)->get();
+        $get_data_editor_check = Articles::where('status', 1)->limit(3)->get();
+
+        $count_draft = Articles::where('status', 0)->count();
+        $count_published = Articles::where('status', 2)->count();
+        $count_editor_check = Articles::where('status', 1)->count();
+
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'data_published' => $get_data_published,
+            'data_editor_check' => $get_data_editor_check,
+            'jumlah_draft' => $count_draft,
+            'jumlah_published' => $count_published,
+            'jumlah_editor_check' => $count_editor_check,
+            
+        ];
+        
+        return view('Dashboard.pages.artikeleditor', ['card' => $card]);
+    }
+
     public function profile(Request $request, $id)
     {
         // Ambil data user berdasarkan ID
@@ -563,9 +591,15 @@ class DashboardController extends Controller
     
     public function draft_articles(Request $request)
     {
+        $keyword = $request->keyword;
+
         $user = Auth::user();
         $username = $user->name;
-        $get_data_draft = Articles::where('user_id', $user->id)->where('status', 0)->paginate(10);
+        $get_data_draft = Articles::where('user_id', $user->id)
+        ->where('status', 0)
+        ->where('title', 'LIKE', '%'.$keyword.'%') // Tambahkan pencarian berdasarkan title
+        ->paginate(10);
+    
 
         $count_draft = Articles::where('user_id', $user->id)->where('status', 0)->count();
 
@@ -573,7 +607,8 @@ class DashboardController extends Controller
         $card = [
             'username' => $username,
             'data_draft' => $get_data_draft,
-            'jumlah_draft' => $count_draft
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
         ];
         
         return view('Dashboard.pages.draft_articles', ['card' => $card]);

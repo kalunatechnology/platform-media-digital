@@ -203,7 +203,7 @@
             <div class="row">
                 <!-- Baris Pertama: 3 Card -->
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/draft_articles" class="card card-custom shadow-sm">
+                    <a href="/backoffice/draft_articles_editor" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_draft'] }}</h5>
@@ -242,45 +242,6 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Baris Kedua: 2 Card -->
-            <div class="row mt-3">
-                <div class="col-md-6 col-sm-6">
-                    <a href="/backoffice/hidden_artikel" class="card card-custom shadow-sm">
-                        <div class="d-flex">
-                            <div class="card-text">
-                                <h5>{{ $card['jumlah_hidden'] }}</h5>
-                                <p>Hidden</p>
-                            </div>
-                            <div class="icon-dashboard">
-                                <i class="fa-solid card-icon fa-eye-slash" style="font-size: 30px"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <a href="/backoffice/archived" class="card card-custom shadow-sm">
-                        <div class="d-flex">
-                            <div class="card-text">
-                                <h5>{{ $card['jumlah_archived'] }}</h5>
-                                <p>Archived</p>
-                            </div>
-                            <div class="icon-dashboard">
-                                <i class="fa-solid card-icon fa-bookmark"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="row mt-4 mb-4">
-                <div class="card mb-4" style="width: 100%">
-                    <div class="upload-box p-4">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="Pen Icon">
-                        <a href="/backoffice/addartikel" class="btn-upload">Create Your Article</a>
-                    </div>
-                </div>
-            </div>
             
 
 
@@ -292,7 +253,7 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">Draft
                                         Articles</h4>
-                                    <a href="/backoffice/draft_articles"
+                                    <a href="/backoffice/draft_articles_editor"
                                         style="margin-top: 6px; padding-right: 10px">view all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
@@ -395,86 +356,6 @@
                                     @empty
                                     <tr>
                                         <td colspan="3" class="text-center"><strong>Belum ada artikel yang diterbitkan</strong></td>
-                                    </tr>
-                                    @endforelse         
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="card mb-4" style="width: 100%">
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0 table-hover">
-                                <div class="d-flex" style="justify-content: space-between;">
-                                    <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
-                                        Hidden Article</h4>
-                                    <a href="/backoffice/hidden_artikel"
-                                        style="margin-top: 6px; padding-right: 10px">view all</a>
-                                </div>
-                                <thead class="bg-grey1" style="background: #f8fafc">
-                                    <tr>
-                                        <th class="text-start">No.</th>
-                                        <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
-                                    </tr>
-                                </thead>
-                                @php
-                                $nomor=1;
-                                @endphp
-                                <tbody>
-                                    @forelse ($card['data_hidden'] as $draft)
-                                    <tr>
-                                        <td class="text-start">{{ $nomor++ }}</td>
-                                        <td class="text-start">{{ $draft->category->name }}</td>
-                                        <td class="text-start">{{ $draft->title }}</td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="3" class="text-center"><strong>Belum ada artikel anda yang habis masa penayangan</strong></td>
-                                    </tr>
-                                    @endforelse         
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="card mb-4" style="width: 100%">
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0 table-hover">
-                                <div class="d-flex" style="justify-content: space-between;">
-                                    <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
-                                        Archived</h4>
-                                    <a href="/backoffice/archived" style="margin-top: 6px; padding-right: 10px">view
-                                        all</a>
-                                </div>
-                                <thead class="bg-grey1" style="background: #f8fafc">
-                                    <tr>
-                                        <th class="text-start">No.</th>
-                                        <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
-                                    </tr>
-                                </thead>
-                                @php
-                                $nomor=1;
-                                @endphp
-                                <tbody>
-                                    @forelse ($card['data_archived'] as $draft)
-                                    <tr>
-                                        <td class="text-start">{{ $nomor++ }}</td>
-                                        <td class="text-start">{{ $draft->category->name }}</td>
-                                        <td class="text-start">{{ $draft->title }}</td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="3" class="text-center"><strong>Artikel yang anda sembunyikan belum ada</strong></td>
                                     </tr>
                                     @endforelse         
                                 </tbody>

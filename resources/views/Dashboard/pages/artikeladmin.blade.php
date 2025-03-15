@@ -180,7 +180,7 @@
 
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Detail Data DTD</span>
+        <span>Detail Data Artikel</span>
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;
