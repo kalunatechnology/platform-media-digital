@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Berita</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+
     <style>
         *,
         *::before,
@@ -1042,10 +1044,11 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                <a href="#">Ini Halaman Preview Konten Artikel Anda</a>
+                <a href="#">Ini Halaman Preview Konten Artikel</a>
             </div>
             <div class="navbar-actions">
-                <a href="/backoffice/draft_articles" class="btn-login">Kembali ke draft</a>
+                <a href="/backoffice/draft_articles_editor" class="btn-login">Kembali</a>
+                <a href="/backoffice/edit_editor/{{ $data->id }}" class="btn btn-warning btn-sm bg-warning" target="_blank">Edit Draft ini</a>
             </div>
             <button class="navbar-toggle" id="navbar-toggle">
                 <span class="toggle-bar"></span>
@@ -1092,7 +1095,7 @@
                 alt="Author" class="img-fluid rounded-circle" width="100">
                 <span>{{ $data->user->name }}</span>
                 <span>5 comments</span>
-                <span>{{ $data->time ?? '?' }} min read</span>
+                <span>2 min read</span>
             </div>
     
             <div class="content">

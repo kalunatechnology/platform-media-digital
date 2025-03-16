@@ -415,7 +415,7 @@
 
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Draft Artikel {{ $card['username'] }}</span>
+        <span>Draft Artikel</span>
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;
@@ -437,16 +437,16 @@
         <!-- Card Jumlah Timses -->
         <div class="card total-timses-card">
             <div class="card-body">
-                <h3>Data Draft Artikel {{ $card['username'] }}</h3>
+                <h3>Data Draft Artikel</h3>
                 <p class="display-4"><small>{{ $card['jumlah_draft'] }} artikel</small></p>
             </div>
             
         </div>
 
         <!-- Search Bar -->
-        <form method="GET" action="{{ url('/backoffice/draft_articles') }}" class="form-search">
+        <form method="GET" action="{{ url('/backoffice/draft_articles_editor') }}" class="form-search">
             <label for="search">
-                <input required name="keyword" autocomplete="off" placeholder="cari judul artikel"
+                <input required name="keyword" autocomplete="off" placeholder="cari judul artikel atau penulis"
                     id="search" type="text" value="{{ $card['keyword'] }}">
                 <div class="icon">
                     <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none"
@@ -474,23 +474,23 @@
         </form>
         
         <div class="button-back mt-1">
-            <a href="/backoffice/artikel"
+            <a href="/backoffice/artikeleditor"
             class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Kembali</a>
         </div>
         <br>
         <div class="keterangan">
-            <p>*Artikel Anda masih dalam draft dan sedang menunggu peninjauan oleh editor sebelum dapat dipublikasikan.</p>
+            <p>
+                Silahkan melakukan pengecekan draft dibawah ini dengan langkah : <br>
+                1. klik preview untuk melihat tampilan artikel dalam versi halaman yang akan dipublish. <br>
+                2. klik edit draft ini untuk melakukan pengeditan artikel, klik kembali jika ingin merubah artikel yang ditinjau. <br>
+                3. setelah melakukan edit dan menyimpn maka status artikel akan berubah menjadi editor_check
+            </p>
         </div>
         <br><br>
 
         <!-- Card untuk Tabel Daftar Timses -->
         <div class="card">
             <div class="card-body">
-                <div class="card-title d-flex align-items-center ">
-                    <a href="{{ url('/backoffice/addartikel') }}" type="button" class="btn btn-primary rounded-lg">
-                        <div class="fa fa-fw fa-plus mr-2"></div> Add Data
-                    </a>
-                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -498,6 +498,7 @@
                                 <th>No</th>
                                 <th>Thumbnail</th>
                                 <th>Kategori</th>
+                                <th>Penulis</th>
                                 <th>Judul</th>
                                 <th>Action</th>
                             </tr>
@@ -512,12 +513,11 @@
                                 <td><img src="{{ asset('storage/' . $artikel->thumbnail) }}" alt="Dokumentasi"
                                         class="thumbnail"></td>
                                 <td>{{ $artikel->category->name }}</td>
+                                <td>{{ $artikel->user->name }}</td>
                                 <td>{{ $artikel->title }}</td>
                                 <td class="d-flex">
-                                    <a href="/backoffice/preview_draft/{{ $artikel->id }}"
+                                    <a href="/backoffice/preview_draft_editor/{{ $artikel->id }}"
                                         class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Preview</a>
-                                    <a href="/backoffice/{{ $artikel->id }}/edit_draft_artikel"
-                                        class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Data</a>
                                     <form action="{{ url('/backoffice/artikel/' . $artikel->id) }}" method="POST"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                         style="display: inline;">

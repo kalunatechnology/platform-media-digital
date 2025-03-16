@@ -362,6 +362,103 @@ class DashboardController extends Controller
         
         return view('Dashboard.pages.artikeleditor', ['card' => $card]);
     }
+    public function draft_articles_editor(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 0)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 0)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+        
+        return view('Dashboard.pages.draft_articles_editor', ['card' => $card]);
+    }
+    public function preview_draft_editor ($id)
+    {
+        $data = Articles::with('user')->find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.artikel.preview_editor', ['data' => $data, 'card' => $card]);
+    }
+    public function edit_editor ($id)
+    {
+        $data = Articles::find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.artikel.edit_editor', ['data' => $data, 'card' => $card]);
+    }
+    public function updateeditor($id, Request $request)
+    {
+        $artikel = Articles::findOrFail($id);
+    
+        $request->validate([
+            'kategori_id' => 'required',
+            'title' => 'required|unique:articles,title,' . $id,
+            'deskripsi_singkat' => 'required',
+            'content' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+    
+        $artikel->update([
+            'category_id' => $request->kategori_id,
+            'user_id' => $request->author ?? $artikel->user_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'short_description' => $request->deskripsi_singkat,
+            'content' => $request->content,
+            'status' => 1,
+        ]);
+    
+        if ($request->hasFile('thumbnail')) {
+            if ($artikel->thumbnail) {
+                Storage::delete('public/' . $artikel->thumbnail);
+            }
+    
+            $filePath = $request->file('thumbnail')->store('thumbnail', 'public');
+    
+            $artikel->update(['thumbnail' => $filePath]);
+        }
+    
+        session()->flash('success', 'Artikel berhasil diperbarui.');
+    
+        return redirect()->route('draft_articles_editor');
+    }
+
 
     public function profile(Request $request, $id)
     {
@@ -597,7 +694,7 @@ class DashboardController extends Controller
         $username = $user->name;
         $get_data_draft = Articles::where('user_id', $user->id)
         ->where('status', 0)
-        ->where('title', 'LIKE', '%'.$keyword.'%') // Tambahkan pencarian berdasarkan title
+        ->where('title', 'LIKE', '%'.$keyword.'%')
         ->paginate(10);
     
 

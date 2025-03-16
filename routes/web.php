@@ -47,20 +47,29 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::put('/role/{id}', [DashboardController::class, 'updaterole']);
     Route::delete('/role/{id}', [DashboardController::class, 'destroyrole']);
 
+    // khusus admin
     Route::get('/artikeladmin', [DashboardController::class, 'artikeladmin'])->name('artikeladmin');
 
+    // khusus editor
     Route::get('/artikeleditor', [DashboardController::class, 'artikeleditor'])->name('artikeleditor');
+    Route::get('/draft_articles_editor', [DashboardController::class, 'draft_articles_editor'])->name('draft_articles_editor');
+    Route::get('/preview_draft_editor/{id}', [DashboardController::class, 'preview_draft_editor'])->name('preview_draft_editor');
+    Route::get('/edit_editor/{id}', [DashboardController::class, 'edit_editor'])->name('edit_editor');
+    Route::put('/editor/{id}', [DashboardController::class, 'updateeditor']);
+    Route::get('/editorcheck_editor', [DashboardController::class, 'editorcheck_editor'])->name('editorcheck_editor');
 
+
+    // khusus author
     Route::get('/artikel', [DashboardController::class, 'artikel'])->name('artikel');
     Route::get('/addartikel', [DashboardController::class, 'addartikel']);
-    Route::post('/addartikel', [DashboardController::class, 'postartikel']);
-    
+    Route::post('/addartikel', [DashboardController::class, 'postartikel']);    
     Route::get('/{id}/edit_draft_artikel', [DashboardController::class, 'edit_draft_artikel']);
     Route::put('/artikel/{id}', [DashboardController::class, 'updateartikel']);
     Route::delete('/artikel/{id}', [DashboardController::class, 'destroyartikel']);
-
     Route::get('/draft_articles', [DashboardController::class, 'draft_articles'])->name('draft_articles');
     Route::get('/preview_draft/{id}', [DashboardController::class, 'preview_draft'])->name('preview_draft');
+    Route::get('/editorcheck', [DashboardController::class, 'editorcheck'])->name('editorcheck');
+
 
 
 
