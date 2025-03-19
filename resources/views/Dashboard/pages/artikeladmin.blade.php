@@ -363,7 +363,7 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Published</h4>
-                                    <a href="/backoffice/published" style="margin-top: 6px; padding-right: 10px">view
+                                    <a href="/backoffice/published_admin" style="margin-top: 6px; padding-right: 10px">view
                                         all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
@@ -403,7 +403,7 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Hidden Article</h4>
-                                    <a href="/backoffice/hidden_artikel"
+                                    <a href="/backoffice/hidden_artikel_admin"
                                         style="margin-top: 6px; padding-right: 10px">view all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
@@ -443,7 +443,7 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Archived</h4>
-                                    <a href="/backoffice/archived" style="margin-top: 6px; padding-right: 10px">view
+                                    <a href="/backoffice/archived_admin" style="margin-top: 6px; padding-right: 10px">view
                                         all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">

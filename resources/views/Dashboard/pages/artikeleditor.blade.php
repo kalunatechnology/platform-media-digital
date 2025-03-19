@@ -333,7 +333,7 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Published</h4>
-                                    <a href="/backoffice/published" style="margin-top: 6px; padding-right: 10px">view
+                                    <a href="/backoffice/published_editor" style="margin-top: 6px; padding-right: 10px">view
                                         all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
