@@ -67,10 +67,11 @@
 
         /* Navbar Actions */
         .navbar-actions {
-            display: flex;
+            display: block;
             align-items: center;
             gap: 15px;
         }
+        
 
         /* Search Box */
         .search-box {
@@ -167,6 +168,7 @@
             .navbar-links.active {
                 display: flex;
             }
+            
 
             .navbar-toggle {
                 display: flex;
@@ -174,6 +176,17 @@
 
             .navbar-actions {
                 display: none;
+            }
+            .navbar-actions.active {
+                display: block;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                padding: 10px 0;
+                border-top: 1px solid #ddd;
             }
 
             .search-box {
@@ -1044,14 +1057,14 @@
             <div class="navbar-logo">
                 <a href="#">Ini Halaman Preview Konten Artikel Anda</a>
             </div>
-            <div class="navbar-actions">
-                <a href="/backoffice/draft_articles" class="btn-login">Kembali ke draft</a>
-            </div>
             <button class="navbar-toggle" id="navbar-toggle">
                 <span class="toggle-bar"></span>
                 <span class="toggle-bar"></span>
                 <span class="toggle-bar"></span>
             </button>
+            <div class="navbar-actions" id="navbar-actions">
+                <a href="/backoffice/draft_articles" class="btn-login">Kembali ke Draft</a>
+            </div>
         </div>
     </nav>
 
@@ -1065,23 +1078,6 @@
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Left Sidebar -->
-        <div class="left-sidebar">
-            <div class="social-icons1">
-                <a href="#" title="Share on Facebook">
-                    <img src="{{ asset('images/facebook.png') }}" alt="Facebook" class="social-icon1">
-                </a>
-                <a href="#" title="Share on X">
-                    <img src="{{ asset('images/x.png') }}" alt="X" class="social-icon1">
-                </a>
-                <a href="#" title="Share on Instagram">
-                    <img src="{{ asset('images/instagram.png') }}" alt="Instagram" class="social-icon1">
-                </a>
-                <a href="#" title="Share on TikTok">
-                    <img src="{{ asset('images/tiktok.png') }}" alt="TikTok" class="social-icon1">
-                </a>
-            </div>
-        </div>
     
         <!-- Main Content -->
         <div class="main-content">
@@ -1336,14 +1332,13 @@
     
 
     <script>
-        // JavaScript to toggle navbar menu visibility
+        // JavaScript untuk toggle tombol "Kembali ke Draft"
         const navbarToggle = document.getElementById('navbar-toggle');
-        const navbarLinks = document.querySelector('.navbar-links');
+        const navbarActions = document.getElementById('navbar-actions');
 
         navbarToggle.addEventListener('click', () => {
-            navbarLinks.classList.toggle('active');
+            navbarActions.classList.toggle('active');
         });
-
     </script>
 
     <script>

@@ -299,7 +299,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -339,7 +339,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -379,7 +379,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -419,7 +419,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -459,7 +459,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php

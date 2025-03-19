@@ -62,11 +62,11 @@
                                                 @endif
                                                 <div class="card-header pb-2">
                                                     <div class="d-flex align-items-center">
-                                                        <h4 class="card-title">Edit Data Draft Artikel</h4>
+                                                        <h4 class="card-title">Edit Data Artikel</h4>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form action="{{ url('/backoffice/editor/' . $data->id) }}" method="post" enctype="multipart/form-data">
+                                                    <form action="{{ url('/backoffice/editor_check/' . $data->id) }}" method="post" enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
                                                         <div class="row">
@@ -117,10 +117,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12" style="color: red">
-                                                                *setelah anda menekan "simpan perubahan" maka artikel akan diganti status menjadi "editor check" dan tunggu admin untuk menyetujui kapan artikel akan publish
+                                                                *setelah anda menekan "simpan perubahan" maka artikel akan ditinjau ulang oleh admin sebelum diterbitkan
                                                             </div>
                                                             <div class="d-flex justify-content-end mt-4">
-                                                                <a href="{{ url('/backoffice/draft_articles_editor') }}" class="btn btn-sm bg-warning mx-1 text-black">
+                                                                <a href="{{ url('/backoffice/editor_check_editor') }}" class="btn btn-sm bg-warning mx-1 text-black">
                                                                     Cancel
                                                                 </a>
                                                                 <button type="submit" class="btn btn-sm bg-primary ml-1 text-black">

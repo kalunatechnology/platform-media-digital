@@ -203,7 +203,7 @@
             <div class="row">
                 <!-- Baris Pertama: 3 Card -->
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/draft_articles" class="card card-custom shadow-sm">
+                    <a href="/backoffice/draft_articles_admin" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_draft'] }}</h5>
@@ -283,14 +283,14 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">Draft
                                         Articles</h4>
-                                    <a href="/backoffice/draft_articles"
+                                    <a href="/backoffice/draft_articles_admin"
                                         style="margin-top: 6px; padding-right: 10px">view all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -323,14 +323,14 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Editor Check</h4>
-                                    <a href="/backoffice/editor_check" style="margin-top: 6px; padding-right: 10px">view
+                                    <a href="/backoffice/editor_check_admin" style="margin-top: 6px; padding-right: 10px">view
                                         all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -370,7 +370,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -410,7 +410,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -450,7 +450,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php

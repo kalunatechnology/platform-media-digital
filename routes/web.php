@@ -49,6 +49,16 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
 
     // khusus admin
     Route::get('/artikeladmin', [DashboardController::class, 'artikeladmin'])->name('artikeladmin');
+    Route::get('/draft_articles_admin', [DashboardController::class, 'draft_articles_admin'])->name('draft_articles_admin');
+    Route::get('/preview_draft_admin/{id}', [DashboardController::class, 'preview_draft_admin'])->name('preview_draft_admin');
+    Route::get('/editor_check_admin', [DashboardController::class, 'editor_check_admin'])->name('editor_check_admin');
+    Route::put('/artikel/{id}/publish', [DashboardController::class, 'publishArtikel'])->name('artikel.publish');
+    Route::put('/artikel2/{id}/publish', [DashboardController::class, 'publishArtikel2'])->name('artikel.publish2');
+    Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
+
+
+
+    
 
     // khusus editor
     Route::get('/artikeleditor', [DashboardController::class, 'artikeleditor'])->name('artikeleditor');
@@ -56,7 +66,11 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/preview_draft_editor/{id}', [DashboardController::class, 'preview_draft_editor'])->name('preview_draft_editor');
     Route::get('/edit_editor/{id}', [DashboardController::class, 'edit_editor'])->name('edit_editor');
     Route::put('/editor/{id}', [DashboardController::class, 'updateeditor']);
-    Route::get('/editorcheck_editor', [DashboardController::class, 'editorcheck_editor'])->name('editorcheck_editor');
+    Route::get('/editor_check_editor', [DashboardController::class, 'editor_check_editor'])->name('editor_check_editor');
+    Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
+    Route::get('/edit_editor_check/{id}', [DashboardController::class, 'edit_editor_check'])->name('edit_editor_check');
+    Route::put('/editor_check/{id}', [DashboardController::class, 'updateeditorcheck']);
+
 
 
     // khusus author
@@ -68,7 +82,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::delete('/artikel/{id}', [DashboardController::class, 'destroyartikel']);
     Route::get('/draft_articles', [DashboardController::class, 'draft_articles'])->name('draft_articles');
     Route::get('/preview_draft/{id}', [DashboardController::class, 'preview_draft'])->name('preview_draft');
-    Route::get('/editorcheck', [DashboardController::class, 'editorcheck'])->name('editorcheck');
+    Route::get('/editor_check', [DashboardController::class, 'editor_check'])->name('editor_check');
 
 
 

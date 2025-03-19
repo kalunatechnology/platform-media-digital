@@ -260,7 +260,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -275,7 +275,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="3" class="text-center"><strong>Anda belum membuat artikel</strong></td>
+                                        <td colspan="3" class="text-center"><strong>Belum ada pengguna yang membuat artikel</strong></td>
                                     </tr>
                                     @endforelse                                    
                                 </tbody>
@@ -293,14 +293,14 @@
                                 <div class="d-flex" style="justify-content: space-between;">
                                     <h4 class="card-title text-start" style="margin-top: 4px; padding-left: 10px;">
                                         Editor Check</h4>
-                                    <a href="/backoffice/editor_check" style="margin-top: 6px; padding-right: 10px">view
+                                    <a href="/backoffice/editor_check_editor" style="margin-top: 6px; padding-right: 10px">view
                                         all</a>
                                 </div>
                                 <thead class="bg-grey1" style="background: #f8fafc">
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -315,7 +315,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="3" class="text-center"><strong>Artikel anda belum ada yang di cek editor</strong></td>
+                                        <td colspan="3" class="text-center"><strong>Anda belum melakukan pengecekan artikel</strong></td>
                                     </tr>
                                     @endforelse         
                                 </tbody>
@@ -340,7 +340,7 @@
                                     <tr>
                                         <th class="text-start">No.</th>
                                         <th class="text-start">Kategori</th>
-                                        <th>Judul Artikel</th>
+                                        <th class="text-start">Judul Artikel</th>
                                     </tr>
                                 </thead>
                                 @php

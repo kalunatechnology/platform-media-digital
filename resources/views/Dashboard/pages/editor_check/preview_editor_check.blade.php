@@ -7,7 +7,6 @@
     <title>Portal Berita</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
-
     <style>
         *,
         *::before,
@@ -133,6 +132,103 @@
             background-color: #2ecc71;
             color: #fff;
         }
+        .modal-header {
+        background-color: #f4f4f4;
+        padding: 15px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .modal-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Floating window (modal) content */
+    .modal-content {
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+    }
+
+    .modal-body {
+        padding: 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Foto in Modal */
+    .modal-body img {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .modal-body img:hover {
+        transform: scale(1.05);
+        /* Zoom effect */
+    }
+
+    /* Font styling for labels and data */
+    .modal-body .row {
+        margin-bottom: 15px;
+    }
+
+    .modal-body .row .col {
+        font-weight: bold;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .modal-body .row .col::after {
+        content: ":";
+        margin-right: 5px;
+    }
+
+    .modal-body .data {
+        font-weight: normal;
+        font-size: 18px;
+        color: #666;
+    }
+
+    /* Spacing for sections */
+    .modal-body .col,
+    .modal-body .data {
+        margin-bottom: 10px;
+    }
+	.fullscreen-img-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1050;
+    }
+
+    .fullscreen-img-modal img {
+        max-width: 90%;
+        max-height: 90%;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .fullscreen-img-modal img:hover {
+        transform: scale(1.05);
+    }
+
+    /* Close button for fullscreen preview */
+    .fullscreen-img-modal .close-preview {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+    }
 
         .btn-register:hover {
             background-color: #27ae60;
@@ -1063,8 +1159,9 @@
                 <span class="toggle-bar"></span>
             </button>
             <div class="navbar-actions" id="navbar-actions">
-                <a href="/backoffice/draft_articles_editor" class="btn-login">Kembali</a>
-                <a href="/backoffice/edit_editor/{{ $data->id }}" class="btn btn-warning btn-sm bg-warning" target="_blank">Edit Draft ini</a>
+                <a href="/backoffice/editor_check_admin" class="btn-login">Kembali</a>
+                <a href="/backoffice/edit_editor_check/{{ $data->id }}"
+                    class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Data</a>
             </div>
         </div>
     </nav>
@@ -1079,7 +1176,7 @@
 
     <!-- Main Container -->
     <div class="container">
-        
+
     
         <!-- Main Content -->
         <div class="main-content">
@@ -1090,7 +1187,7 @@
                 alt="Author" class="img-fluid rounded-circle" width="100">
                 <span>{{ $data->user->name }}</span>
                 <span>5 comments</span>
-                <span>2 min read</span>
+                <span>{{ $data->time ?? '?' }} min read</span>
             </div>
     
             <div class="content">
@@ -1331,6 +1428,25 @@
             </div>
         </div>
     </footer>
+    <!-- Tambahkan jQuery sebelum Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Periksa apakah jQuery sudah tersedia
+            if (typeof jQuery === "undefined") {
+                console.error("jQuery belum dimuat!");
+                return;
+            }
+    
+            // Trigger modal ketika tombol dengan class .detail-button diklik
+            $('.detail-button').on('click', function () {
+                var targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            });
+        });
+    </script>
+
     
 
     <script>
@@ -1376,3 +1492,39 @@
         });
 
     </script>
+    <script>
+        // Ensure that the modal is working correctly
+        $(document).ready(function () {
+            // Trigger modal when clicking on the detail button
+            $('.detail-button').on('click', function () {
+                var targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            });
+        });
+    
+        // Get the preview image element and the fullscreen modal
+        const previewImg = document.querySelector('.preview-img');
+        const fullscreenModal = document.getElementById('fullscreenImgModal');
+        const fullscreenImg = document.getElementById('fullscreenImg');
+        const closePreview = document.querySelector('.close-preview');
+    
+        // When the user clicks the image, open fullscreen preview
+        previewImg.addEventListener('click', function () {
+            fullscreenImg.src = this.src; // Set the full image source
+            fullscreenModal.style.display = 'flex'; // Show the fullscreen modal
+        });
+    
+        // Close the fullscreen preview when the user clicks the close button
+        closePreview.addEventListener('click', function () {
+            fullscreenModal.style.display = 'none'; // Hide the fullscreen modal
+        });
+    
+        // Also close the fullscreen preview when the user clicks outside the image
+        fullscreenModal.addEventListener('click', function (event) {
+            if (event.target !== fullscreenImg) {
+                fullscreenModal.style.display = 'none';
+            }
+        });
+    
+    </script>
+    
