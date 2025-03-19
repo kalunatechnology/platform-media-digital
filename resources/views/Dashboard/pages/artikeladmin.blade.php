@@ -216,7 +216,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/editor_check" class="card card-custom shadow-sm">
+                    <a href="/backoffice/editor_check_admin" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_editor_check'] }}</h5>
@@ -229,7 +229,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/published" class="card card-custom shadow-sm">
+                    <a href="/backoffice/published_admin" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_published'] }}</h5>
@@ -246,7 +246,7 @@
             <!-- Baris Kedua: 2 Card -->
             <div class="row mt-3">
                 <div class="col-md-6 col-sm-6">
-                    <a href="/backoffice/hidden_artikel" class="card card-custom shadow-sm">
+                    <a href="/backoffice/hidden_artikel_admin" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_hidden'] }}</h5>
@@ -259,7 +259,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <a href="/backoffice/archived" class="card card-custom shadow-sm">
+                    <a href="/backoffice/archived_admin" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_archived'] }}</h5>

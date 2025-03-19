@@ -216,7 +216,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/editor_check" class="card card-custom shadow-sm">
+                    <a href="/backoffice/editor_check_editor" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_editor_check'] }}</h5>
@@ -229,7 +229,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <a href="/backoffice/published" class="card card-custom shadow-sm">
+                    <a href="/backoffice/published_editor" class="card card-custom shadow-sm">
                         <div class="d-flex">
                             <div class="card-text">
                                 <h5>{{ $card['jumlah_published'] }}</h5>

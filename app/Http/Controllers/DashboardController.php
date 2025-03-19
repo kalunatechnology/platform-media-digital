@@ -817,6 +817,22 @@ class DashboardController extends Controller
         
         return view('Dashboard.pages.editor_check.editor_check_editor', ['card' => $card]);
     }
+    public function preview_editor_check_admin ($id)
+    {
+        $data = Articles::with('user')->find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.editor_check.preview_editor_check_admin', ['data' => $data, 'card' => $card]);
+    }
 
 
     public function profile(Request $request, $id)

@@ -1159,9 +1159,7 @@
                 <span class="toggle-bar"></span>
             </button>
             <div class="navbar-actions" id="navbar-actions">
-                <a href="/backoffice/editor_check_editor" class="btn-login">Kembali</a>
-                <a href="/backoffice/edit_editor_check/{{ $data->id }}"
-                    class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Data</a>
+                <a href="/backoffice/editor_check_admin" class="btn-login">Kembali</a>
             </div>
         </div>
     </nav>

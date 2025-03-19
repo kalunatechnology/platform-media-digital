@@ -72,7 +72,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/edit_editor/{id}', [DashboardController::class, 'edit_editor'])->name('edit_editor');
     Route::put('/editor/{id}', [DashboardController::class, 'updateeditor']);
     Route::get('/editor_check_editor', [DashboardController::class, 'editor_check_editor'])->name('editor_check_editor');
-    Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
+    Route::get('/preview_editor_check_admin/{id}', [DashboardController::class, 'preview_editor_check_admin'])->name('preview_editor_check_admin');
     Route::get('/edit_editor_check/{id}', [DashboardController::class, 'edit_editor_check'])->name('edit_editor_check');
     Route::put('/editor_check/{id}', [DashboardController::class, 'updateeditorcheck']);
     Route::get('/published_editor', [DashboardController::class, 'published_editor'])->name('published_editor');

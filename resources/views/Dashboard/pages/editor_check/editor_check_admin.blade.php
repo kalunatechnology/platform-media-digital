@@ -479,7 +479,9 @@
         </div>
         <br>
         <div class="keterangan">
-            <p>*Anda bisa melihat preview lagi.</p>
+            <p>1. Anda bisa melihat preview lagi, kemudian menugaskan editor untuk edit lagi apabila belum sesuai<br>
+                2. Atau anda bisa melakukan publish secara langsung melalui button publish.
+            </p>
         </div>
         <br><br>
 
@@ -513,7 +515,7 @@
                                 <td>{{ $artikel->user->name }}</td>
                                 <td>{{ $artikel->title }}</td>
                                 <td class="d-flex">
-                                    <a href="/backoffice/preview_editor_check/{{ $artikel->id }}"
+                                    <a href="/backoffice/preview_editor_check_admin/{{ $artikel->id }}"
                                         class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Preview</a>
                                     <button type="button" class="btn btn-warning btn-sm bg-warning mx-1 text-black" data-bs-toggle="modal"
                                         data-bs-target="#publishModal">
