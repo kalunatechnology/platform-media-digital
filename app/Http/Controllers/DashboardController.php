@@ -8,6 +8,7 @@ use App\Models\Kota;
 use App\Models\Provinsi;
 use App\Models\Roles;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -422,6 +423,65 @@ class DashboardController extends Controller
 
         return view('Dashboard.pages.editor_check.preview_editor_check', ['data' => $data, 'card' => $card]);
     }
+    public function published_admin (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 2)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 2)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.publish.published_admin', ['card' => $card]);
+    }
+    public function perpanjangArtikel(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after:date_start',
+        ]);
+
+        // Temukan artikel berdasarkan ID
+        $artikel = Articles::findOrFail($id);
+
+        // Update data artikel
+        $artikel->update([
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'status' => 2,
+        ]);
+
+        
+        return redirect()->back()->with('success', 'Artikel berhasil diperpanjang!');
+    }
+    public function arsipkanAdmin($id)
+    {
+        $artikel = Articles::findOrFail($id);
+        $artikel->status = 3;
+        $artikel->save();
+
+        return redirect()->back()->with('success', 'Artikel berhasil diarsipkan.');
+    }
+
+    
     public function edit_editor_check ($id)
     {
         $data = Articles::find($id);
@@ -475,6 +535,90 @@ class DashboardController extends Controller
         session()->flash('success', 'Artikel berhasil diperbarui.');
     
         return redirect()->route('editor_check_editor');
+    }
+    public function published_editor (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 2)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 2)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.publish.published_editor', ['card' => $card]);
+    }
+    public function edit_publish ($id)
+    {
+        $data = Articles::find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.publish.edit_publish', ['data' => $data, 'card' => $card]);
+    }
+    public function update_publish($id, Request $request)
+    {
+        $artikel = Articles::findOrFail($id);
+    
+        $request->validate([
+            'kategori_id' => 'required',
+            'title' => 'required|unique:articles,title,' . $id,
+            'deskripsi_singkat' => 'required',
+            'content' => 'required',
+            'time' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+    
+
+    
+        $artikel->update([
+            'category_id' => $request->kategori_id,
+            'user_id' => $request->author ?? $artikel->user_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'short_description' => $request->deskripsi_singkat,
+            'time' => $request->time,
+            'content' => $request->content,
+            'status' => 2,
+        ]);
+    
+        if ($request->hasFile('thumbnail')) {
+            if ($artikel->thumbnail) {
+                Storage::delete('public/' . $artikel->thumbnail);
+            }
+    
+            $filePath = $request->file('thumbnail')->store('thumbnail', 'public');
+    
+            $artikel->update(['thumbnail' => $filePath]);
+        }
+    
+        session()->flash('success', 'Artikel berhasil diperbarui.');
+    
+        return redirect()->route('published_editor');
     }
 
 
@@ -964,6 +1108,30 @@ class DashboardController extends Controller
         ];
         
         return view('Dashboard.pages.editor_check.editor_check', ['card' => $card]);
+    }
+    public function published (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('user_id', $user->id)
+        ->where('status', 2)
+        ->where('title', 'LIKE', '%'.$keyword.'%')
+        ->paginate(10);
+    
+
+        $count_draft =  Articles::where('user_id', $user->id)->where('status', 2)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.publish.published', ['card' => $card]);
     }
 
 

@@ -345,7 +345,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="3" class="text-center"><strong>Artikel anda belum ada yang di cek editor</strong></td>
+                                        <td colspan="3" class="text-center"><strong>Editor belum melakukan pengecekan artikel</strong></td>
                                     </tr>
                                     @endforelse         
                                 </tbody>
@@ -425,7 +425,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="3" class="text-center"><strong>Belum ada artikel anda yang habis masa penayangan</strong></td>
+                                        <td colspan="3" class="text-center"><strong>Belum ada artikel yang habis masa penayangan</strong></td>
                                     </tr>
                                     @endforelse         
                                 </tbody>

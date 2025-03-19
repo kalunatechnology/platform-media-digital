@@ -55,6 +55,11 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::put('/artikel/{id}/publish', [DashboardController::class, 'publishArtikel'])->name('artikel.publish');
     Route::put('/artikel2/{id}/publish', [DashboardController::class, 'publishArtikel2'])->name('artikel.publish2');
     Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
+    Route::get('/published_admin', [DashboardController::class, 'published_admin'])->name('published_admin');
+    Route::put('/artikel/{id}/perpanjang', [DashboardController::class, 'perpanjangArtikel'])->name('artikel.perpanjang');
+    Route::get('/{id}/arsipkan_admin', [DashboardController::class, 'arsipkanAdmin'])->name('arsipkanAdmin');
+
+
 
 
 
@@ -70,6 +75,10 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
     Route::get('/edit_editor_check/{id}', [DashboardController::class, 'edit_editor_check'])->name('edit_editor_check');
     Route::put('/editor_check/{id}', [DashboardController::class, 'updateeditorcheck']);
+    Route::get('/published_editor', [DashboardController::class, 'published_editor'])->name('published_editor');
+    Route::get('/edit_publish/{id}', [DashboardController::class, 'edit_publish'])->name('edit_publish');
+    Route::put('/edit_publish/{id}', [DashboardController::class, 'update_publish']);
+
 
 
 
@@ -83,6 +92,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/draft_articles', [DashboardController::class, 'draft_articles'])->name('draft_articles');
     Route::get('/preview_draft/{id}', [DashboardController::class, 'preview_draft'])->name('preview_draft');
     Route::get('/editor_check', [DashboardController::class, 'editor_check'])->name('editor_check');
+    Route::get('/published', [DashboardController::class, 'published'])->name('published');
+
 
 
 
