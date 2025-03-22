@@ -22,6 +22,16 @@ use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
+    public function checkAndUpdateArticles()
+    {
+        Articles::where('status', 2)
+            ->where('date_end', '<=', Carbon::now())
+            ->update(['status' => 4]);
+    }
+    public function __construct()
+    {
+        $this->checkAndUpdateArticles();
+    }
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -480,6 +490,78 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Artikel berhasil diarsipkan.');
     }
+    public function hidden_admin (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 4)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 4)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.hidden.hidden_admin', ['card' => $card]);
+    }
+    public function preview_hidden_admin ($id)
+    {
+        $data = Articles::with('user')->find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.hidden.preview_hidden_admin', ['data' => $data, 'card' => $card]);
+    }
+    public function perpanjang_hiddenArtikel(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after:date_start',
+        ]);
+
+        // Temukan artikel berdasarkan ID
+        $artikel = Articles::findOrFail($id);
+
+        // Update data artikel
+        $artikel->update([
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'status' => 2,
+        ]);
+
+        
+        return redirect()->back()->with('success', 'Artikel berhasil diperpanjang!');
+    }
+    public function hapus_hidden_admin ($id)
+    {
+        $data = Articles::find($id);
+        $data->delete();
+        return redirect()->route('hidden_admin');
+    }
+
 
     
     public function edit_editor_check ($id)
@@ -620,6 +702,104 @@ class DashboardController extends Controller
     
         return redirect()->route('published_editor');
     }
+    public function hidden_editor (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 4)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 4)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.hidden.hidden_editor', ['card' => $card]);
+    }
+    public function preview_hidden_editor ($id)
+    {
+        $data = Articles::with('user')->find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.hidden.preview_hidden_editor', ['data' => $data, 'card' => $card]);
+    }
+    public function edit_hidden_artikel ($id)
+    {
+        $data = Articles::find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.hidden.edit_hidden_artikel', ['data' => $data, 'card' => $card]);
+    }
+    public function updatehidden($id, Request $request)
+    {
+        $artikel = Articles::findOrFail($id);
+    
+        $request->validate([
+            'kategori_id' => 'required',
+            'title' => 'required|unique:articles,title,' . $id,
+            'deskripsi_singkat' => 'required',
+            'content' => 'required',
+            'time' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+    
+        $artikel->update([
+            'category_id' => $request->kategori_id,
+            'user_id' => $request->author ?? $artikel->user_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'short_description' => $request->deskripsi_singkat,
+            'time' => $request->time,
+            'content' => $request->content,
+            'status' => 4,
+        ]);
+    
+        // Handle thumbnail upload
+        if ($request->hasFile('thumbnail')) {
+            if ($artikel->thumbnail) {
+                Storage::delete('public/' . $artikel->thumbnail);
+            }
+            
+            $filePath = $request->file('thumbnail')->store('thumbnail', 'public');
+            $artikel->update(['thumbnail' => $filePath]);
+        }
+    
+        session()->flash('success', 'Artikel berhasil diperbarui.');
+        return redirect()->route('hidden_editor');
+    }
+    
 
 
     public function publishArtikel(Request $request, $id)
@@ -676,10 +856,15 @@ class DashboardController extends Controller
         $get_data_draft = Articles::where('status', 0)->limit(3)->get();
         $get_data_published = Articles::where('status', 2)->limit(3)->get();
         $get_data_editor_check = Articles::where('status', 1)->limit(3)->get();
+        $get_data_archived = Articles::where('status', 3)->limit(3)->get();
+        $get_data_hidden = Articles::where('status', 4)->limit(3)->get();
+
 
         $count_draft = Articles::where('status', 0)->count();
         $count_published = Articles::where('status', 2)->count();
         $count_editor_check = Articles::where('status', 1)->count();
+        $count_archived = Articles::where('status', 3)->count();
+        $count_hidden = Articles::where('status', 4)->count();
 
 
 
@@ -688,10 +873,13 @@ class DashboardController extends Controller
             'data_draft' => $get_data_draft,
             'data_published' => $get_data_published,
             'data_editor_check' => $get_data_editor_check,
+            'data_archived' => $get_data_archived,
+            'data_hidden' => $get_data_hidden,
             'jumlah_draft' => $count_draft,
             'jumlah_published' => $count_published,
             'jumlah_editor_check' => $count_editor_check,
-            
+            'jumlah_archived' => $count_archived,
+            'jumlah_hidden' => $count_hidden,
         ];
         
         return view('Dashboard.pages.artikeleditor', ['card' => $card]);
@@ -1148,6 +1336,30 @@ class DashboardController extends Controller
         ];
 
         return view('Dashboard.pages.publish.published', ['card' => $card]);
+    }
+    public function hidden_artikel (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('user_id', $user->id)
+        ->where('status', 4)
+        ->where('title', 'LIKE', '%'.$keyword.'%')
+        ->paginate(10);
+    
+
+        $count_draft =  Articles::where('user_id', $user->id)->where('status', 4)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.hidden.hidden', ['card' => $card]);
     }
 
 

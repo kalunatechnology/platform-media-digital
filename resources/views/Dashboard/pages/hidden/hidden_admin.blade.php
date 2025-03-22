@@ -415,7 +415,7 @@
 
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Artikel Published</span>
+        <span>Artikel Hidden</span>
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;
@@ -437,14 +437,14 @@
         <!-- Card Jumlah Timses -->
         <div class="card total-timses-card">
             <div class="card-body">
-                <h3>Data Published Artikel</h3>
+                <h3>Data Hidden Artikel</h3>
                 <p class="display-4"><small>{{ $card['jumlah_draft'] }} artikel</small></p>
             </div>
             
         </div>
 
         <!-- Search Bar -->
-        <form method="GET" action="{{ url('/backoffice/published_editor') }}" class="form-search">
+        <form method="GET" action="{{ url('/backoffice/hidden_artikel_admin') }}" class="form-search">
             <label for="search">
                 <input required name="keyword" autocomplete="off" placeholder="cari judul atau penulis artikel"
                     id="search" type="text" value="{{ $card['keyword'] }}">
@@ -474,7 +474,7 @@
         </form>
         
         <div class="button-back mt-1">
-            <a href="/backoffice/artikeleditor"
+            <a href="/backoffice/artikeladmin"
             class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Kembali</a>
         </div>
         <br>
@@ -505,13 +505,7 @@
                             $nomor = 1;
                             @endphp
                             @foreach ($card['data_draft'] as $artikel)
-                                @php
-                                    // Hitung selisih hari dari tanggal sekarang ke date_end
-                                    $diffDays = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($artikel->date_end), false);
-                                    // Jika kurang dari atau sama dengan 7 hari sebelum habis, beri kelas merah
-                                    $rowClass = $diffDays <= 7 ? 'table-danger' : '';
-                                @endphp
-                                <tr class="{{ $rowClass }}">
+                                <tr>
                                     <td>{{ $nomor++ }}</td>
                                     <td><img src="{{ asset('storage/' . $artikel->thumbnail) }}" alt="Dokumentasi" class="thumbnail"></td>
                                     <td>{{ $artikel->category->name }}</td>
@@ -522,12 +516,54 @@
                                         {{ \Carbon\Carbon::parse($artikel->date_end)->translatedFormat('d F Y') }}
                                     </td>
                                     <td class="d-flex">
-                                        <a href="/backoffice/preview_draft/{{ $artikel->id }}"
-                                            class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Lihat Artikel</a>
-                                        <a href="/backoffice/edit_publish/{{ $artikel->id }}"
-                                            class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Artikel</a>
+                                        <a href="/backoffice/preview_hidden_admin/{{ $artikel->id }}"
+                                            class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Preview Artikel</a>
+                                        <button type="button" class="btn btn-warning btn-sm bg-warning mx-1 text-black" data-bs-toggle="modal"
+                                            data-bs-target="#publishModal{{ $artikel->id }}">
+                                            Perpanjang
+                                        </button>
+                                        <button class="btn btn-danger btn-sm bg-danger mx-1 text-white" onclick="confirmDelete({{ $artikel->id }})">
+                                            Hapus Artikel
+                                        </button>
                                     </td>
                                 </tr>
+                            
+                                <!-- Modal Perpanjang -->
+                                <div class="modal fade" id="publishModal{{ $artikel->id }}" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="publishModalLabel">Perpanjang Penayangan Artikel</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ url('/backoffice/artikel/' . $artikel->id . '/perpanjang_hidden') }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                            
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="date_start" class="form-label">Tanggal Artikel Terbit</label>
+                                                        <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($artikel->date_start)->translatedFormat('d F Y') }}" readonly>
+                                                        <input type="hidden" name="date_start" value="{{ \Carbon\Carbon::parse($artikel->date_start)->format('Y-m-d') }}">
+                                                    </div>
+                            
+                                                    <div class="mb-3">
+                                                        <label for="date_end" class="form-label">Tanggal Artikel Berakhir</label>
+                                                        <input type="date" class="form-control" id="date_end" name="date_end"
+                                                               value="{{ $artikel->date_end ? \Carbon\Carbon::parse($artikel->date_end)->format('Y-m-d') : '' }}" required>
+                                                    </div>
+                            
+                                                    <input type="hidden" name="status" value="2">
+                                                </div>
+                            
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-warning">Perpanjang</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                             
                         </tbody>
@@ -582,19 +618,19 @@
 
 </script>
 <script>
-    function confirmArchive(articleId) {
+    function confirmDelete(articleId) {
         Swal.fire({
             title: "Anda yakin?",
-            text: "Artikel ini akan diarsipkan dan kamu harus mengaktifkan kembali pada halaman archived!",
+            text: "Artikel ini akan dihapus dan tidak dapat dipulihkan",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: "Ya, Arsipkan!",
+            confirmButtonText: "Ya, Hapus!",
             cancelButtonText: "Batal"
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/backoffice/" + articleId + "/arsipkan_admin";
+                window.location.href = "/backoffice/" + articleId + "/hapus_hidden_admin";
             }
         });
     }

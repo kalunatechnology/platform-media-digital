@@ -58,9 +58,10 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/published_admin', [DashboardController::class, 'published_admin'])->name('published_admin');
     Route::put('/artikel/{id}/perpanjang', [DashboardController::class, 'perpanjangArtikel'])->name('artikel.perpanjang');
     Route::get('/{id}/arsipkan_admin', [DashboardController::class, 'arsipkanAdmin'])->name('arsipkanAdmin');
-
-
-
+    Route::get('/hidden_artikel_admin', [DashboardController::class, 'hidden_admin'])->name('hidden_admin');
+    Route::get('/preview_hidden_admin/{id}', [DashboardController::class, 'preview_hidden_admin'])->name('preview_hidden_admin');
+    Route::put('/artikel/{id}/perpanjang_hidden', [DashboardController::class, 'perpanjang_hiddenArtikel'])->name('artikel.perpanjang_hidden');
+    Route::get('/{id}/hapus_hidden_admin', [DashboardController::class, 'hapus_hidden_admin'])->name('hapus_hidden_admin');
 
 
     
@@ -78,6 +79,14 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/published_editor', [DashboardController::class, 'published_editor'])->name('published_editor');
     Route::get('/edit_publish/{id}', [DashboardController::class, 'edit_publish'])->name('edit_publish');
     Route::put('/edit_publish/{id}', [DashboardController::class, 'update_publish']);
+    Route::get('/hidden_artikel_editor', [DashboardController::class, 'hidden_editor'])->name('hidden_editor');
+    Route::get('/preview_hidden_editor/{id}', [DashboardController::class, 'preview_hidden_editor'])->name('preview_hidden_editor');
+    Route::get('/edit_hidden_artikel/{id}', [DashboardController::class, 'edit_hidden_artikel'])->name('edit_hidden_artikel');
+    Route::put('/hidden_artikel/{id}', [DashboardController::class, 'updatehidden']);
+
+
+
+
 
 
 
@@ -93,6 +102,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/preview_draft/{id}', [DashboardController::class, 'preview_draft'])->name('preview_draft');
     Route::get('/editor_check', [DashboardController::class, 'editor_check'])->name('editor_check');
     Route::get('/published', [DashboardController::class, 'published'])->name('published');
+    Route::get('/hidden_artikel', [DashboardController::class, 'hidden_artikel'])->name('hidden_artikel');
 
 
 

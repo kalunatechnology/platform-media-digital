@@ -415,7 +415,7 @@
 
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span>Artikel Published</span>
+        <span>Artikel Hidden</span>
         <span class="navbar-text ml-auto">
             @php
             $foto = Auth::user()->photos ? asset('storage/' . Auth::user()->photos) : null;
@@ -437,14 +437,14 @@
         <!-- Card Jumlah Timses -->
         <div class="card total-timses-card">
             <div class="card-body">
-                <h3>Data Published Artikel</h3>
+                <h3>Data Hidden Artikel</h3>
                 <p class="display-4"><small>{{ $card['jumlah_draft'] }} artikel</small></p>
             </div>
             
         </div>
 
         <!-- Search Bar -->
-        <form method="GET" action="{{ url('/backoffice/published_editor') }}" class="form-search">
+        <form method="GET" action="{{ url('/backoffice/hidden_artikel_editor') }}" class="form-search">
             <label for="search">
                 <input required name="keyword" autocomplete="off" placeholder="cari judul atau penulis artikel"
                     id="search" type="text" value="{{ $card['keyword'] }}">
@@ -479,8 +479,8 @@
         </div>
         <br>
         <div class="keterangan">
-            <p>1. Anda bisa memperpanjang masa penanyangan dengan menekan tombol perpanjang  <br>
-                2. Atau anda juga bisa melakukan edit melalui editor.</p>
+            <p>1. Anda bisa melakukan edit artikel di halaman ini  <br>
+                2. Untuk melakukan publish ulang hubungi admin.</p>
         </div>
         <br><br>
 
@@ -505,13 +505,7 @@
                             $nomor = 1;
                             @endphp
                             @foreach ($card['data_draft'] as $artikel)
-                                @php
-                                    // Hitung selisih hari dari tanggal sekarang ke date_end
-                                    $diffDays = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($artikel->date_end), false);
-                                    // Jika kurang dari atau sama dengan 7 hari sebelum habis, beri kelas merah
-                                    $rowClass = $diffDays <= 7 ? 'table-danger' : '';
-                                @endphp
-                                <tr class="{{ $rowClass }}">
+                                <tr>
                                     <td>{{ $nomor++ }}</td>
                                     <td><img src="{{ asset('storage/' . $artikel->thumbnail) }}" alt="Dokumentasi" class="thumbnail"></td>
                                     <td>{{ $artikel->category->name }}</td>
@@ -522,10 +516,10 @@
                                         {{ \Carbon\Carbon::parse($artikel->date_end)->translatedFormat('d F Y') }}
                                     </td>
                                     <td class="d-flex">
-                                        <a href="/backoffice/preview_draft/{{ $artikel->id }}"
-                                            class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Lihat Artikel</a>
-                                        <a href="/backoffice/edit_publish/{{ $artikel->id }}"
-                                            class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Artikel</a>
+                                        <a href="/backoffice/preview_hidden_editor/{{ $artikel->id }}"
+                                            class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Preview Artikel</a>
+                                        <a href="/backoffice/edit_hidden_artikel/{{ $artikel->id }}"
+                                            class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Data</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -580,24 +574,6 @@
         }
     });
 
-</script>
-<script>
-    function confirmArchive(articleId) {
-        Swal.fire({
-            title: "Anda yakin?",
-            text: "Artikel ini akan diarsipkan dan kamu harus mengaktifkan kembali pada halaman archived!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Ya, Arsipkan!",
-            cancelButtonText: "Batal"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "/backoffice/" + articleId + "/arsipkan_admin";
-            }
-        });
-    }
 </script>
 
 @endsection
