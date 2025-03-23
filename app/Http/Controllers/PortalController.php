@@ -13,24 +13,35 @@ class PortalController extends Controller
     {
         $now = Carbon::now();
     
-        // Update artikel dengan status 2 menjadi 4
+        // Update artikel dengan status 2 menjadi 4 dan reset editor_pick jika perlu
         $updatedStatus2 = Articles::where('status', 2)
             ->where('date_end', '<=', $now)
-            ->update(['status' => 4]);
+            ->update([
+                'status' => 4,
+                'editor_pick' => 0 // Reset editor_pick
+            ]);
     
-        // Update artikel dengan status 3 menjadi 4
+        // Update artikel dengan status 3 menjadi 4 dan reset editor_pick jika perlu
         $updatedStatus3 = Articles::where('status', 3)
             ->where('date_end', '<=', $now)
-            ->update(['status' => 4]);
+            ->update([
+                'status' => 4,
+                'editor_pick' => 0 // Reset editor_pick
+            ]);
+    
+        // Reset editor_pick ke 0 jika status == 3 (hanya status 2 yang boleh editor_pick = 1)
+        $resetEditorPick = Articles::where('status', 3)
+            ->where('editor_pick', 1)
+            ->update(['editor_pick' => 0]);
     
         // Hitung total perubahan
-        $totalUpdated = $updatedStatus2 + $updatedStatus3;
+        $totalUpdated = $updatedStatus2 + $updatedStatus3 + $resetEditorPick;
     
-        // Log hasil update (bisa diganti dengan return response jika dipanggil via AJAX)
+        // Logging atau response JSON
         if ($totalUpdated > 0) {
-            Log::info("$totalUpdated artikel telah diperbarui menjadi Hidden.");
+            Log::info("$totalUpdated artikel telah diperbarui. Status 4 dan editor_pick disesuaikan.");
         } else {
-            Log::info("Tidak ada artikel yang perlu diperbarui.");
+            Log::info("Tidak ada perubahan artikel.");
         }
     }
     public function __construct()

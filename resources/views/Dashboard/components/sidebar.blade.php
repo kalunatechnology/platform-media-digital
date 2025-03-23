@@ -38,6 +38,12 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/artikeleditor') }}">
                     <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor_admin') }}">
+                    <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(admin)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor') }}">
+                    <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(editor)</small></span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -86,6 +92,9 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/artikeleditor') }}">
                     <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor') }}">
+                    <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(editor)</small></span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -111,6 +120,9 @@
                 </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/artikeladmin') }}">
                     <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(admin)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor_admin') }}">
+                    <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(admin)</small></span>
                 </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>

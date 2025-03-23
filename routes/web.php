@@ -64,6 +64,9 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/{id}/hapus_hidden_admin', [DashboardController::class, 'hapus_hidden_admin'])->name('hapus_hidden_admin');
     Route::get('/archived_admin', [DashboardController::class, 'archived_admin'])->name('archived_admin');
 
+    Route::get('/pilihan_editor_admin', [DashboardController::class, 'pilihan_editor_admin'])->name('pilihan_editor_admin');
+
+
 
 
     
@@ -86,6 +89,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/edit_hidden_artikel/{id}', [DashboardController::class, 'edit_hidden_artikel'])->name('edit_hidden_artikel');
     Route::put('/hidden_artikel/{id}', [DashboardController::class, 'updatehidden']);
     Route::get('/archived_editor', [DashboardController::class, 'archived_editor'])->name('archived_editor');
+    Route::get('/pilihan_editor', [DashboardController::class, 'pilihan_editor'])->name('pilihan_editor');
+    Route::put('/set-editor-choice', [DashboardController::class, 'setEditorChoice'])->name('artikel.set_editor_choice');
 
 
     // khusus author

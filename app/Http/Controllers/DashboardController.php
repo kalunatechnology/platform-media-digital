@@ -27,24 +27,35 @@ class DashboardController extends Controller
     {
         $now = Carbon::now();
     
-        // Update artikel dengan status 2 menjadi 4
+        // Update artikel dengan status 2 menjadi 4 dan reset editor_pick jika perlu
         $updatedStatus2 = Articles::where('status', 2)
             ->where('date_end', '<=', $now)
-            ->update(['status' => 4]);
+            ->update([
+                'status' => 4,
+                'editor_pick' => 0 // Reset editor_pick
+            ]);
     
-        // Update artikel dengan status 3 menjadi 4
+        // Update artikel dengan status 3 menjadi 4 dan reset editor_pick jika perlu
         $updatedStatus3 = Articles::where('status', 3)
             ->where('date_end', '<=', $now)
-            ->update(['status' => 4]);
+            ->update([
+                'status' => 4,
+                'editor_pick' => 0 // Reset editor_pick
+            ]);
+    
+        // Reset editor_pick ke 0 jika status == 3 (hanya status 2 yang boleh editor_pick = 1)
+        $resetEditorPick = Articles::where('status', 3)
+            ->where('editor_pick', 1)
+            ->update(['editor_pick' => 0]);
     
         // Hitung total perubahan
-        $totalUpdated = $updatedStatus2 + $updatedStatus3;
+        $totalUpdated = $updatedStatus2 + $updatedStatus3 + $resetEditorPick;
     
-        // Log hasil update (bisa diganti dengan return response jika dipanggil via AJAX)
+        // Logging atau response JSON
         if ($totalUpdated > 0) {
-            Log::info("$totalUpdated artikel telah diperbarui menjadi Hidden.");
+            Log::info("$totalUpdated artikel telah diperbarui. Status 4 dan editor_pick disesuaikan.");
         } else {
-            Log::info("Tidak ada artikel yang perlu diperbarui.");
+            Log::info("Tidak ada perubahan artikel.");
         }
     }
     public function __construct()
@@ -626,6 +637,30 @@ class DashboardController extends Controller
 
         return view('Dashboard.pages.archived.archived_admin', ['card' => $card]);
     }
+    public function pilihan_editor_admin(Request $request)
+    {
+        $username = FacadesSession::get('username');
+        $keyword = $request->keyword;
+    
+        $get_data = Articles::whereIn('editor_pick', [0, 1]) // Hanya tampilkan yang memiliki nilai 0 atau 1
+            ->where('status', 2)
+            ->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', '%' . $keyword . '%')
+                      ->orWhereHas('user', function ($query) use ($keyword) {
+                          $query->where('name', 'LIKE', '%' . $keyword . '%');
+                      });
+            })
+            ->orderBy('editor_pick', 'desc') // Urutkan dengan yang bernilai 1 lebih dulu
+            ->paginate(15);
+    
+        $card = [
+            'username' => $username,
+            'get_data' => $get_data,
+            'keyword' => $keyword
+        ];
+    
+        return view('Dashboard.pages.pilihan.pilihan_editor_admin', compact('card'));
+    }
 
 
     
@@ -891,6 +926,43 @@ class DashboardController extends Controller
         ];
 
         return view('Dashboard.pages.archived.archived_editor', ['card' => $card]);
+    }
+    public function pilihan_editor(Request $request)
+    {
+        $username = FacadesSession::get('username');
+        $keyword = $request->keyword;
+
+        $get_data = Articles::where('status', 2)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+        
+
+
+
+        $card = [
+            'username' => $username,
+            'get_data' => $get_data,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.pilihan.pilihan_editor', ['card' => $card]);
+    }
+    public function setEditorChoice(Request $request)
+    {
+        Articles::query()->update(['editor_pick' => 0]);
+
+        if ($request->has('editor_pick')) {
+            Articles::whereIn('id', $request->editor_pick)->update(['editor_pick' => 1]);
+        }
+
+        session()->flash('success', 'Pilihan editor berhasil diperbarui.');
+
+        return redirect()->route('pilihan_editor');
     }
     
 
