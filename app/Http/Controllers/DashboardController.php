@@ -126,8 +126,14 @@ class DashboardController extends Controller
     public function destroykategori($id)
     {
         $data = Categories::find($id);
+    
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan.'], 404);
+        }
+    
         $data->delete();
-        return redirect()->route('kategori');
+    
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
 
     public function usersetting(Request $request)
@@ -193,10 +199,16 @@ class DashboardController extends Controller
         return view('Dashboard.pages.user.add', ['card' => $card]);
     }
     public function destroyuser ($id)
-    {
+    {        
         $data = User::find($id);
+    
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan.'], 404);
+        }
+    
         $data->delete();
-        return redirect()->route('usersetting');
+    
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
     public function edituser ($id)
     {
@@ -307,8 +319,14 @@ class DashboardController extends Controller
     public function destroyrole($id)
     {
         $data = Roles::find($id);
+    
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan.'], 404);
+        }
+    
         $data->delete();
-        return redirect()->route('role');
+    
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
     public function artikeladmin(Request $request)
     {
@@ -1168,7 +1186,7 @@ class DashboardController extends Controller
     
             DB::commit();
             return redirect()->back()->with([
-                'success' => 'Artikel berhasil disimpan sebagai draft. Tunggu editor menghubungi anda',
+                'success' => 'Artikel berhasil disimpan sebagai draft. Tunggu admin menghubungi anda',
                 'card' => compact('username', 'kategori'),
             ]);
         } catch (\Exception $e) {
@@ -1245,8 +1263,14 @@ class DashboardController extends Controller
     public function destroyartikel ($id)
     {
         $data = Articles::find($id);
+    
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan.'], 404);
+        }
+    
         $data->delete();
-        return redirect()->route('draft_articles');
+    
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
     
     public function draft_articles(Request $request)

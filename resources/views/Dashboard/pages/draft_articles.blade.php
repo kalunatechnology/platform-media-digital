@@ -518,14 +518,9 @@
                                         class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Preview</a>
                                     <a href="/backoffice/{{ $artikel->id }}/edit_draft_artikel"
                                         class="btn btn-warning btn-sm bg-warning mx-1 text-black">Edit Data</a>
-                                    <form action="{{ url('/backoffice/artikel/' . $artikel->id) }}" method="POST"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('delete')
-                                        <input type="submit" name="submit" value="delete"
-                                            class="btn btn-sm btn-danger bg-danger mx-1 text-white">
-                                    </form>
+                                    <button class="btn btn-danger btn-sm bg-danger mx-1 text-white" onclick="confirmDelete({{ $artikel->id }})">
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -579,6 +574,39 @@
         }
     });
 
+</script>
+<script>
+	function confirmDelete(artikelId) {
+		Swal.fire({
+			title: "Anda yakin?",
+			text: "Data ini akan dihapus dan tidak dapat dipulihkan",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#d33",
+			cancelButtonColor: "#3085d6",
+			confirmButtonText: "Ya, Hapus!",
+			cancelButtonText: "Batal"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				fetch(`/backoffice/artikel/${artikelId}`, {
+					method: "DELETE",
+					headers: {
+						"X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+						"Content-Type": "application/json"
+					}
+				})
+				.then(response => response.json())
+				.then(data => {
+					Swal.fire("Terhapus!", data.message, "success").then(() => {
+						location.reload(); // Reload halaman setelah hapus
+					});
+				})
+				.catch(error => {
+					Swal.fire("Error!", "Terjadi kesalahan saat menghapus data.", "error");
+				});
+			}
+		});
+	}
 </script>
 
 

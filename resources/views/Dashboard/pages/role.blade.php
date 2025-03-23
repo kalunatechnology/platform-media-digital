@@ -89,14 +89,9 @@
                                                                 <div class="d-flex">
                                                                     <a href="{{ url('/backoffice/' . $role->id . '/editrole') }}"
                                                                         class="btn btn-primary btn-sm bg-primary mr-1 text-white">Edit</a>
-                                                                    <form action="{{ url('/backoffice/role/' . $role->id) }}" method="POST"
-                                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <input type="submit" name="submit"
-                                                                            value="delete"
-                                                                            class="btn btn-sm btn-danger bg-danger ml-1 text-white">
-                                                                    </form>
+                                                                    <button class="btn btn-danger btn-sm bg-danger mx-1 text-white" onclick="confirmDelete({{ $role->id }})">
+                                                                        Delete
+                                                                    </button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -122,5 +117,38 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script>
+        function confirmDelete(roleId) {
+            Swal.fire({
+                title: "Anda yakin?",
+                text: "Data ini akan dihapus dan tidak dapat dipulihkan",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, Hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/backoffice/role/${roleId}`, {
+                        method: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire("Terhapus!", data.message, "success").then(() => {
+                            location.reload(); // Reload halaman setelah hapus
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire("Error!", "Terjadi kesalahan saat menghapus data.", "error");
+                    });
+                }
+            });
+        }
+    </script>
 </div>
 @endsection

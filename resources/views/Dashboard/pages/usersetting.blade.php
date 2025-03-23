@@ -149,14 +149,9 @@
                                                                 <div class="d-flex">
                                                                     <a href="{{ url('/backoffice/' . $user->id . '/edituser') }}"
                                                                         class="btn btn-primary btn-sm bg-primary mr-1 text-white">Edit</a>
-                                                                    <form action="{{ url('/backoffice/usersetting/' . $user->id) }}" method="POST"
-                                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <input type="submit" name="submit"
-                                                                            value="delete"
-                                                                            class="btn btn-sm btn-danger bg-danger ml-1 text-white">
-                                                                    </form>
+                                                                    <button class="btn btn-danger btn-sm bg-danger mx-1 text-white" onclick="confirmDelete({{ $user->id }})">
+                                                                        Delete
+                                                                    </button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -184,10 +179,43 @@
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script>
         function clearSearch(event) {
-            event.preventDefault(); // Mencegah form terkirim
-            document.getElementById('search').value = ''; // Kosongkan input
+            event.preventDefault(); 
+            document.getElementById('search').value = ''; 
         }
 
+    </script>
+    <script>
+        function confirmDelete(userId) {
+            Swal.fire({
+                title: "Anda yakin?",
+                text: "Data ini akan dihapus dan tidak dapat dipulihkan",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, Hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/backoffice/usersetting/${userId}`, {
+                        method: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire("Terhapus!", data.message, "success").then(() => {
+                            location.reload(); // Reload halaman setelah hapus
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire("Error!", "Terjadi kesalahan saat menghapus data.", "error");
+                    });
+                }
+            });
+        }
     </script>
 </div>
 @endsection
