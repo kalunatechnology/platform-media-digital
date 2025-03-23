@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Articles;
 use Carbon\Carbon;
 
+
 class UpdateArticleStatus extends Command
 {
     /**
@@ -29,12 +30,22 @@ class UpdateArticleStatus extends Command
      */
     public function handle()
     {
-        // Ambil semua artikel yang statusnya masih Published (2) dan sudah melewati date_end
-        $articles = Articles::where('status', 2)
-            ->where('date_end', '<=', Carbon::now()) // Cek jika date_end sudah terlewati
-            ->update(['status' => 4]); // Ubah status menjadi Hidden (4)
-
-        // Menampilkan pesan jumlah artikel yang diperbarui
-        $this->info("$articles artikel telah diperbarui menjadi Hidden.");
+        // Ambil jumlah artikel sebelum update
+        $articlesBefore = Articles::whereIn('status', [2, 3])
+            ->where('date_end', '<=', Carbon::now())
+            ->count();
+    
+        // Jika ada artikel yang seharusnya diupdate, lanjutkan proses
+        if ($articlesBefore > 0) {
+            $articlesUpdated = Articles::whereIn('status', [2, 3])
+                ->where('date_end', '<=', Carbon::now())
+                ->update(['status' => 4]);
+    
+            // Menampilkan pesan jumlah artikel yang diperbarui
+            $this->info("$articlesUpdated artikel telah diperbarui menjadi Hidden.");
+        } else {
+            $this->info("Tidak ada artikel yang perlu diperbarui.");
+        }
     }
+    
 }

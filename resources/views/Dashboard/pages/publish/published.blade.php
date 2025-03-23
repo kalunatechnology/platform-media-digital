@@ -479,9 +479,8 @@
         </div>
         <br>
         <div class="keterangan">
-            <p>1. Anda bisa memperpanjang masa penanyangan dengan menekan tombol perpanjang  <br>
-                2. Atau anda juga bisa melakukan edit melalui editor. <br>
-                3. Anda bisa mengarsipkan artikel anda dengan menekan tombol arsipkan, dan anda bisa mempublish ulang pada halaman archived.
+            <p>1. Anda bisa memperpanjang masa penanyangan dengan menghubungi admin  <br>
+                2. Anda bisa mengarsipkan artikel anda dengan menekan tombol arsipkan, dan anda bisa mempublish ulang pada halaman archived.
             </p>
         </div>
         <br><br>
@@ -524,52 +523,12 @@
                                     <td class="d-flex">
                                         <a href="/backoffice/preview_draft/{{ $artikel->id }}"
                                             class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Lihat Artikel</a>
-                                        <button type="button" class="btn btn-warning btn-sm bg-warning mx-1 text-black" data-bs-toggle="modal"
-                                            data-bs-target="#publishModal{{ $artikel->id }}">
-                                            Perpanjang
-                                        </button>
                                         <button class="btn btn-danger btn-sm bg-danger mx-1 text-white" onclick="confirmArchive({{ $artikel->id }})">
                                             Arsipkan
                                         </button>
                                     </td>
                                 </tr>
                             
-                                <!-- Modal Perpanjang -->
-                                <div class="modal fade" id="publishModal{{ $artikel->id }}" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="publishModalLabel">Perpanjang Penayangan Artikel</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ url('/backoffice/artikel/' . $artikel->id . '/perpanjang') }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                            
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="date_start" class="form-label">Tanggal Artikel Terbit</label>
-                                                        <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($artikel->date_start)->translatedFormat('d F Y') }}" readonly>
-                                                        <input type="hidden" name="date_start" value="{{ \Carbon\Carbon::parse($artikel->date_start)->format('Y-m-d') }}">
-                                                    </div>
-                            
-                                                    <div class="mb-3">
-                                                        <label for="date_end" class="form-label">Tanggal Artikel Berakhir</label>
-                                                        <input type="date" class="form-control" id="date_end" name="date_end"
-                                                               value="{{ $artikel->date_end ? \Carbon\Carbon::parse($artikel->date_end)->format('Y-m-d') : '' }}" required>
-                                                    </div>
-                            
-                                                    <input type="hidden" name="status" value="2">
-                                                </div>
-                            
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-warning">Perpanjang</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             @endforeach
                             
                         </tbody>
