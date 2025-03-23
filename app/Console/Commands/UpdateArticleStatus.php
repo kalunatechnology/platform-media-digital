@@ -30,22 +30,27 @@ class UpdateArticleStatus extends Command
      */
     public function handle()
     {
-        // Ambil jumlah artikel sebelum update
-        $articlesBefore = Articles::whereIn('status', [2, 3])
-            ->where('date_end', '<=', Carbon::now())
-            ->count();
+        $now = Carbon::now();
     
-        // Jika ada artikel yang seharusnya diupdate, lanjutkan proses
-        if ($articlesBefore > 0) {
-            $articlesUpdated = Articles::whereIn('status', [2, 3])
-                ->where('date_end', '<=', Carbon::now())
-                ->update(['status' => 4]);
+        // Update artikel dengan status 2 ke 4
+        $updatedStatus2 = Articles::where('status', 2)
+            ->where('date_end', '<=', $now)
+            ->update(['status' => 4]);
     
-            // Menampilkan pesan jumlah artikel yang diperbarui
-            $this->info("$articlesUpdated artikel telah diperbarui menjadi Hidden.");
+        // Update artikel dengan status 3 ke 4
+        $updatedStatus3 = Articles::where('status', 3)
+            ->where('date_end', '<=', $now)
+            ->update(['status' => 4]);
+    
+        // Hitung total perubahan
+        $totalUpdated = $updatedStatus2 + $updatedStatus3;
+    
+        if ($totalUpdated > 0) {
+            $this->info("$totalUpdated artikel telah diperbarui menjadi Hidden.");
         } else {
             $this->info("Tidak ada artikel yang perlu diperbarui.");
         }
     }
+    
     
 }
