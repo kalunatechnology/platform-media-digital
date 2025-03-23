@@ -579,6 +579,34 @@ class DashboardController extends Controller
         $data->delete();
         return redirect()->route('hidden_admin');
     }
+    public function archived_admin (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 3)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 3)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.archived.archived_admin', ['card' => $card]);
+    }
 
 
     
@@ -816,6 +844,34 @@ class DashboardController extends Controller
     
         session()->flash('success', 'Artikel berhasil diperbarui.');
         return redirect()->route('hidden_editor');
+    }
+    public function archived_editor (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('status', 3)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+    
+
+        $count_draft = Articles::where('status', 3)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.archived.archived_editor', ['card' => $card]);
     }
     
 
@@ -1384,6 +1440,49 @@ class DashboardController extends Controller
         ];
 
         return view('Dashboard.pages.hidden.hidden', ['card' => $card]);
+    }
+    public function archived (Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $user = Auth::user();
+        $username = $user->name;
+        $get_data_draft = Articles::where('user_id', $user->id)
+        ->where('status', 3)
+        ->where('title', 'LIKE', '%'.$keyword.'%')
+        ->paginate(10);
+    
+
+        $count_draft =  Articles::where('user_id', $user->id)->where('status', 3)->count();
+
+
+        $card = [
+            'username' => $username,
+            'data_draft' => $get_data_draft,
+            'jumlah_draft' => $count_draft,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.archived.archived', ['card' => $card]);
+    }
+    public function publish_ulang($id)
+    {
+        $artikel = Articles::findOrFail($id);
+        $artikel->update(['status' => 2]);
+    
+        return response()->json(['status' => 'success', 'message' => 'Artikel berhasil dipublish.']);
+    }
+    public function destroyarchived ($id)
+    {
+        $data = Articles::find($id);
+    
+        if (!$data) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan.'], 404);
+        }
+    
+        $data->delete();
+    
+        return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
 
 

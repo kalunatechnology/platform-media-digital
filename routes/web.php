@@ -62,6 +62,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/preview_hidden_admin/{id}', [DashboardController::class, 'preview_hidden_admin'])->name('preview_hidden_admin');
     Route::put('/artikel/{id}/perpanjang_hidden', [DashboardController::class, 'perpanjang_hiddenArtikel'])->name('artikel.perpanjang_hidden');
     Route::get('/{id}/hapus_hidden_admin', [DashboardController::class, 'hapus_hidden_admin'])->name('hapus_hidden_admin');
+    Route::get('/archived_admin', [DashboardController::class, 'archived_admin'])->name('archived_admin');
+
 
 
     
@@ -83,12 +85,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/preview_hidden_editor/{id}', [DashboardController::class, 'preview_hidden_editor'])->name('preview_hidden_editor');
     Route::get('/edit_hidden_artikel/{id}', [DashboardController::class, 'edit_hidden_artikel'])->name('edit_hidden_artikel');
     Route::put('/hidden_artikel/{id}', [DashboardController::class, 'updatehidden']);
-
-
-
-
-
-
+    Route::get('/archived_editor', [DashboardController::class, 'archived_editor'])->name('archived_editor');
 
 
     // khusus author
@@ -103,6 +100,12 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/editor_check', [DashboardController::class, 'editor_check'])->name('editor_check');
     Route::get('/published', [DashboardController::class, 'published'])->name('published');
     Route::get('/hidden_artikel', [DashboardController::class, 'hidden_artikel'])->name('hidden_artikel');
+    Route::get('/archived', [DashboardController::class, 'archived'])->name('archived');
+    Route::get('/{id}/publish_ulang', [DashboardController::class, 'publish_ulang'])->name('publish_ulang');
+    Route::delete('/artikel_archived/{id}', [DashboardController::class, 'destroyarchived']);
+
+
+
 
 
 
