@@ -5,14 +5,52 @@ namespace App\Http\Controllers;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Kota;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 
 class LoginController extends Controller
 {
     public function login()
     {
         return view('Auth.login');
+    }
+    public function registrasi()
+    {
+        return view('Auth.register');
+    }
+    public function registrasi_send(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string',
+            'telepon' => 'required|numeric',
+            'password' => 'required|min:6',
+            'role_id' => 'nullable|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->first()
+            ], 400);
+        }
+
+        // Simpan user baru
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'telepon' => $request->telepon,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->user_id ?? 4,
+        ]);
+
+        return response()->json([
+            'message' => 'Registrasi berhasil!'
+        ], 200);
     }
     public function authenticate(Request $request)
     {

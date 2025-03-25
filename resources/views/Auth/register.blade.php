@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Session</title>
+    <title>Register Session</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <style>
         /* Font import */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -191,23 +194,36 @@
 <body>
     <div class="container">
         <div class="form-section">
-            <h2>Welcome to asdsa!</h2>
+            <h2>Join to asdsa!</h2>
             @error('email')
             <div class="text-danger">{{ $message }} !!</div>
             @enderror
-            <form method="POST" action="/login">
+            <form id="registrationForm">
                 @csrf
+                <input type="hidden" name="role_id" value="4">
+                <div class="input-group">
+                    <input type="text" name="name" class="input" placeholder="Username" required>
+                    <i class="bx bx-user"></i>
+                </div>
                 <div class="input-group">
                     <input type="email" name="email" class="input" placeholder="Email" required>
                     <i class='bx bx-envelope'></i>
                 </div>
                 <div class="input-group">
+                    <input type="number" name="telepon" class="input" placeholder="Nomor Telepon" required>
+                    <i class='bx bx-phone'></i>
+                </div>
+                <div class="input-group">
                     <input type="password" name="password" class="input" id="password" placeholder="Password" required>
                     <i class="bx bx-show" id="togglePassword"></i>
                 </div>
-                <button type="submit">Login</button>
+                <div class="input-group">
+                    <input type="password" name="confirm_password" class="input" id="confirm_password" placeholder="Confirm Password" required>
+                    <i class="bx bx-show" id="togglePasswordConfirm"></i>
+                </div>
+                <button type="submit">Registrasi</button>
                 <br><br>
-                <p>Belum memiliki akun ? daftarkan akun anda <a class="register-href" href="{{ url('/registrasi') }}"> disini</a></p>
+                <p>Sudah memiliki akun ? login akun kamu <a class="register-href" href="{{ url('/login') }}"> disini</a></p>
             </form>
         </div>
         <div class="contact-info">
@@ -253,6 +269,71 @@
             passwordInput.setAttribute('type', type);
             this.classList.toggle('bx-lock');
             this.classList.toggle('bx-lock-alt');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Mencegah form reload
+            
+            let name = document.querySelector("input[name='name']").value;
+            let email = document.querySelector("input[name='email']").value;
+            let telepon = document.querySelector("input[name='telepon']").value;
+            let password = document.querySelector("input[name='password']").value;
+            let confirmPassword = document.querySelector("input[name='confirm_password']").value;
+            let roleId = document.querySelector("input[name='role_id']").value;
+    
+            // Validasi Confirm Password
+            if (password !== confirmPassword) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Password dan Konfirmasi Password tidak cocok!",
+                });
+                return;
+            }
+    
+            // Kirim data dengan Fetch API
+            let formData = new FormData();
+            formData.append("role_id", roleId);
+            formData.append("name", name);
+            formData.append("email", email);
+            formData.append("telepon", telepon);
+            formData.append("password", password);
+            formData.append("_token", "{{ csrf_token() }}");
+    
+            try {
+                let response = await fetch("{{ url('/registrasi_send') }}", {
+                    method: "POST",
+                    body: formData,
+                });
+    
+                let result = await response.json();
+                
+                if (response.ok) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Registrasi Berhasil!",
+                        text: "Akun kamu telah terdaftar. Tunggu admin mengkonfirmasi",
+                        timer: 4000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = "{{ url('/login') }}";
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Registrasi Gagal!",
+                        text: result.message || "Terjadi kesalahan, coba lagi!",
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Registrasi Gagal!",
+                    text: "Tidak dapat menghubungi server, coba lagi nanti!",
+                });
+            }
         });
     </script>
 </body>

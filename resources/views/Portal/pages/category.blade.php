@@ -153,18 +153,6 @@
 
         /* Responsive Styles */
         @media screen and (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                flex-direction: column;
-                background-color: #fff;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                padding: 10px 0;
-                border-top: 1px solid #ddd;
-            }
-
             .navbar-links.active {
                 display: flex;
             }
@@ -173,13 +161,35 @@
                 display: flex;
             }
 
-            .navbar-actions {
+			.navbar-links {
+                display: none;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 39px;
+                left: 0;
+                width: 100%;
+                padding: 15px 15px;
+                border-top: 1px solid #ddd;
+            }
+		
+			.navbar-actions {
                 display: none;
             }
-
-            .search-box {
+            .navbar-actions.active {
+                display: block;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 277px;
+                left: 0;
+                width: 100%;
+                padding: 15px 15px;
+            }
+			.search-box {
                 width: 100%;
                 margin-top: 10px;
+                margin-bottom: 20px;
             }
 
             .search-box input {
@@ -200,151 +210,153 @@
             }
         }
 
-/* Container Kategori */
-.categories {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
-}
+        /* Container Kategori */
+        .categories {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
 
-/* Judul */
-.categories h2 {
-    font-size: 32px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
-    color: #222; /* Warna teks */
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-    
-    /* Animasi muncul */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 0.8s ease-in-out forwards;
-}
+        /* Judul */
+        .categories h2 {
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            color: #222;
+            /* Warna teks */
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
 
-/* Efek highlight di bawah teks */
-.categories h2::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 60%;
-    height: 4px;
-    background: linear-gradient(to right, #ff7eb3, #ff758c);
-    transform: translateX(-50%);
-    border-radius: 10px;
-}
+            /* Animasi muncul */
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
 
-/* Animasi Fade-In */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Efek highlight di bawah teks */
+        .categories h2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, #ff7eb3, #ff758c);
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
 
+        /* Animasi Fade-In */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-hr {
-    border: none;
-    height: 2px;
-    background-color: #ddd;
-    margin: 20px auto;
-    width: 90%;
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
 
-/* Grid Layout (2 per baris) */
-.category-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    justify-content: center;
-}
-
-/* Style Kartu */
-.category-card {
-    position: relative;
-    height: 180px;
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-/* Link dalam Kartu */
-.category-card a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    border-radius: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-}
-
-/* Efek Hover */
-.category-card a:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-    opacity: 0.85;
-}
-
-/* Overlay Gelap saat Hover */
-.category-card a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    transition: background 0.3s ease;
-    z-index: 1;
-}
-
-.category-card a:hover::before {
-    background: rgba(0, 0, 0, 0.6);
-}
-
-/* Teks dalam Kartu */
-.category-card span {
-    font-size: 26px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: white;
-    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9), 
-                 0px 0px 8px rgba(255, 255, 255, 0.6);
-    position: relative;
-    z-index: 2;
-    transition: text-shadow 0.3s ease-in-out;
-}
-
-.category-card a:hover span {
-    text-shadow: 3px 3px 15px rgba(0, 0, 0, 1), 
-                 0px 0px 12px rgba(255, 255, 255, 0.9);
-}
-
-/* Responsif untuk Mobile */
-@media (max-width: 768px) {
-    .category-list {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 20px auto;
+            width: 90%;
+        }
 
 
+        /* Grid Layout (2 per baris) */
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            justify-content: center;
+        }
 
-                        /* Footer Styling */
-                        .custom-footer {
+        /* Style Kartu */
+        .category-card {
+            position: relative;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* Link dalam Kartu */
+        .category-card a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Efek Hover */
+        .category-card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            opacity: 0.85;
+        }
+
+        /* Overlay Gelap saat Hover */
+        .category-card a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            z-index: 1;
+        }
+
+        .category-card a:hover::before {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Teks dalam Kartu */
+        .category-card span {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9),
+                0px 0px 8px rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 2;
+            transition: text-shadow 0.3s ease-in-out;
+        }
+
+        .category-card a:hover span {
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 1),
+                0px 0px 12px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsif untuk Mobile */
+        @media (max-width: 768px) {
+            .category-list {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+
+
+        /* Footer Styling */
+        .custom-footer {
             background-image: url('images/footer.jpg');
             background-size: cover;
             background-position: center;
@@ -476,7 +488,7 @@ hr {
 
     </style>
 
-    </head>
+</head>
 
 <body>
 
@@ -493,7 +505,12 @@ hr {
                 <li><a href="#">Gaya Hidup</a></li>
                 <li><a href="#">Bisnis</a></li>
             </ul>
-            <div class="navbar-actions">
+            <button class="navbar-toggle" id="navbar-toggle">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </button>
+            <div class="navbar-actions" id="navbar-actions">
                 <div class="search-box">
                     <input type="text" placeholder="Cari berita...">
                     <button class="search-button">
@@ -507,63 +524,58 @@ hr {
                 <a href="#" class="btn-login">Login</a>
                 <a href="#" class="btn-register">Register</a>
             </div>
-            <button class="navbar-toggle" id="navbar-toggle">
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-            </button>
         </div>
     </nav>
 
     <div class="categories">
-    <h2>Kategori Berita</h2>
+        <h2>Kategori Berita</h2>
 
-    <hr>
+        <hr>
 
-    <div class="category-list">
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/politik.jpg');">
-            <span>Politik</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/ekonomi.jpg');">
-            <span>Ekonomi</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/teknologi.png');">
-            <span>Teknologi</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/kesehatan.jpg');">
-            <span>Kesehatan</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/olahraga.jpg');">
-            <span>Olahraga</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/hiburan.jpg');">
-            <span>Hiburan</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/internasional.jpg');">
-            <span>Internasional</span>
-        </a>
-    </div>
-    <div class="category-card">
-        <a href="/category/detailcategory" style="background-image: url('images/nasional.jpg');">
-            <span>Nasional</span>
-        </a>
-    </div>
-</div>
+        <div class="category-list">
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/politik.jpg');">
+                    <span>Politik</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/ekonomi.jpg');">
+                    <span>Ekonomi</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/teknologi.png');">
+                    <span>Teknologi</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/kesehatan.jpg');">
+                    <span>Kesehatan</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/olahraga.jpg');">
+                    <span>Olahraga</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/hiburan.jpg');">
+                    <span>Hiburan</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/internasional.jpg');">
+                    <span>Internasional</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/detailcategory" style="background-image: url('images/nasional.jpg');">
+                    <span>Nasional</span>
+                </a>
+            </div>
+        </div>
 
-</div>
+    </div>
 
 
 
@@ -615,9 +627,12 @@ hr {
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');
+        const navbarActions = document.getElementById('navbar-actions');
+
 
         navbarToggle.addEventListener('click', () => {
             navbarLinks.classList.toggle('active');
+            navbarActions.classList.toggle('active');
         });
 
     </script>

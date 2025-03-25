@@ -153,18 +153,6 @@
 
         /* Responsive Styles */
         @media screen and (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                flex-direction: column;
-                background-color: #fff;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                padding: 10px 0;
-                border-top: 1px solid #ddd;
-            }
-
             .navbar-links.active {
                 display: flex;
             }
@@ -173,13 +161,37 @@
                 display: flex;
             }
 
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 39px;
+                left: 0;
+                width: 100%;
+                padding: 15px 15px;
+                border-top: 1px solid #ddd;
+            }
+
             .navbar-actions {
                 display: none;
+            }
+
+            .navbar-actions.active {
+                display: block;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 277px;
+                left: 0;
+                width: 100%;
+                padding: 15px 15px;
             }
 
             .search-box {
                 width: 100%;
                 margin-top: 10px;
+                margin-bottom: 20px;
             }
 
             .search-box input {
@@ -202,119 +214,123 @@
 
 
         .container {
-    display: flex;
-    justify-content: space-between; /* Agar h1 dan search sejajar dengan space di antara */
-    align-items: center; /* Sejajarkan secara vertikal */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+            display: flex;
+            justify-content: space-between;
+            /* Agar h1 dan search sejajar dengan space di antara */
+            align-items: center;
+            /* Sejajarkan secara vertikal */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.search-container input {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        .search-container input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-hr {
-    border: none;
-    height: 2px;
-    background-color: #ddd;
-    margin: 20px auto;
-    width: 90%;
-}
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 20px auto;
+            width: 90%;
+        }
 
-.authors {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 30px;
-    max-width: 1200px;
-    margin: auto;
-}
+        .authors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.author-card {
-    background: linear-gradient(135deg, #ffffff, #f8f8f8);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        .author-card {
+            background: linear-gradient(135deg, #ffffff, #f8f8f8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.author-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
 
-.author-card img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #ddd;
-    margin-bottom: 12px;
-}
+        .author-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ddd;
+            margin-bottom: 12px;
+        }
 
-/* ✅ Pastikan ukuran h3 konsisten */
-h3 {
-    font-size: 18px;
-    font-weight: bold;
-    position: relative;
-    display: block;
-    text-align: center;
-    width: 100%;
-    min-height: 24px; /* Menyesuaikan tinggi agar tetap rapi */
-    padding-bottom: 5px;
-}
+        /* ✅ Pastikan ukuran h3 konsisten */
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            display: block;
+            text-align: center;
+            width: 100%;
+            min-height: 24px;
+            /* Menyesuaikan tinggi agar tetap rapi */
+            padding-bottom: 5px;
+        }
 
-/* ✅ Efek Underline Loading yang Selalu Tengah */
-h3::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -3px;
-    width: 0;
-    height: 2px;
-    background: red;
-    transition: width 0.4s ease-in-out;
-    transform: translateX(-50%);
-}
+        /* ✅ Efek Underline Loading yang Selalu Tengah */
+        h3::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            background: red;
+            transition: width 0.4s ease-in-out;
+            transform: translateX(-50%);
+        }
 
-.author-card:hover h3::after {
-    width: 80%; /* Gunakan persentase agar tetap proporsional */
-}
-
-
-.pagination-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.pagination a {
-    display: inline-block;
-    padding: 8px 12px;
-    margin: 0 5px;
-    text-decoration: none;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.pagination a.active {
-    background-color: red;
-    color: white;
-    border: none;
-}
+        .author-card:hover h3::after {
+            width: 80%;
+            /* Gunakan persentase agar tetap proporsional */
+        }
 
 
+        .pagination-container {
+            text-align: center;
+            margin: 20px 0;
+        }
 
-                /* Footer Styling */
-                .custom-footer {
+        .pagination a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination a.active {
+            background-color: red;
+            color: white;
+            border: none;
+        }
+
+
+
+        /* Footer Styling */
+        .custom-footer {
             background-image: url('images/footer.jpg');
             background-size: cover;
             background-position: center;
@@ -462,7 +478,12 @@ h3::after {
                 <li><a href="#">Gaya Hidup</a></li>
                 <li><a href="#">Bisnis</a></li>
             </ul>
-            <div class="navbar-actions">
+            <button class="navbar-toggle" id="navbar-toggle">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </button>
+            <div class="navbar-actions" id="navbar-actions">
                 <div class="search-box">
                     <input type="text" placeholder="Cari berita...">
                     <button class="search-button">
@@ -476,50 +497,105 @@ h3::after {
                 <a href="#" class="btn-login">Login</a>
                 <a href="#" class="btn-register">Register</a>
             </div>
-            <button class="navbar-toggle" id="navbar-toggle">
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-            </button>
         </div>
     </nav>
 
     <div class="container">
-    <h1>INDEKS PENULIS</h1>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Cari Penulis" onkeyup="filterAuthors()">
+        <h1>INDEKS PENULIS</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari Penulis" onkeyup="filterAuthors()">
+        </div>
     </div>
-</div>
 
-<hr>
+    <hr>
 
-<section class="authors" id="authorList">
-    <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana"><h3>A.S. Laksanaaaaaaaaa</h3><p>Sastrawan, pengarang, dan kolumnis.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan"><h3>Abdul Manap Pulungan</h3><p>Penulis ekonomi di Indef.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Abdul Susila"><h3>Abdul Susila</h3><p>Lulusan Pondok Pesantren, mendalami dunia film.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana"><h3>Aditya Heru Wardhana</h3><p>Executive Editor CNN Indonesia.</p></div>
-    <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri"><h3>Agnes Savithri</h3><p>Jurnalis Bisnis Indonesia.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Agnes Anya"><h3>Agnes Anya</h3><p>Jurnalis Agence France-Presse.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Aminuddin"><h3>Aminuddin</h3><p>Penulis dan aktivis kebudayaan.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Andika Pratama"><h3>Andika Pratama</h3><p>Ahli politik dan kolumnis.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan"><h3>Aris Setiawan</h3><p>Dosen dan penulis esai.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu"><h3>Bagus Wahyu</h3><p>Jurnalis dan fotografer dokumenter.</p></div>
+    <section class="authors" id="authorList">
+        <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana">
+            <h3>A.S. Laksanaaaaaaaaa</h3>
+            <p>Sastrawan, pengarang, dan kolumnis.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan">
+            <h3>Abdul Manap Pulungan</h3>
+            <p>Penulis ekonomi di Indef.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Abdul Susila">
+            <h3>Abdul Susila</h3>
+            <p>Lulusan Pondok Pesantren, mendalami dunia film.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana">
+            <h3>Aditya Heru Wardhana</h3>
+            <p>Executive Editor CNN Indonesia.</p>
+        </div>
+        <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri">
+            <h3>Agnes Savithri</h3>
+            <p>Jurnalis Bisnis Indonesia.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Agnes Anya">
+            <h3>Agnes Anya</h3>
+            <p>Jurnalis Agence France-Presse.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Aminuddin">
+            <h3>Aminuddin</h3>
+            <p>Penulis dan aktivis kebudayaan.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Andika Pratama">
+            <h3>Andika Pratama</h3>
+            <p>Ahli politik dan kolumnis.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan">
+            <h3>Aris Setiawan</h3>
+            <p>Dosen dan penulis esai.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu">
+            <h3>Bagus Wahyu</h3>
+            <p>Jurnalis dan fotografer dokumenter.</p>
+        </div>
 
-    <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana"><h3>A.S. Laksana</h3><p>Sastrawan, pengarang, dan kolumnis.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan"><h3>Abdul Manap Pulungan</h3><p>Penulis ekonomi di Indef.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Abdul Susila"><h3>Abdul Susila</h3><p>Lulusan Pondok Pesantren, mendalami dunia film.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana"><h3>Aditya Heru Wardhana</h3><p>Executive Editor CNN Indonesia.</p></div>
-    <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri"><h3>Agnes Savithri</h3><p>Jurnalis Bisnis Indonesia.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Agnes Anya"><h3>Agnes Anya</h3><p>Jurnalis Agence France-Presse.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Aminuddin"><h3>Aminuddin</h3><p>Penulis dan aktivis kebudayaan.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Andika Pratama"><h3>Andika Pratama</h3><p>Ahli politik dan kolumnis.</p></div>
-    <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan"><h3>Aris Setiawan</h3><p>Dosen dan penulis esai.</p></div>
-    <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu"><h3>Bagus Wahyu</h3><p>Jurnalis dan fotografer dokumenter.</p></div>
-</section>
+        <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana">
+            <h3>A.S. Laksana</h3>
+            <p>Sastrawan, pengarang, dan kolumnis.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan">
+            <h3>Abdul Manap Pulungan</h3>
+            <p>Penulis ekonomi di Indef.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Abdul Susila">
+            <h3>Abdul Susila</h3>
+            <p>Lulusan Pondok Pesantren, mendalami dunia film.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana">
+            <h3>Aditya Heru Wardhana</h3>
+            <p>Executive Editor CNN Indonesia.</p>
+        </div>
+        <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri">
+            <h3>Agnes Savithri</h3>
+            <p>Jurnalis Bisnis Indonesia.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Agnes Anya">
+            <h3>Agnes Anya</h3>
+            <p>Jurnalis Agence France-Presse.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Aminuddin">
+            <h3>Aminuddin</h3>
+            <p>Penulis dan aktivis kebudayaan.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Andika Pratama">
+            <h3>Andika Pratama</h3>
+            <p>Ahli politik dan kolumnis.</p>
+        </div>
+        <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan">
+            <h3>Aris Setiawan</h3>
+            <p>Dosen dan penulis esai.</p>
+        </div>
+        <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu">
+            <h3>Bagus Wahyu</h3>
+            <p>Jurnalis dan fotografer dokumenter.</p>
+        </div>
+    </section>
 
-<section class="pagination-container">
-    <div id="pagination" class="pagination"></div>
-</section>
+    <section class="pagination-container">
+        <div id="pagination" class="pagination"></div>
+    </section>
 
 
     <footer class="custom-footer">
@@ -566,76 +642,81 @@ h3::after {
         </div>
     </footer>
 
-    <script>
+	<script>
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');
+        const navbarActions = document.getElementById('navbar-actions');
+
 
         navbarToggle.addEventListener('click', () => {
             navbarLinks.classList.toggle('active');
+            navbarActions.classList.toggle('active');
         });
 
     </script>
 
     <script>
-const authorsPerPage = 6;
-let currentPage = 1;
+        const authorsPerPage = 6;
+        let currentPage = 1;
 
-function displayAuthors() {
-    const authorList = document.querySelectorAll(".author-card");
-    const totalAuthors = authorList.length;
-    const totalPages = Math.ceil(totalAuthors / authorsPerPage);
+        function displayAuthors() {
+            const authorList = document.querySelectorAll(".author-card");
+            const totalAuthors = authorList.length;
+            const totalPages = Math.ceil(totalAuthors / authorsPerPage);
 
-    authorList.forEach((card, index) => {
-        card.style.display = (index >= (currentPage - 1) * authorsPerPage && index < currentPage * authorsPerPage) ? "block" : "none";
-    });
+            authorList.forEach((card, index) => {
+                card.style.display = (index >= (currentPage - 1) * authorsPerPage && index < currentPage *
+                    authorsPerPage) ? "block" : "none";
+            });
 
-    updatePagination(totalPages);
-}
-
-function updatePagination(totalPages) {
-    const pagination = document.getElementById("pagination");
-    pagination.innerHTML = "";
-
-    if (totalPages <= 1) return; // Jika hanya ada 1 halaman, tidak perlu pagination
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageLink = document.createElement("a");
-        pageLink.innerText = i;
-        pageLink.href = "#";
-        if (i === currentPage) {
-            pageLink.classList.add("active");
+            updatePagination(totalPages);
         }
 
-        pageLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            currentPage = i;
-            displayAuthors();
-        });
+        function updatePagination(totalPages) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
 
-        pagination.appendChild(pageLink);
-    }
-}
+            if (totalPages <= 1) return; // Jika hanya ada 1 halaman, tidak perlu pagination
 
-function filterAuthors() {
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const authorCards = document.querySelectorAll(".author-card");
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement("a");
+                pageLink.innerText = i;
+                pageLink.href = "#";
+                if (i === currentPage) {
+                    pageLink.classList.add("active");
+                }
 
-    let visibleAuthors = 0;
-    authorCards.forEach(card => {
-        const authorName = card.querySelector("h3").innerText.toLowerCase();
-        if (authorName.includes(searchInput)) {
-            card.style.display = "block";
-            visibleAuthors++;  // Hitung kolumnis yang masih ditampilkan
-        } else {
-            card.style.display = "none";
+                pageLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayAuthors();
+                });
+
+                pagination.appendChild(pageLink);
+            }
         }
-    });
 
-    const totalPages = Math.ceil(visibleAuthors / authorsPerPage);
-    currentPage = 1;  // Reset ke halaman pertama saat filter berubah
-    updatePagination(totalPages);
-}
+        function filterAuthors() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const authorCards = document.querySelectorAll(".author-card");
 
-displayAuthors();
+            let visibleAuthors = 0;
+            authorCards.forEach(card => {
+                const authorName = card.querySelector("h3").innerText.toLowerCase();
+                if (authorName.includes(searchInput)) {
+                    card.style.display = "block";
+                    visibleAuthors++; // Hitung kolumnis yang masih ditampilkan
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            const totalPages = Math.ceil(visibleAuthors / authorsPerPage);
+            currentPage = 1; // Reset ke halaman pertama saat filter berubah
+            updatePagination(totalPages);
+        }
+
+        displayAuthors();
+
     </script>

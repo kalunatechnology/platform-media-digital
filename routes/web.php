@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PortalController::class, 'index'])->name('home');
-Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('home');
-Route::get('/author', [PortalController::class, 'author'])->name('home');
+Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('detailberita');
+Route::get('/author', [PortalController::class, 'author'])->name('author');
 Route::get('/category', [PortalController::class, 'category'])->name('category');
 Route::get('category/detailcategory', [PortalController::class, 'detailcategory'])->name('detailcategory');
 
@@ -63,11 +63,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::put('/artikel/{id}/perpanjang_hidden', [DashboardController::class, 'perpanjang_hiddenArtikel'])->name('artikel.perpanjang_hidden');
     Route::get('/{id}/hapus_hidden_admin', [DashboardController::class, 'hapus_hidden_admin'])->name('hapus_hidden_admin');
     Route::get('/archived_admin', [DashboardController::class, 'archived_admin'])->name('archived_admin');
-
     Route::get('/pilihan_editor_admin', [DashboardController::class, 'pilihan_editor_admin'])->name('pilihan_editor_admin');
-
-
-
 
     
 
@@ -110,17 +106,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::delete('/artikel_archived/{id}', [DashboardController::class, 'destroyarchived']);
 
 
-
-
-
-
-
-
     Route::get('/profile/{id}', [DashboardController::class, 'profile'])->name('profile');
     Route::post('/profile/{id}', [DashboardController::class, 'profile']);
-
-
-
 
 
     Route::put('/approveuser/{id}', [DashboardController::class, 'approveUser'])->name('approve.user');
@@ -134,5 +121,7 @@ Route::prefix('api')->group(function () {
 });
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/registrasi', [LoginController::class, 'registrasi'])->name('registrasi');
+Route::post('/registrasi_send', [LoginController::class, 'registrasi_send'])->name('registrasi_send');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

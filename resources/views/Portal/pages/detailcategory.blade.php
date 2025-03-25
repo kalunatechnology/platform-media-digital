@@ -158,10 +158,10 @@
                 flex-direction: column;
                 background-color: #fff;
                 position: absolute;
-                top: 60px;
+                top: 39px;
                 left: 0;
                 width: 100%;
-                padding: 10px 0;
+                padding: 15px 15px;
                 border-top: 1px solid #ddd;
             }
 
@@ -173,13 +173,24 @@
                 display: flex;
             }
 
-            .navbar-actions {
+			.navbar-actions {
                 display: none;
+            }
+            .navbar-actions.active {
+                display: block;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 277px;
+                left: 0;
+                width: 100%;
+                padding: 15px 15px;
             }
 
             .search-box {
                 width: 100%;
                 margin-top: 10px;
+                margin-bottom: 20px;
             }
 
             .search-box input {
@@ -654,7 +665,7 @@ hr {
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar">
+	<nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="#">Portal Berita</a>
@@ -666,7 +677,12 @@ hr {
                 <li><a href="#">Gaya Hidup</a></li>
                 <li><a href="#">Bisnis</a></li>
             </ul>
-            <div class="navbar-actions">
+            <button class="navbar-toggle" id="navbar-toggle">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </button>
+            <div class="navbar-actions" id="navbar-actions">
                 <div class="search-box">
                     <input type="text" placeholder="Cari berita...">
                     <button class="search-button">
@@ -680,11 +696,6 @@ hr {
                 <a href="#" class="btn-login">Login</a>
                 <a href="#" class="btn-register">Register</a>
             </div>
-            <button class="navbar-toggle" id="navbar-toggle">
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-            </button>
         </div>
     </nav>
         
@@ -973,13 +984,16 @@ hr {
         </div>
     </footer>
 
-    <script>
+	<script>
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');
+        const navbarActions = document.getElementById('navbar-actions');
+
 
         navbarToggle.addEventListener('click', () => {
             navbarLinks.classList.toggle('active');
+            navbarActions.classList.toggle('active');
         });
 
     </script>
