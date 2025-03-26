@@ -160,7 +160,7 @@
                 display: flex;
             }
 
-			.navbar-links {
+            .navbar-links {
                 display: none;
                 flex-direction: column;
                 background-color: #fff;
@@ -171,10 +171,11 @@
                 padding: 15px 15px;
                 border-top: 1px solid #ddd;
             }
-		
-			.navbar-actions {
+
+            .navbar-actions {
                 display: none;
             }
+
             .navbar-actions.active {
                 display: block;
                 flex-direction: column;
@@ -185,7 +186,8 @@
                 width: 100%;
                 padding: 15px 15px;
             }
-			.search-box {
+
+            .search-box {
                 width: 100%;
                 margin-top: 10px;
                 margin-bottom: 20px;
@@ -1046,7 +1048,7 @@
 <body>
 
     <!-- NAVBAR -->
-	<nav class="navbar">
+    <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="#">Portal Berita</a>
@@ -1074,8 +1076,8 @@
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="{{ url('/login') }}" class="btn-login">Login</a>
+                <a href="{{ url('/registrasi') }}" class="btn-register">Register</a>
             </div>
         </div>
     </nav>
@@ -1084,7 +1086,8 @@
 
     <!-- Banner Section -->
     <div class="banner">
-        <img src="{{ asset('images/image1.jpg') }}" alt="News Thumbnail" style="width: 100%; height: 500px; object-fit: cover;">
+        <img src="{{ asset('images/image1.jpg') }}" alt="News Thumbnail"
+            style="width: 100%; height: 500px; object-fit: cover;">
     </div>
 
 
@@ -1107,7 +1110,7 @@
                 </a>
             </div>
         </div>
-    
+
         <!-- Main Content -->
         <div class="main-content">
             <div class="category">Teknologi</div>
@@ -1118,13 +1121,13 @@
                 <span>5 comments</span>
                 <span>2 min read</span>
             </div>
-    
+
             <div class="content">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
             </div>
-    
+
             <div class="divider"></div>
-    
+
             <div class="author-profile">
                 <img src="{{ asset('images/user-icon.png') }}" alt="Author">
                 <div class="author-info">
@@ -1143,7 +1146,8 @@
                 <h3>Artikel Penulis</h3>
                 <div class="articles-list">
                     <div class="news-card">
-                        <div class="news-image" style="background-image: url('{{ asset('images/image1.jpg') }}');"></div>
+                        <div class="news-image" style="background-image: url('{{ asset('images/image1.jpg') }}');">
+                        </div>
                         <div class="news-content">
                             <span class="category" style="background-color: #3498db;">Teknologi</span>
                             <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
@@ -1154,7 +1158,8 @@
                         </div>
                     </div>
                     <div class="news-card">
-                        <div class="news-image" style="background-image: url('{{ asset('images/image2.jpg') }}');"></div>
+                        <div class="news-image" style="background-image: url('{{ asset('images/image2.jpg') }}');">
+                        </div>
                         <div class="news-content">
                             <span class="category" style="background-color: #e74c3c;">Ekonomi</span>
                             <h3><a href="#">Ekonomi Digital: Peluang dan Tantangan</a></h3>
@@ -1165,7 +1170,8 @@
                         </div>
                     </div>
                     <div class="news-card">
-                        <div class="news-image" style="background-image: url('{{ asset('images/image3.jpg') }}');"></div>
+                        <div class="news-image" style="background-image: url('{{ asset('images/image3.jpg') }}');">
+                        </div>
                         <div class="news-content">
                             <span class="category" style="background-color: #2ecc71;">Lingkungan</span>
                             <h3><a href="#">Menyelamatkan Bumi: Langkah-langkah Sederhana</a></h3>
@@ -1177,7 +1183,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <!-- Berikan Komentar Section -->
             <div class="comment-section">
@@ -1215,7 +1221,7 @@
                 </div>
             </div>
 
-            
+
         </div>
         <div class="right-sidebar">
             <div class="categories">
@@ -1305,14 +1311,14 @@
                         </li>
                     </ul>
                 </div>
-                
+
 
             </div>
 
 
         </div>
     </div>
-    
+
 
     <footer class="custom-footer">
         <div class="custom-footer-container">
@@ -1321,7 +1327,7 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Portal Beritaku" class="custom-footer-logo">
                 <h3 class="custom-footer-portal-name">Portal Beritaku</h3>
             </div>
-    
+
             <!-- Middle Section: Explore Links -->
             <div class="custom-footer-center">
                 <h4 class="custom-footer-title">Telusuri</h4>
@@ -1332,7 +1338,7 @@
                     <li><a href="/kategori/olahraga">Olahraga</a></li>
                 </ul>
             </div>
-    
+
             <!-- Right Section: Social Media -->
             <div class="custom-footer-right">
                 <h4 class="custom-footer-title">Ikuti Kami</h4>
@@ -1357,9 +1363,9 @@
             </div>
         </div>
     </footer>
-    
 
-	<script>
+
+    <script>
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');

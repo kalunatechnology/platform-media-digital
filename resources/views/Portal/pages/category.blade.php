@@ -161,7 +161,7 @@
                 display: flex;
             }
 
-			.navbar-links {
+            .navbar-links {
                 display: none;
                 flex-direction: column;
                 background-color: #fff;
@@ -172,10 +172,11 @@
                 padding: 15px 15px;
                 border-top: 1px solid #ddd;
             }
-		
-			.navbar-actions {
+
+            .navbar-actions {
                 display: none;
             }
+
             .navbar-actions.active {
                 display: block;
                 flex-direction: column;
@@ -186,7 +187,8 @@
                 width: 100%;
                 padding: 15px 15px;
             }
-			.search-box {
+
+            .search-box {
                 width: 100%;
                 margin-top: 10px;
                 margin-bottom: 20px;
@@ -521,8 +523,8 @@
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="{{ url('/login') }}" class="btn-login">Login</a>
+                <a href="{{ url('/registrasi') }}" class="btn-register">Register</a>
             </div>
         </div>
     </nav>

@@ -176,6 +176,7 @@
             .navbar-actions {
                 display: none;
             }
+
             .navbar-actions.active {
                 display: block;
                 flex-direction: column;
@@ -1129,8 +1130,8 @@
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="{{ url('/login') }}" class="btn-login">Login</a>
+                <a href="{{ url('/registrasi') }}" class="btn-register">Register</a>
             </div>
         </div>
     </nav>

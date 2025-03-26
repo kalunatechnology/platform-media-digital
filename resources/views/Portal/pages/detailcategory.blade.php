@@ -173,9 +173,10 @@
                 display: flex;
             }
 
-			.navbar-actions {
+            .navbar-actions {
                 display: none;
             }
+
             .navbar-actions.active {
                 display: block;
                 flex-direction: column;
@@ -212,321 +213,332 @@
         }
 
         .detail-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1200px;
-    margin: auto;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-/* Judul */
-.categories h2 {
-    font-size: 32px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
-    color: #000; /* Warna teks */
-    position: relative;
-    display: inline-block;
-    
-    /* Animasi muncul */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 0.8s ease-in-out forwards;
-}
+        /* Judul */
+        .categories h2 {
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            color: #000;
+            /* Warna teks */
+            position: relative;
+            display: inline-block;
 
-/* Efek highlight di bawah teks */
-.categories h2::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    transform: translateX(-50%);
-    border-radius: 10px;
-}
+            /* Animasi muncul */
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
 
-/* Animasi Fade-In */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Efek highlight di bawah teks */
+        .categories h2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
 
+        /* Animasi Fade-In */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-hr {
-    border: none;
-    height: 2px;
-    background-color: #ddd;
-    margin: 20px auto;
-    width: 90%;
-}
-
-/* Card Besar */
-.big-card {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 70%;  /* Sedikit lebih sempit */
-    margin: 0 auto 40px; /* Memusatkan card */
-    position: relative;
-}
-
-.category-tag {
-    position: absolute;
-    top: 35px;
-    left: 35px;
-    background-color: #3498db;
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;  /* Diperkecil */
-    font-weight: bold;
-    border-radius: 5px;
-    z-index: 2; /* Pastikan tag kategori selalu di atas konten */
-}
-
-.big-card-image {
-    width: 100%;
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-}
-
-.big-card-content {
-    margin-top: 15px;
-}
-
-.big-card-content h3 a {
-    color: black;
-    text-decoration: none;
-    position: relative;
-    font-size: 20px;
-    margin: 10px 0;
-}
-
-.big-card-content h3 a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #ff5722;
-    transition: width 0.5s ease;
-}
-
-.big-card-content h3 a:hover::after {
-    width: 100%;
-}
-
-.big-card-content p {
-    font-size: 14px;
-    color: #555;
-}
-
-.author-and-views {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.author {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: black;
-}
-
-.author img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.views {
-    font-size: 14px;
-    color: #555;
-}
-
-.views i {
-    margin-right: 5px;
-}
-
-/* Card Grid */
-.category-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
-    gap: 20px;
-}
-
-.news-card {
-    display: none; /* Semua card disembunyikan awalnya */
-}
-
-.news-card.show {
-    display: block; /* Card yang memiliki class show akan ditampilkan */
-}
-
-.news-card {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-}
-
-.news-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.news-image {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-}
-
-.news-content {
-    margin-top: 10px;
-}
-
-.news-content h3 a {
-    color: black;
-    text-decoration: none;
-    position: relative;
-    font-size: 20px;
-    margin: 10px 0;
-}
-
-.news-content h3 a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #ff5722;
-    transition: width 0.7s ease;
-}
-
-.news-content h3 a:hover::after {
-    width: 100%;
-}
-
-.news-content p {
-    font-size: 14px;
-    color: #555;
-}
-
-.author-and-views {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.author {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: black;
-}
-
-.author img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.views {
-    font-size: 14px;
-    color: #555;
-}
-
-.views i {
-    margin-right: 5px;
-}
-
-/* Membuat seluruh card dapat diklik */
-.news-card a,
-.big-card a {
-    display: block;
-    text-decoration: none;
-    color: inherit; /* Pastikan teks tetap terlihat */
-}
-
-/* Styling Button Load More */
-.load-more {
-    display: inline-block;
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin: 20px auto;
-    display: block;
-}
-
-.load-more:hover {
-    background-color: #2980b9;
-}
-
-.load-more:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
 
-/* Responsiveness untuk mobile */
-@media (max-width: 768px) {
-    .category-cards {
-        grid-template-columns: 1fr;
-    }
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 20px auto;
+            width: 90%;
+        }
 
-    .big-card {
-        width: 100%;
-        flex-direction: column;
-    }
+        /* Card Besar */
+        .big-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            /* Sedikit lebih sempit */
+            margin: 0 auto 40px;
+            /* Memusatkan card */
+            position: relative;
+        }
 
-    .big-card-image {
-        height: 200px;
-    }
+        .category-tag {
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            /* Diperkecil */
+            font-weight: bold;
+            border-radius: 5px;
+            z-index: 2;
+            /* Pastikan tag kategori selalu di atas konten */
+        }
 
-    .category-tag {
-        font-size: 11px;
-    }
+        .big-card-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
 
-    .news-image {
-        height: 200px;
-    }
+        .big-card-content {
+            margin-top: 15px;
+        }
 
-    .category-tag {
-        font-size: 11px;
-    }
-}
+        .big-card-content h3 a {
+            color: black;
+            text-decoration: none;
+            position: relative;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .big-card-content h3 a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff5722;
+            transition: width 0.5s ease;
+        }
+
+        .big-card-content h3 a:hover::after {
+            width: 100%;
+        }
+
+        .big-card-content p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .author-and-views {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+        }
+
+        .author img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .views {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .views i {
+            margin-right: 5px;
+        }
+
+        /* Card Grid */
+        .category-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 kolom */
+            gap: 20px;
+        }
+
+        .news-card {
+            display: none;
+            /* Semua card disembunyikan awalnya */
+        }
+
+        .news-card.show {
+            display: block;
+            /* Card yang memiliki class show akan ditampilkan */
+        }
+
+        .news-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .news-content {
+            margin-top: 10px;
+        }
+
+        .news-content h3 a {
+            color: black;
+            text-decoration: none;
+            position: relative;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .news-content h3 a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff5722;
+            transition: width 0.7s ease;
+        }
+
+        .news-content h3 a:hover::after {
+            width: 100%;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .author-and-views {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+        }
+
+        .author img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .views {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .views i {
+            margin-right: 5px;
+        }
+
+        /* Membuat seluruh card dapat diklik */
+        .news-card a,
+        .big-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            /* Pastikan teks tetap terlihat */
+        }
+
+        /* Styling Button Load More */
+        .load-more {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .load-more:hover {
+            background-color: #2980b9;
+        }
+
+        .load-more:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+
+        /* Responsiveness untuk mobile */
+        @media (max-width: 768px) {
+            .category-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .big-card {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .big-card-image {
+                height: 200px;
+            }
+
+            .category-tag {
+                font-size: 11px;
+            }
+
+            .news-image {
+                height: 200px;
+            }
+
+            .category-tag {
+                font-size: 11px;
+            }
+        }
+
         /* Footer Styling */
         .custom-footer {
             background-image: url('/images/footer.jpg');
@@ -665,7 +677,7 @@ hr {
 <body>
 
     <!-- NAVBAR -->
-	<nav class="navbar">
+    <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="#">Portal Berita</a>
@@ -693,252 +705,252 @@ hr {
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="{{ url('/login') }}" class="btn-login">Login</a>
+                <a href="{{ url('/registrasi') }}" class="btn-register">Register</a>
             </div>
         </div>
     </nav>
-        
+
     <div class="detail-section">
-    <div class="categories">
-    <h2>Kategori Berita - TEKNOLOGI</h2>
-    <hr>
+        <div class="categories">
+            <h2>Kategori Berita - TEKNOLOGI</h2>
+            <hr>
 
-    <div class="category-detail">
-    <!-- Card Besar di atas -->
-    <div class="big-card">
-        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-        <div class="big-card-image" style="background-image: url('/images/image1.jpg');"></div>
-        <div class="big-card-content">
-            <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
-            <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
-        </div>
-        <div class="author-and-views">
-            <div class="author">
-                <img src="images/user-icon.png" alt="Author">
-                <span>By John Doe</span>
+            <div class="category-detail">
+                <!-- Card Besar di atas -->
+                <div class="big-card">
+                    <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                    <div class="big-card-image" style="background-image: url('/images/image1.jpg');"></div>
+                    <div class="big-card-content">
+                        <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
+                        <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
+                    </div>
+                    <div class="author-and-views">
+                        <div class="author">
+                            <img src="images/user-icon.png" alt="Author">
+                            <span>By John Doe</span>
+                        </div>
+                        <div class="views">
+                            <i class="fas fa-eye"></i> 1200 Views
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Grid di bawah -->
+                <div class="category-cards">
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more cards here -->
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more cards here -->
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
+                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
+                        <div class="news-content">
+                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
+                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
+                        </div>
+                        <div class="author-and-views">
+                            <div class="author">
+                                <img src="images/user-icon.png" alt="Author">
+                                <span>By Jane Smith</span>
+                            </div>
+                            <div class="views">
+                                <i class="fas fa-eye"></i> 900 Views
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="views">
-                <i class="fas fa-eye"></i> 1200 Views
-            </div>
+
+            <button class="load-more">Lihat Selanjutnya</button>
         </div>
     </div>
-
-    <!-- Card Grid di bawah -->
-    <div class="category-cards">
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <!-- Add more cards here -->
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <!-- Add more cards here -->
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-            <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-            <div class="news-content">
-                <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-            </div>
-            <div class="author-and-views">
-                <div class="author">
-                    <img src="images/user-icon.png" alt="Author">
-                    <span>By Jane Smith</span>
-                </div>
-                <div class="views">
-                    <i class="fas fa-eye"></i> 900 Views
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <button class="load-more">Lihat Selanjutnya</button>
-</div>
-</div>
 
 
     <footer class="custom-footer">
@@ -984,7 +996,7 @@ hr {
         </div>
     </footer>
 
-	<script>
+    <script>
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');
@@ -998,38 +1010,34 @@ hr {
 
     </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const cards = document.querySelectorAll('.news-card'); // Ambil semua card
-    const loadMoreButton = document.querySelector('.load-more');
-    let currentVisibleCards = 6; // Mulai dengan menampilkan 6 card pertama
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('.news-card'); // Ambil semua card
+            const loadMoreButton = document.querySelector('.load-more');
+            let currentVisibleCards = 6; // Mulai dengan menampilkan 6 card pertama
 
-    // Fungsi untuk menampilkan card berdasarkan jumlah yang ingin ditampilkan
-    function showCards() {
-        for (let i = 0; i < currentVisibleCards; i++) {
-            if (cards[i]) {
-                cards[i].classList.add('show'); // Menampilkan card
+            // Fungsi untuk menampilkan card berdasarkan jumlah yang ingin ditampilkan
+            function showCards() {
+                for (let i = 0; i < currentVisibleCards; i++) {
+                    if (cards[i]) {
+                        cards[i].classList.add('show'); // Menampilkan card
+                    }
+                }
+
+                // Jika semua card sudah ditampilkan, sembunyikan tombol
+                if (currentVisibleCards >= cards.length) {
+                    loadMoreButton.style.display = 'none'; // Sembunyikan tombol jika tidak ada card lagi
+                }
             }
-        }
 
-        // Jika semua card sudah ditampilkan, sembunyikan tombol
-        if (currentVisibleCards >= cards.length) {
-            loadMoreButton.style.display = 'none'; // Sembunyikan tombol jika tidak ada card lagi
-        }
-    }
+            // Menambah 3 card setiap tombol diklik
+            loadMoreButton.addEventListener('click', function () {
+                currentVisibleCards += 3;
+                showCards();
+            });
 
-    // Menambah 3 card setiap tombol diklik
-    loadMoreButton.addEventListener('click', function() {
-        currentVisibleCards += 3;
-        showCards();
-    });
+            // Tampilkan 6 card pertama saat halaman dimuat
+            showCards();
+        });
 
-    // Tampilkan 6 card pertama saat halaman dimuat
-    showCards();
-});
-
-
-</script>
-
-
-
+    </script>

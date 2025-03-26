@@ -494,8 +494,8 @@
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="btn-login">Login</a>
-                <a href="#" class="btn-register">Register</a>
+                <a href="{{ url('/login') }}" class="btn-login">Login</a>
+                <a href="{{ url('/registrasi') }}" class="btn-register">Register</a>
             </div>
         </div>
     </nav>
@@ -642,7 +642,7 @@
         </div>
     </footer>
 
-	<script>
+    <script>
         // JavaScript to toggle navbar menu visibility
         const navbarToggle = document.getElementById('navbar-toggle');
         const navbarLinks = document.querySelector('.navbar-links');
