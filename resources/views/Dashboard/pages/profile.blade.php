@@ -59,7 +59,8 @@
     }
 
     .save-button:hover {
-        background-color: #FBF7EB;
+        background-color: #bb31e9;
+        color: black;
     }
 
     .upload-button {
@@ -98,6 +99,10 @@
                         <div class="mb-3">
                             <label for="nomorTelepon" class="form-label">Nomor Telepon</label>
                             <input type="number" class="form-control" value="{{ $data->telepon }}" id="telepon" name="telepon" placeholder="Nomor Telepon">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi Anda</label>
+                            <input type="text" class="form-control" value="{{ $data->description }}" id="description" name="description" placeholder="Misal. Dosen Universitas x, Sastrawan">
                         </div>
                         <div class="mb-3">
                             <div class="form-group">

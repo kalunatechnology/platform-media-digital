@@ -244,6 +244,12 @@ class DashboardController extends Controller
     {
         $data = User::find($id);
         $username = FacadesSession::get('username');
+        $provinsi = Provinsi::all();
+        $kota = Kota::all();
+        $asal_daerah = [
+            'provinsi' => $provinsi,
+            'kota' => $kota,
+        ];
 
         
 
@@ -251,10 +257,14 @@ class DashboardController extends Controller
 
         $card = [
             'roles' => $roles,
-            'username' => $username
+            'username' => $username,
+        ];
+        $asal_daerah = [
+            'provinsi' => $provinsi,
+            'kota' => $kota,
         ];
 
-        return view('Dashboard.pages.user.edit', ['data' => $data, 'card' => $card]);
+        return view('Dashboard.pages.user.edit', ['data' => $data, 'card' => $card, 'asal' => $asal_daerah]);
     }
     public function updateuser($id, Request $request)
     {
@@ -263,6 +273,12 @@ class DashboardController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->role_id = $request->input('role_id');
+        $user->telepon = $request->input('telepon');
+        $user->description = $request->input('description');
+        $user->provinces_id = $request->input('provinsi');
+        $user->regencies_id = $request->input('kota');
+        $user->districts_id = $request->input('kecamatan');
+        $user->villages_id = $request->input('kelurahan');
     
         if ($request->has('password') && !empty($request->input('password'))) {
             $user->password = Hash::make($request->input('password'));
@@ -1207,6 +1223,7 @@ class DashboardController extends Controller
             $data->name = $request->input('name');
             $data->email = $request->input('email');
             $data->telepon = $request->input('telepon');
+            $data->description = $request->input('description');
             $data->role_id = $request->input('role_id');
             $data->provinces_id = $request->input('provinsi');
             $data->regencies_id = $request->input('kota');
