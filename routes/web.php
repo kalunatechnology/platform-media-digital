@@ -22,7 +22,10 @@ Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('de
 Route::get('/author', [PortalController::class, 'author'])->name('author');
 Route::get('/author/{name}', [PortalController::class, 'authorPage'])->name('author.page');
 Route::get('/category', [PortalController::class, 'category'])->name('category');
-Route::get('category/detailcategory', [PortalController::class, 'detailcategory'])->name('detailcategory');
+Route::get('/category/{slug}', [PortalController::class, 'categoryDetail'])->name('category.detail');
+
+
+// Route::get('category/detailcategory', [PortalController::class, 'detailcategory'])->name('detailcategory');
 
 Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -121,6 +124,9 @@ Route::prefix('api')->group(function () {
     Route::post('/getkelurahan', [LoginController::class, 'getkelurahan'])->name('getkelurahan.fetch');
     Route::get('/get-authors', [PortalController::class, 'getAuthors']);
     Route::get('/author/{name}/articles', [PortalController::class, 'getAuthorArticles']);
+    Route::get('/get-categories', [PortalController::class, 'getCategories']);
+    Route::get('/category/{id}/articles', [PortalController::class, 'getCategoryArticles']);
+
 });
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');

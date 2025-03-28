@@ -515,7 +515,7 @@
     <hr>
 
     <section class="authors" id="authorList">
-        <!-- Data dari AJAX akan muncul di sini -->
+        
     </section>
 
     <section class="pagination-container">

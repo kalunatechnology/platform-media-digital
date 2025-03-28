@@ -534,47 +534,8 @@
 
         <hr>
 
-        <div class="category-list">
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/politik.jpg');">
-                    <span>Politik</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/ekonomi.jpg');">
-                    <span>Ekonomi</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/teknologi.png');">
-                    <span>Teknologi</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/kesehatan.jpg');">
-                    <span>Kesehatan</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/olahraga.jpg');">
-                    <span>Olahraga</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/hiburan.jpg');">
-                    <span>Hiburan</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/internasional.jpg');">
-                    <span>Internasional</span>
-                </a>
-            </div>
-            <div class="category-card">
-                <a href="/category/detailcategory" style="background-image: url('images/nasional.jpg');">
-                    <span>Nasional</span>
-                </a>
-            </div>
+        <div class="category-list" id="categoryList">
+            
         </div>
 
     </div>
@@ -638,3 +599,29 @@
         });
 
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchCategories();
+        });
+        
+        function fetchCategories() {
+            fetch('/api/get-categories')
+                .then(response => response.json())
+                .then(data => {
+                    let categoryList = document.getElementById("categoryList");
+                    categoryList.innerHTML = "";
+        
+                    data.forEach(category => {
+                        let categoryCard = `
+                            <div class="category-card">
+                                <a href="/category/${category.slug}" style="background-image: url('${category.thumbnail_categories ? category.thumbnail_categories : '/images/hiburan.jpg'}');">
+                                    <span>${category.name}</span>
+                                </a>
+                            </div>
+                        `;
+                        categoryList.innerHTML += categoryCard;
+                    });
+                })
+                .catch(error => console.error("Error fetching categories:", error));
+        }
+        </script>

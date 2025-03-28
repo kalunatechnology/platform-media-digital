@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Berita</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         *,
         *::before,
@@ -713,242 +714,30 @@
 
     <div class="detail-section">
         <div class="categories">
-            <h2>Kategori Berita - TEKNOLOGI</h2>
+            <h2>Berita - {{ $category->name }}</h2>
             <hr>
 
-            <div class="category-detail">
-                <!-- Card Besar di atas -->
-                <div class="big-card">
-                    <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                    <div class="big-card-image" style="background-image: url('/images/image1.jpg');"></div>
-                    <div class="big-card-content">
-                        <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
-                        <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
-                    </div>
-                    <div class="author-and-views">
-                        <div class="author">
-                            <img src="images/user-icon.png" alt="Author">
-                            <span>By John Doe</span>
-                        </div>
-                        <div class="views">
-                            <i class="fas fa-eye"></i> 1200 Views
-                        </div>
-                    </div>
+            <div id="big-card" class="big-card">
+                <div class="category-tag"></div>
+                <div class="big-card-image"></div>
+                <div class="big-card-content">
+                    <h3><a href="#"></a></h3>
+                    <p></p>
                 </div>
-
-                <!-- Card Grid di bawah -->
-                <div class="category-cards">
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
+                <div class="author-and-views">
+                    <div class="author">
+                        <img src="{{ asset('images/user-icon.png') }}" alt="User Icon">
+                        <span></span>
                     </div>
-                    <!-- Add more cards here -->
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add more cards here -->
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image1.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image2.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="category-tag">Teknologi</div> <!-- Tag Category -->
-                        <div class="news-image" style="background-image: url('/images/image3.jpg');"></div>
-                        <div class="news-content">
-                            <h3><a href="#">Inovasi Teknologi di 2024</a></h3>
-                            <p>Inovasi terbaru yang akan mengubah cara kita berinteraksi dengan teknologi.</p>
-                        </div>
-                        <div class="author-and-views">
-                            <div class="author">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By Jane Smith</span>
-                            </div>
-                            <div class="views">
-                                <i class="fas fa-eye"></i> 900 Views
-                            </div>
-                        </div>
+                    <div class="views">
+                        <i class="fas fa-eye"></i> <span></span>
                     </div>
                 </div>
             </div>
 
-            <button class="load-more">Lihat Selanjutnya</button>
+            <div id="category-cards" class="category-cards"></div>
+
+            <button class="load-more" id="loadMore">Load More</button>
         </div>
     </div>
 
@@ -1010,34 +799,96 @@
 
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const cards = document.querySelectorAll('.news-card'); // Ambil semua card
-            const loadMoreButton = document.querySelector('.load-more');
-            let currentVisibleCards = 6; // Mulai dengan menampilkan 6 card pertama
+<script>
+    $(document).ready(function () {
+        let categoryId = {{ $category->id }};
+        let page = 1;
 
-            // Fungsi untuk menampilkan card berdasarkan jumlah yang ingin ditampilkan
-            function showCards() {
-                for (let i = 0; i < currentVisibleCards; i++) {
-                    if (cards[i]) {
-                        cards[i].classList.add('show'); // Menampilkan card
+        function fetchArticles(loadMore = false) {
+            $.ajax({
+                url: `/api/category/${categoryId}/articles?page=${page}`,
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (!loadMore) {
+                        let bigArticle = response.most_viewed;
+
+                        if (bigArticle) {
+                            let categoryName = bigArticle.category && bigArticle.category.name 
+                                ? bigArticle.category.name 
+                                : "Kategori Tidak Diketahui";
+                            let thumbnailUrl = bigArticle.thumbnail 
+                                ? `/storage/${bigArticle.thumbnail}` 
+                                : "{{ asset('images/default-thumbnail.jpg') }}";
+                            let authorName = bigArticle.user 
+                                ? bigArticle.user.name 
+                                : "Unknown";
+                            let authorPhoto = bigArticle.user && bigArticle.user.photos 
+                                ? `/storage/${bigArticle.user.photos}` 
+                                : "{{ asset('images/user-icon.png') }}";
+
+                            $("#big-card .category-tag").text(categoryName);
+                            $("#big-card .big-card-image").css("background-image", `url('${thumbnailUrl}')`);
+                            $("#big-card .big-card-content h3 a").attr("href", `/article/${bigArticle.slug}`).text(bigArticle.title);
+                            $("#big-card .big-card-content p").text(bigArticle.short_description);
+                            $("#big-card .author img").attr("src", authorPhoto);
+                            $("#big-card .author span").text("" + authorName);
+                            $("#big-card .views span").text(bigArticle.views_count + " Views");
+                        }
                     }
-                }
 
-                // Jika semua card sudah ditampilkan, sembunyikan tombol
-                if (currentVisibleCards >= cards.length) {
-                    loadMoreButton.style.display = 'none'; // Sembunyikan tombol jika tidak ada card lagi
-                }
-            }
+                    if (response.articles.data.length > 0) {
+                        response.articles.data.forEach(article => {
+                            let categoryName = article.category && article.category.name 
+                                ? article.category.name 
+                                : "Kategori Tidak Diketahui";
+                            let thumbnailUrl = article.thumbnail 
+                                ? `/storage/${article.thumbnail}` 
+                                : "{{ asset('images/default-thumbnail.jpg') }}";
+                            let authorName = article.user 
+                                ? article.user.name 
+                                : "Unknown";
+                            let authorPhoto = article.user && article.user.photos 
+                                ? `/storage/${article.user.photos}` 
+                                : "{{ asset('images/user-icon.png') }}";
 
-            // Menambah 3 card setiap tombol diklik
-            loadMoreButton.addEventListener('click', function () {
-                currentVisibleCards += 3;
-                showCards();
+                            $("#category-cards").append(`
+                                <div class="news-card">
+                                    <div class="category-tag">${categoryName}</div>
+                                    <div class="news-image" style="background-image: url('${thumbnailUrl}');"></div>
+                                    <div class="news-content">
+                                        <h3><a href="/article/${article.slug}">${article.title}</a></h3>
+                                        <p>${article.short_description}</p>
+                                    </div>
+                                    <div class="author-and-views">
+                                        <div class="author">
+                                            <img src="${authorPhoto}" alt="User Icon">
+                                            <span>${authorName}</span>
+                                        </div>
+                                        <div class="views">
+                                            <i class="fas fa-eye"></i> ${article.views_count} Views
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        });
+                    } else if (loadMore) {
+                        $("#loadMore").hide(); 
+                    }
+                },
+                error: function () {
+                    console.error("Gagal mengambil data dari API.");
+                }
             });
+        }
 
-            // Tampilkan 6 card pertama saat halaman dimuat
-            showCards();
+        fetchArticles();
+
+        $("#loadMore").on("click", function () {
+            page++;
+            fetchArticles(true);
         });
+    });
+</script>
 
-    </script>
+

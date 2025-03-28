@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Categories;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -98,7 +99,22 @@ class PortalController extends Controller
         // Return dalam format JSON
         return response()->json($articles);
     }
+    public function getCategories()
+    {
+        $categories = Categories::select('name', 'thumbnail_categories', 'slug')->get();
     
+        $categories->transform(function ($category) {
+            $category->thumbnail_categories = $category->thumbnail_categories 
+                ? asset('storage/' . $category->thumbnail_categories) 
+                : asset('images/hiburan.jpg'); // Gambar default
+    
+            return $category;
+        });
+    
+        return response()->json($categories);
+    }
+    
+
 
 
     public function category ()
@@ -106,10 +122,42 @@ class PortalController extends Controller
 
         return view("Portal.pages.category");
     }
-
-    public function detailcategory ()
+    public function categoryDetail($slug)
     {
+        $category = Categories::where('slug', $slug)->firstOrFail();
 
-        return view("Portal.pages.detailcategory");
+        return view('Portal.pages.detailcategory', compact('category'));
     }
+    public function getCategoryArticles($id)
+    {
+        // Ambil artikel dengan view terbanyak
+        $mostViewedArticle = Articles::where('category_id', $id)
+            ->with('user', 'category')
+            ->orderByDesc('views_count')
+            ->first();
+    
+        // Ambil artikel lainnya, kecuali yang sudah jadi "big article"
+        $articlesQuery = Articles::where('category_id', $id)
+            ->with('user', 'category')
+            ->orderByDesc('created_at');
+    
+        if ($mostViewedArticle) {
+            $articlesQuery->where('id', '!=', $mostViewedArticle->id);
+        }
+    
+        $articles = $articlesQuery->paginate(10);
+    
+        return response()->json([
+            'most_viewed' => $mostViewedArticle,
+            'articles' => $articles
+        ]);
+    }
+    
+
+
+    // public function detailcategory ()
+    // {
+
+    //     return view("Portal.pages.detailcategory");
+    // }
 }
