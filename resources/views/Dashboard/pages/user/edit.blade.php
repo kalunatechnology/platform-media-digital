@@ -87,8 +87,8 @@
                                                                         value="{{ $data->telepon }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="form-control-label">Email</label>
-                                                                    <input name="text" class="form-control" type="text"
+                                                                    <label class="form-control-label">Deskripsi Orang</label>
+                                                                    <input name="description" class="form-control" type="text"
                                                                         value="{{ $data->description }}">
                                                                 </div>
                                                                 <div class="form-group">

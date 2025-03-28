@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PortalController::class, 'index'])->name('home');
 Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/author', [PortalController::class, 'author'])->name('author');
+Route::get('/author/{name}', [PortalController::class, 'authorPage'])->name('author.page');
 Route::get('/category', [PortalController::class, 'category'])->name('category');
 Route::get('category/detailcategory', [PortalController::class, 'detailcategory'])->name('detailcategory');
 
@@ -118,6 +119,8 @@ Route::prefix('api')->group(function () {
     Route::post('/getkota', [LoginController::class, 'getkota'])->name('getkota.fetch');
     Route::post('/getkecamatan', [LoginController::class, 'getkecamatan'])->name('getkecamatan.fetch');
     Route::post('/getkelurahan', [LoginController::class, 'getkelurahan'])->name('getkelurahan.fetch');
+    Route::get('/get-authors', [PortalController::class, 'getAuthors']);
+    Route::get('/author/{name}/articles', [PortalController::class, 'getAuthorArticles']);
 });
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');

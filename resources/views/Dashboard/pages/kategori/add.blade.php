@@ -75,6 +75,11 @@
                                                                     <input name="name" class="form-control" type="text"
                                                                         value="{{ old('name') }}">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label">Thumbnail / Ilustrasi Kategori</label>
+                                                                    <input name="thumbnail_categories" class="form-control" type="file">
+                                                                    <p><small style="color: red">*maksimal file upload 2 mb</small><br><small style="color: red">*rekomendasi orientasi landscape</small></p>
+                                                                </div>
                                                             </div>
                                                             <div class="d-flex justify-content-end mt-4">
                                                                 <button type="button" class="btn btn-sm bg-warning mx-1 text-black"

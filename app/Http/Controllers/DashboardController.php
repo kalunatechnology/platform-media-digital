@@ -105,11 +105,15 @@ class DashboardController extends Controller
     
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name',
+            'thumbnail_categories' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        $thumbnailPath = $this->uploadThumbnailCategories($request);
+
     
         // Buat kategori baru
         $kategori = new Categories();
         $kategori->name = $data['name'];
+        $kategori->thumbnail_categories = $thumbnailPath;
         $kategori->slug = Str::slug($data['name'], '-');
         $kategori->save();
     
@@ -138,15 +142,26 @@ class DashboardController extends Controller
     {
         $kategori = Categories::findOrFail($id);
     
-       
-        $data = $request->validate([
-            'name' => 'required|string|unique:categories,name,' . $id,
-        ]);
     
-       
-        $kategori->name = $data['name'];
-        $kategori->slug = Str::slug($data['name'], '-');
-        $kategori->save();
+        $request->validate([
+            'name' => 'required|string|unique:categories,name,' . $id,
+            'thumbnail_categories' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $kategori->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+        ]);
+
+        if ($request->hasFile('thumbnail_categories')) {
+            if ($kategori->thumbnail_categories) {
+                Storage::delete('public/' . $kategori->thumbnail_categories);
+            }
+    
+            $filePath = $request->file('thumbnail_categories')->store('thumbnail_categories', 'public');
+    
+            $kategori->update(['thumbnail_categories' => $filePath]);
+        }
     
       
         session()->flash('success', 'Kategori berhasil diperbarui.');
@@ -1365,6 +1380,16 @@ class DashboardController extends Controller
             $file = $request->file('thumbnail');
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->storeAs('public/thumbnail', $fileName);
+            return str_replace('public/', '', $path);
+        }
+        return null;
+    }
+    private function uploadThumbnailCategories($request)
+    {
+        if ($request->hasFile('thumbnail_categories')) {
+            $file = $request->file('thumbnail_categories');
+            $fileName = time() . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/thumbnail_categories', $fileName);
             return str_replace('public/', '', $path);
         }
         return null;

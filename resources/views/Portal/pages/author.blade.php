@@ -257,6 +257,8 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            color: black;
         }
 
         .author-card:hover {
@@ -271,6 +273,9 @@
             object-fit: cover;
             border: 4px solid #ddd;
             margin-bottom: 12px;
+        }
+        .author-card p {
+            color: #000;
         }
 
         /* ✅ Pastikan ukuran h3 konsisten */
@@ -510,87 +515,7 @@
     <hr>
 
     <section class="authors" id="authorList">
-        <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana">
-            <h3>A.S. Laksanaaaaaaaaa</h3>
-            <p>Sastrawan, pengarang, dan kolumnis.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan">
-            <h3>Abdul Manap Pulungan</h3>
-            <p>Penulis ekonomi di Indef.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Abdul Susila">
-            <h3>Abdul Susila</h3>
-            <p>Lulusan Pondok Pesantren, mendalami dunia film.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana">
-            <h3>Aditya Heru Wardhana</h3>
-            <p>Executive Editor CNN Indonesia.</p>
-        </div>
-        <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri">
-            <h3>Agnes Savithri</h3>
-            <p>Jurnalis Bisnis Indonesia.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Agnes Anya">
-            <h3>Agnes Anya</h3>
-            <p>Jurnalis Agence France-Presse.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Aminuddin">
-            <h3>Aminuddin</h3>
-            <p>Penulis dan aktivis kebudayaan.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Andika Pratama">
-            <h3>Andika Pratama</h3>
-            <p>Ahli politik dan kolumnis.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan">
-            <h3>Aris Setiawan</h3>
-            <p>Dosen dan penulis esai.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu">
-            <h3>Bagus Wahyu</h3>
-            <p>Jurnalis dan fotografer dokumenter.</p>
-        </div>
-
-        <div class="author-card"><img src="images/user-icon.png" alt="A.S. Laksana">
-            <h3>A.S. Laksana</h3>
-            <p>Sastrawan, pengarang, dan kolumnis.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Abdul Manap Pulungan">
-            <h3>Abdul Manap Pulungan</h3>
-            <p>Penulis ekonomi di Indef.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Abdul Susila">
-            <h3>Abdul Susila</h3>
-            <p>Lulusan Pondok Pesantren, mendalami dunia film.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Aditya Heru Wardhana">
-            <h3>Aditya Heru Wardhana</h3>
-            <p>Executive Editor CNN Indonesia.</p>
-        </div>
-        <div class="author-card"><img src="images/user-icon.png" alt="Agnes Savithri">
-            <h3>Agnes Savithri</h3>
-            <p>Jurnalis Bisnis Indonesia.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Agnes Anya">
-            <h3>Agnes Anya</h3>
-            <p>Jurnalis Agence France-Presse.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Aminuddin">
-            <h3>Aminuddin</h3>
-            <p>Penulis dan aktivis kebudayaan.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Andika Pratama">
-            <h3>Andika Pratama</h3>
-            <p>Ahli politik dan kolumnis.</p>
-        </div>
-        <div class="author-card"><img src="images/user2.png" alt="Aris Setiawan">
-            <h3>Aris Setiawan</h3>
-            <p>Dosen dan penulis esai.</p>
-        </div>
-        <div class="author-card"><img src="images/user1.png" alt="Bagus Wahyu">
-            <h3>Bagus Wahyu</h3>
-            <p>Jurnalis dan fotografer dokumenter.</p>
-        </div>
+        <!-- Data dari AJAX akan muncul di sini -->
     </section>
 
     <section class="pagination-container">
@@ -655,68 +580,49 @@
         });
 
     </script>
-
     <script>
-        const authorsPerPage = 6;
-        let currentPage = 1;
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            loadAuthors(1, this.value);
+        });
 
-        function displayAuthors() {
-            const authorList = document.querySelectorAll(".author-card");
-            const totalAuthors = authorList.length;
-            const totalPages = Math.ceil(totalAuthors / authorsPerPage);
+        async function loadAuthors(page = 1, search = "") {
+            let response = await fetch(`/api/get-authors?page=${page}&search=${search}`);
+            let data = await response.json();
 
-            authorList.forEach((card, index) => {
-                card.style.display = (index >= (currentPage - 1) * authorsPerPage && index < currentPage *
-                    authorsPerPage) ? "block" : "none";
+            let authorList = document.getElementById("authorList");
+            let pagination = document.getElementById("pagination");
+
+            authorList.innerHTML = "";
+
+            data.data.forEach(author => {
+                let authorSlug = encodeURIComponent(author.name); // Encode name untuk URL
+                authorList.innerHTML += `
+                <a href="/author/${authorSlug}" class="author-card">
+                    <img src="${author.photos ? '/storage/' + author.photos : 'images/user-icon.png'}" alt="${author.name}">
+                    <h3>${author.name}</h3>
+                    <p>${author.description || 'Penulis dan kontributor.'}</p>
+                </a>
+            `;
             });
 
-            updatePagination(totalPages);
-        }
-
-        function updatePagination(totalPages) {
-            const pagination = document.getElementById("pagination");
             pagination.innerHTML = "";
 
-            if (totalPages <= 1) return; // Jika hanya ada 1 halaman, tidak perlu pagination
+            if (data.prev_page_url) {
+                pagination.innerHTML +=
+                    `<button onclick="loadAuthors(${data.current_page - 1}, '${search}')">Prev</button>`;
+            }
 
-            for (let i = 1; i <= totalPages; i++) {
-                const pageLink = document.createElement("a");
-                pageLink.innerText = i;
-                pageLink.href = "#";
-                if (i === currentPage) {
-                    pageLink.classList.add("active");
-                }
+            for (let i = 1; i <= data.last_page; i++) {
+                pagination.innerHTML +=
+                    `<button onclick="loadAuthors(${i}, '${search}')" ${i === data.current_page ? 'style="font-weight: bold;"' : ''}>${i}</button>`;
+            }
 
-                pageLink.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayAuthors();
-                });
-
-                pagination.appendChild(pageLink);
+            if (data.next_page_url) {
+                pagination.innerHTML +=
+                    `<button onclick="loadAuthors(${data.current_page + 1}, '${search}')">Next</button>`;
             }
         }
 
-        function filterAuthors() {
-            const searchInput = document.getElementById("searchInput").value.toLowerCase();
-            const authorCards = document.querySelectorAll(".author-card");
-
-            let visibleAuthors = 0;
-            authorCards.forEach(card => {
-                const authorName = card.querySelector("h3").innerText.toLowerCase();
-                if (authorName.includes(searchInput)) {
-                    card.style.display = "block";
-                    visibleAuthors++; // Hitung kolumnis yang masih ditampilkan
-                } else {
-                    card.style.display = "none";
-                }
-            });
-
-            const totalPages = Math.ceil(visibleAuthors / authorsPerPage);
-            currentPage = 1; // Reset ke halaman pertama saat filter berubah
-            updatePagination(totalPages);
-        }
-
-        displayAuthors();
+        loadAuthors();
 
     </script>

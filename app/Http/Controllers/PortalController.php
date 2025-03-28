@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -65,6 +66,40 @@ class PortalController extends Controller
 
         return view("Portal.pages.author");
     }
+    public function getAuthors(Request $request)
+    {
+        $query = User::where('role_id', 4);
+    
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+    
+        $authors = $query->paginate(10);
+    
+        return response()->json($authors);
+    }
+    public function authorPage($name)
+    {
+        // Cari user berdasarkan name
+        $user = User::where('name', $name)->firstOrFail();
+    
+        // Kirim user ke view (kita butuh id untuk AJAX nanti)
+        return view('Portal.pages.author_articles', compact('user'));
+    }
+    
+    public function getAuthorArticles($id)
+    {
+        // Cari user berdasarkan ID
+        $user = User::findOrFail($id);
+    
+        // Ambil artikel berdasarkan user_id
+        $articles = $user->articles()->paginate(10);
+    
+        // Return dalam format JSON
+        return response()->json($articles);
+    }
+    
+
 
     public function category ()
     {

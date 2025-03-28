@@ -76,6 +76,12 @@
                                                                     <input name="name" class="form-control" type="text"
                                                                         value="{{ $data->name }}">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label">Thumbnail / Ilustrasi Kategori</label>
+                                                                    <input name="thumbnail_categories" class="form-control" type="file">
+                                                                    <img class="mt-3" style="max-height: 100px"
+                                                                    src="{{ asset('storage/' . $data->thumbnail_categories) }}" alt="">
+                                                                </div>
                                                             </div>
                                                             <div class="d-flex justify-content-end mt-4">
                                                                 <button type="button" class="btn btn-sm bg-warning mx-1 text-black"
@@ -101,11 +107,6 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <span class="navbar-text">
-            This website Powered By Kaluna Technology
-        </span>
-    </footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
