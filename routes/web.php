@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PortalController::class, 'index'])->name('home');
-Route::get('/detailberita', [PortalController::class, 'detailberita'])->name('detailberita');
+// Route::get('/article', [PortalController::class, 'detailberita'])->name('detailberita');
+Route::get('/article/{slug}', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/author', [PortalController::class, 'author'])->name('author');
 Route::get('/author/{name}', [PortalController::class, 'authorPage'])->name('author.page');
 Route::get('/category', [PortalController::class, 'category'])->name('category');
@@ -126,6 +127,10 @@ Route::prefix('api')->group(function () {
     Route::get('/author/{name}/articles', [PortalController::class, 'getAuthorArticles']);
     Route::get('/get-categories', [PortalController::class, 'getCategories']);
     Route::get('/category/{id}/articles', [PortalController::class, 'getCategoryArticles']);
+    Route::get('/article/{slug}', [PortalController::class, 'getArticleBySlug']);
+    Route::post('/articles/{article}/comment', [PortalController::class, 'store.comment']);
+
+
 
 });
 

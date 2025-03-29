@@ -220,10 +220,6 @@
             object-fit: cover;
         }
 
-        .content img {
-            max-width: 120%;
-        }
-
         .container {
             display: flex;
             margin: 20px auto;
@@ -898,10 +894,6 @@
                 flex-direction: column;
             }
 
-            .left-sidebar {
-                position: static;
-            }
-
             .left-sidebar,
             .main-content,
             .right-sidebar {
@@ -1094,7 +1086,7 @@
 
     <!-- Banner Section -->
     <div class="banner">
-        <img id="article-thumbnail" src="{{ asset('images/default-thumbnail.jpg') }}" alt="News Thumbnail"
+        <img src="{{ asset('images/image1.jpg') }}" alt="News Thumbnail"
             style="width: 100%; height: 500px; object-fit: cover;">
     </div>
 
@@ -1121,78 +1113,161 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <div class="category" id="article-category">Loading...</div>
-            <h1 id="article-title">Loading...</h1>
+            <div class="category">Teknologi</div>
+            <h1>Judul Berita 1</h1>
             <div class="meta-info">
-                <img id="meta-author-photo" src="{{ asset('images/user-icon.png') }}" alt="Author">
-                <span id="author-name">By Unknown</span>
-                <span id="comment-count">0 comments</span>
-                <span id="reading-time">0 min read</span>
+                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
+                <span>By Author Name</span>
+                <span>5 comments</span>
+                <span>2 min read</span>
             </div>
 
-            <div class="content" id="article-content">
-                <p>Loading content...</p>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
             </div>
 
             <div class="divider"></div>
 
-            <!-- Profil Penulis -->
             <div class="author-profile">
-                <img id="author-photo" src="{{ asset('images/user-icon.png') }}" alt="Author">
+                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
                 <div class="author-info">
-                    <h3 id="author-fullname">Unknown</h3>
-                    <p id="author-description">No description available.</p>
+                    <h3>John Doe</h3>
+                    <p>Short description about the author.</p>
                     <div class="author-actions">
-                        <button id="view-all-posts">View All Posts</button>
-                        <a href="#" id="copy-link">Copy</a>
-                        <a href="#" id="social-links">Social Links</a>
+                        <button>View All Posts</button>
+                        <a href="#">Copy</a>
+                        <a href="#">Social Links</a>
                     </div>
                 </div>
             </div>
-
             <div class="divider"></div>
 
-            <!-- Artikel Rekomendasi -->
             <div class="recent-posts">
-                <h3>Artikel Penulis Lainnya</h3>
-                <div class="articles-list" id="recommended-articles">
-                </div>
-                <div class="comment-section">
-                    <h3>Berikan Komentar</h3>
-                    <form class="comment-form">
-                        <input type="text" id="username" name="username" placeholder="Nama Anda" required>
-                        <label for="name">Nama:</label>
-                        <input type="text" id="username" name="username" placeholder="Nama Anda" required>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Email Anda" required>
-                        <label for="comment">Komentar:</label>
-                        <textarea id="comment" name="comment" placeholder="Tulis komentar Anda disini..."
-                            required></textarea>    
-                        <button type="submit">Submit Comment</button>
-                    </form>
-    
-                    <!-- Comment List -->
-                    <div class="comment-list">
-                        @foreach ($comments as $comment)
-                            <div class="comment">
-                                <div class="comment-author">{{ $comment->username }}</div>
-                                <p class="comment-text">{{ $comment->comment }}</p>
+                <h3>Artikel Penulis</h3>
+                <div class="articles-list">
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('{{ asset('images/image1.jpg') }}');">
+                        </div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #3498db;">Teknologi</span>
+                            <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
+                            <div class="author">
+                                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
+                                <span>By John Doe</span>
                             </div>
-                        @endforeach
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('{{ asset('images/image2.jpg') }}');">
+                        </div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #e74c3c;">Ekonomi</span>
+                            <h3><a href="#">Ekonomi Digital: Peluang dan Tantangan</a></h3>
+                            <div class="author">
+                                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
+                                <span>By John Doe</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('{{ asset('images/image3.jpg') }}');">
+                        </div>
+                        <div class="news-content">
+                            <span class="category" style="background-color: #2ecc71;">Lingkungan</span>
+                            <h3><a href="#">Menyelamatkan Bumi: Langkah-langkah Sederhana</a></h3>
+                            <div class="author">
+                                <img src="{{ asset('images/user-icon.png') }}" alt="Author">
+                                <span>By John Doe</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <!-- Berikan Komentar Section -->
+            <div class="comment-section">
+                <h3>Berikan Komentar</h3>
+                <form class="comment-form">
+                    <label for="comment">Komentar:</label>
+                    <textarea id="comment" name="comment" placeholder="Tulis komentar Anda disini..."
+                        required></textarea>
+
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Email Anda" required>
+
+                    <label for="city">Asal Kota:</label>
+                    <input type="text" id="city" name="city" placeholder="Kota Asal Anda" required>
+
+                    <button type="submit">Submit Comment</button>
+                </form>
+
+                <!-- Comment List -->
+                <div class="comment-list">
+                    <!-- Example of posted comments -->
+                    <div class="comment">
+                        <div class="comment-author">John Doe (Semarang)</div>
+                        <p class="comment-text">Revolusi Teknologi di tahun 2024 sangat menarik, terutama di bidang AI!
+                        </p>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-author">Jane Smith (Yogyakarta)</div>
+                        <p class="comment-text">Saya setuju dengan perkembangan teknologi yang dijelaskan. Banyak
+                            potensi yang bisa dimanfaatkan.</p>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="right-sidebar">
             <div class="categories">
-                <h3>Lihat Topik Lainnya</h3>
+                <h3>Kategori</h3>
                 <ul>
+                    <li>
+                        <a href="/kategori/category1" class="category-link category1">
+                            Kategori 1
+                            <span class="category-count" style="background-color: #ff5733;">12</span>
+                        </a>
+                    </li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/kategori/category2" class="category-link category2">
+                            Kategori 2
+                            <span class="category-count" style="background-color: #33c3ff;">8</span>
+                        </a>
+                    </li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/kategori/category3" class="category-link category3">
+                            Kategori 3
+                            <span class="category-count" style="background-color: #28a745;">20</span>
+                        </a>
+                    </li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/kategori/category4" class="category-link category4">
+                            Kategori 4
+                            <span class="category-count" style="background-color: #ffc107;">15</span>
+                        </a>
+                    </li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/kategori/category5" class="category-link category5">
+                            Kategori 5
+                            <span class="category-count" style="background-color: #6f42c1;">5</span>
+                        </a>
+                    </li>
+                    <div class="divider"></div>
                 </ul>
             </div>
 
             <div class="latest-posts">
                 <h3>
-                    Artikel Terbaru
+                    Postingan Terakhir
                     <button class="carousel-btn prev">&lt;</button>
                     <button class="carousel-btn next">&gt;</button>
                 </h3>
@@ -1204,12 +1279,44 @@
                             </div>
                             <p>Everything you ever need to know about flowers</p>
                         </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="{{ asset('images/image2.jpg') }}" alt="Post Thumbnail">
+                            </div>
+                            <p>Coffee and lemons don’t go together that well</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="{{ asset('images/image3.jpg') }}" alt="Post Thumbnail">
+                            </div>
+                            <p>Did you know that plants actually have a secret life?</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="{{ asset('images/image2.jpg') }}" alt="Post Thumbnail">
+                            </div>
+                            <p>Everything you ever need to know about flowers</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="{{ asset('images/image3.jpg') }}" alt="Post Thumbnail">
+                            </div>
+                            <p>Coffee and lemons don’t go together that well</p>
+                        </li>
+                        <li class="carousel-item">
+                            <div class="image-wrapper">
+                                <img src="{{ asset('images/image1.jpg') }}" alt="Post Thumbnail">
+                            </div>
+                            <p>Did you know that plants actually have a secret life?</p>
+                        </li>
                     </ul>
                 </div>
-            </div>
-        </div>
 
-        
+
+            </div>
+
+
+        </div>
     </div>
 
 
@@ -1306,158 +1413,3 @@
         });
 
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            let slug = "{{ $slug }}";
-
-            $.ajax({
-                url: `/api/article/${slug}`,
-                type: "GET",
-                success: function (response) {
-                    // Update data utama artikel
-                    let thumbnailUrl = response.article.thumbnail ?
-                        `/storage/${response.article.thumbnail}` :
-                        "{{ asset('images/default-thumbnail.jpg') }}";
-
-                    $("#article-thumbnail").attr("src", thumbnailUrl);
-                    $("#article-title").text(response.article.title);
-                    $("#article-category").text(response.article.category.name);
-                    $("#article-content").html(response.article.content);
-
-                    // Meta info
-                    $("#author-name").text("" + response.author.name);
-                    $("#comment-count").text(response.comment_count + " comments");
-                    $("#reading-time").text(response.article.time + " min read");
-
-                    let authorPhoto = response.author.photos ?
-                        response.author.photos :
-                        "{{ asset('images/user-icon.png') }}";
-
-
-
-                    // Update gambar profil author di dua tempat
-                    $("#meta-author-photo").attr("src", authorPhoto); // Untuk meta info
-                    $("#author-photo").attr("src", authorPhoto); // Untuk profil penulis
-
-                    // Update deskripsi penulis
-                    $("#author-fullname").text(response.author.name);
-                    $("#author-description").text(response.author.description ?
-                        response.author.description :
-                        "No description available.");
-
-                    // Update artikel rekomendasi
-                    let recommendedHtml = "";
-                    response.recommended_articles.forEach(article => {
-                        let articleThumbnail = article.thumbnail ?
-                            `/storage/${article.thumbnail}` :
-                            "{{ asset('images/default-thumbnail.jpg') }}";
-
-                        recommendedHtml += `
-                                <div class="news-card">
-                                    <div class="news-image" style="background-image: url('${articleThumbnail}');"></div>
-                                    <div class="news-content">
-                                        <span class="category">${article.category.name}</span>
-                                        <h3><a href="/article/${article.slug}">${article.title}</a></h3>
-                                        <div class="author">
-                                            <img src="${article.user.photos ? `/storage/${article.user.photos}` : "{{ asset('images/user-icon.png') }}"}" alt="Author">
-                                            <span>${article.user.name}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                    $("#recommended-articles").html(recommendedHtml);
-
-                    let categoryHtml = "";
-                    response.categories.forEach(category => {
-                        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-                        categoryHtml += `
-                            <li>
-                                <a href="/category/${category.slug}" class="category-link ${category.slug}">
-                                    ${category.name}
-                                    <span class="category-count" style="background-color: ${randomColor};">${category.articles_count}</span>
-                                </a>
-                            </li>
-                            <div class="divider"></div>
-                        `;
-                    });
-                    $(".categories ul").html(categoryHtml);
-
-                    let latestHtml = "";
-                    response.latest_articles.forEach(article => {
-                        let articleThumbnail = article.thumbnail
-                            ? `/storage/${article.thumbnail}`
-                            : "{{ asset('images/default-thumbnail.jpg') }}";
-
-                        latestHtml += `
-                            <li class="carousel-item">
-                                <div class="image-wrapper">
-                                    <a href="/article/${article.slug}">
-                                        <img src="${articleThumbnail}" alt="${article.title}">
-                                    </a>
-                                </div>
-                                <p>${article.title}</p>
-                            </li>
-                        `;
-                    });
-
-                    // Masukkan artikel terbaru ke dalam carousel
-                    $(".carousel").html(latestHtml);
-
-                },
-                error: function () {
-                    $("#article-title").text("Artikel tidak ditemukan");
-                    $("#article-content").html("<p>Maaf, artikel ini tidak tersedia.</p>");
-                    $("#recommended-articles").html("<p>Katgori gagal dimuat.</p>");
-                    $(".carousel").html("<p>Gagal mengambil artikel terbaru.</p>");
-                }
-            });
-        });
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $(".comment-form").submit(function (e) {
-                e.preventDefault(); // Mencegah reload halaman
-
-                let articleId = "{{ $article->id }}"; // Ambil ID artikel dari view
-                let username = $("#username").val();
-                let email = $("#email").val();
-                let comment = $("#comment").val();
-
-                $.ajax({
-                    url: "/api/articles/" + articleId + "/comment",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        username: username,
-                        email: email,
-                        comment: comment,
-                    },
-                    success: function (response) {
-                        alert(response.message);
-
-                        // Tambahkan komentar baru ke list tanpa reload
-                        let newComment = `
-                            <div class="comment">
-                                <div class="comment-author">${response.comment.username}</div>
-                                <p class="comment-text">${response.comment.comment}</p>
-                            </div>
-                        `;
-                        $(".comment-list").prepend(newComment); // Tambah komentar baru ke atas
-
-                        // Kosongkan form setelah submit
-                        $("#username").val("");
-                        $("#email").val("");
-                        $("#comment").val("");
-                    },
-                    error: function (xhr) {
-                        alert("Gagal mengirim komentar, coba lagi!");
-                    }
-                });
-            });
-        });
-    </script>
-    

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\ArticleViews;
 use App\Models\Categories;
+use App\Models\Comments;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class PortalController extends Controller
 {
@@ -56,11 +59,11 @@ class PortalController extends Controller
 
         return view("Portal.pages.index");
     }
-    public function detailberita ()
+    public function detailberita($slug)
     {
-
-        return view("Portal.pages.detailberita");
+        return view("Portal.pages.detailberita", compact('slug'));
     }
+    
 
     public function author ()
     {
@@ -130,28 +133,121 @@ class PortalController extends Controller
     }
     public function getCategoryArticles($id)
     {
-        // Ambil artikel dengan view terbanyak
-        $mostViewedArticle = Articles::where('category_id', $id)
-            ->with('user', 'category')
-            ->orderByDesc('views_count')
-            ->first();
-    
-        // Ambil artikel lainnya, kecuali yang sudah jadi "big article"
-        $articlesQuery = Articles::where('category_id', $id)
-            ->with('user', 'category')
-            ->orderByDesc('created_at');
-    
-        if ($mostViewedArticle) {
-            $articlesQuery->where('id', '!=', $mostViewedArticle->id);
+            // Ambil artikel dengan view terbanyak
+            $mostViewedArticle = Articles::where('category_id', $id)
+                ->with('user', 'category')
+                ->orderByDesc('views_count')
+                ->first();
+        
+            // Ambil artikel lainnya, kecuali yang sudah jadi "big article"
+            $articlesQuery = Articles::where('category_id', $id)
+                ->with('user', 'category')
+                ->orderByDesc('created_at');
+        
+            if ($mostViewedArticle) {
+                $articlesQuery->where('id', '!=', $mostViewedArticle->id);
+            }
+        
+            $articles = $articlesQuery->paginate(10);
+        
+            return response()->json([
+                'most_viewed' => $mostViewedArticle,
+                'articles' => $articles
+            ]);
+        }
+    public function getArticleBySlug($slug, Request $request)
+    {
+        // Ambil artikel berdasarkan slug (langsung semua data)
+        $article = Articles::where('slug', $slug)
+            ->with(['user', 'category'])
+            ->firstOrFail(); // Jika tidak ditemukan, otomatis akan mengembalikan error 404
+        if (!$article) {
+            return response()->json(['error' => 'Artikel tidak ditemukan', 'slug' => $slug], 404);
         }
     
-        $articles = $articlesQuery->paginate(10);
+        // Catat views berdasarkan IP
+        $ipAddress = $request->ip();
+        $existingView = ArticleViews::where('article_id', $article->id)
+            ->where('ip_address', $ipAddress)
+            ->exists(); // Lebih cepat daripada first()
     
+        if (!$existingView) {
+            ArticleViews::create([
+                'article_id' => $article->id,
+                'ip_address' => $ipAddress,
+            ]);
+            $article->increment('views_count');
+        }
+    
+        // Ambil data pembuat artikel
+        $author = $article->user ? [
+            'id' => $article->user->id,
+            'name' => $article->user->name,
+            'email' => $article->user->email,
+            'description' => $article->user->description,
+            'photos' => $article->user->photos 
+                ? Storage::url($article->user->photos) 
+                : asset('images/default-user.png'),
+        ] : null;
+    
+        // Ambil semua kategori
+        $categories = Categories::withCount('articles')->get();// Menggunakan all() karena akan mengambil semua data
+    
+        // Ambil artikel rekomendasi dari penulis yang sama
+        $recommendedArticles = Articles::where('user_id', $article->user_id)
+            ->with(['user', 'category'])
+            ->where('id', '!=', $article->id)
+            ->orderByDesc('views_count')
+            ->limit(5)
+            ->get(); // Ambil semua kolom
+    
+        // Ambil artikel terbaru berdasarkan `created_at`
+        $latestArticles = Articles::orderByDesc('created_at')
+            ->limit(5)
+            ->get(); // Ambil semua kolom
+
+        // **Ambil komentar berdasarkan `article_id`**
+        $comments = Comments::where('article_id', $article->id)
+        ->orderByDesc('id') // Ambil komentar terbaru dulu
+        ->get(['username', 'comment', 'created_at']);
+
+        // Hitung jumlah komentar
+        $commentCount = Comments::where('article_id', $article->id)->count();
+    
+        // Return JSON Response
         return response()->json([
-            'most_viewed' => $mostViewedArticle,
-            'articles' => $articles
+            'article' => $article,
+            'author' => $author,
+            'categories' => $categories,
+            'recommended_articles' => $recommendedArticles,
+            'latest_articles' => $latestArticles,
+            'comments' => $comments, // Kirim daftar komentar
+            'comment_count' => $commentCount
         ]);
     }
+    public function store(Request $request, $articleId)
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|email',
+            'comment' => 'required|string',
+        ]);
+
+        // Simpan komentar ke database
+        $comment = Comments::create([
+            'article_id' => $articleId,
+            'username' => $request->username,
+            'comment' => $request->comment,
+        ]);
+
+        return response()->json([
+            'message' => 'Komentar berhasil ditambahkan!',
+            'comment' => $comment
+        ]);
+    }
+
+        
+        
     
 
 

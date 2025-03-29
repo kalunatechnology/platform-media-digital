@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleViews extends Model
 {
     use HasFactory;
-    protected $table = 'artticle_views';
+    protected $table = 'article_views';
 
 
     protected $fillable = ['article_id', 'ip_address'];
