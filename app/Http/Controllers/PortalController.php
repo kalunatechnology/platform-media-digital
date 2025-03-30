@@ -61,7 +61,25 @@ class PortalController extends Controller
     }
     public function detailberita($slug)
     {
-        return view("Portal.pages.detailberita", compact('slug'));
+        $article = Articles::where('slug', $slug)->firstOrFail();
+    
+        $comments = Comments::where('article_id', $article->id)
+            ->orderByDesc('id')
+            ->get()
+            ->map(function ($comment) {
+                return [
+                    'username' => $comment->username,
+                    'comment' => $comment->comment,
+                    'time_ago' => Carbon::parse($comment->created_at)
+                        ->timezone('Asia/Jakarta')
+                        ->diffForHumans(),
+                    'timestamp' => Carbon::parse($comment->created_at)
+                        ->timezone('Asia/Jakarta')
+                        ->timestamp 
+                ];
+            });
+    
+        return view("Portal.pages.detailberita", compact('article', 'comments', 'slug'));
     }
     
 
@@ -208,8 +226,20 @@ class PortalController extends Controller
 
         // **Ambil komentar berdasarkan `article_id`**
         $comments = Comments::where('article_id', $article->id)
-        ->orderByDesc('id') // Ambil komentar terbaru dulu
-        ->get(['username', 'comment', 'created_at']);
+        ->orderByDesc('id')
+        ->get()
+        ->map(function ($comment) {
+            return [
+                'username' => $comment->username,
+                'comment' => $comment->comment,
+                'time_ago' => Carbon::parse($comment->created_at)
+                    ->timezone('Asia/Jakarta')
+                    ->diffForHumans(),
+                'timestamp' => Carbon::parse($comment->created_at)
+                    ->timezone('Asia/Jakarta')
+                    ->timestamp // Kirim dalam UNIX timestamp
+            ];
+        });
 
         // Hitung jumlah komentar
         $commentCount = Comments::where('article_id', $article->id)->count();
@@ -221,30 +251,36 @@ class PortalController extends Controller
             'categories' => $categories,
             'recommended_articles' => $recommendedArticles,
             'latest_articles' => $latestArticles,
-            'comments' => $comments, // Kirim daftar komentar
+            'comments' => $comments,
             'comment_count' => $commentCount
         ]);
     }
-    public function store(Request $request, $articleId)
+    public function postComment(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255',
+            'article_id' => 'required|exists:articles,id',
             'email' => 'required|email',
+            'username' => 'nullable|string|max:255',
             'comment' => 'required|string',
         ]);
-
-        // Simpan komentar ke database
+    
+        // Simpan ke database
         $comment = Comments::create([
-            'article_id' => $articleId,
-            'username' => $request->username,
+            'article_id' => $request->article_id,
+            'username' => $request->username ?? 'Anonymous',
             'comment' => $request->comment,
+            'email' => $request->email,
         ]);
-
+    
         return response()->json([
-            'message' => 'Komentar berhasil ditambahkan!',
-            'comment' => $comment
+            'username' => $comment->username,
+            'comment' => $comment->comment,
+            'email' => $comment->email,
+            'time_ago' => Carbon::parse($comment->created_at)->timezone('Asia/Jakarta')->diffForHumans(),
+            'timestamp' => Carbon::parse($comment->created_at)->timezone('Asia/Jakarta')->timestamp
         ]);
     }
+    
 
         
         

@@ -593,6 +593,12 @@
             color: #555;
         }
 
+        .comment-time {
+            font-size: 11px;
+            color: #a8a0a0;
+            text-align: right;
+        }
+
         /* Responsivitas */
         @media (max-width: 768px) {
 
@@ -616,6 +622,10 @@
 
             .comment-text {
                 font-size: 13px;
+            }
+
+            .comment-time {
+                font-size: 10px;
             }
         }
 
@@ -1159,26 +1169,32 @@
                 </div>
                 <div class="comment-section">
                     <h3>Berikan Komentar</h3>
-                    <form class="comment-form">
+                    <form id="commentForm" class="comment-form" data-article-id="{{ $article->id }}">
+                        <label for="username">Nama:</label>
                         <input type="text" id="username" name="username" placeholder="Nama Anda" required>
-                        <label for="name">Nama:</label>
-                        <input type="text" id="username" name="username" placeholder="Nama Anda" required>
+
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="Email Anda" required>
+
                         <label for="comment">Komentar:</label>
                         <textarea id="comment" name="comment" placeholder="Tulis komentar Anda disini..."
-                            required></textarea>    
+                            required></textarea>
+
                         <button type="submit">Submit Comment</button>
                     </form>
-    
+
+
                     <!-- Comment List -->
                     <div class="comment-list">
                         @foreach ($comments as $comment)
-                            <div class="comment">
-                                <div class="comment-author">{{ $comment->username }}</div>
-                                <p class="comment-text">{{ $comment->comment }}</p>
-                            </div>
-                        @endforeach
+                        <div class="comment">
+                            <div class="comment-author">{{ $comment['username'] }}</div> 
+                            <p class="comment-text">{{ $comment['comment'] }}</p> 
+                            <p class="comment-time" data-time="{{ $comment['timestamp'] }}">
+                                {{ $comment['time_ago'] }}
+                            </p>
+                        </div>
+                    @endforeach
                     </div>
                 </div>
             </div>
@@ -1209,7 +1225,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 
@@ -1308,6 +1324,35 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        function updateCommentTimes() {
+            $(".comment-time").each(function () {
+                let timestamp = $(this).data("time"); // Ambil timestamp dari data-time
+                let timeAgo = timeSince(timestamp); // Hitung waktu terbaru
+                $(this).text(timeAgo); // Update teks waktu
+            });
+        }
+
+        // Fungsi untuk menghitung "10 detik lalu", "4 jam lalu", dll.
+        function timeSince(timestamp) {
+            let now = Math.floor(Date.now() / 1000); // Waktu sekarang dalam UNIX timestamp
+            let seconds = now - timestamp;
+
+            if (seconds < 60) return `${seconds} detik lalu`;
+            let minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes} menit lalu`;
+            let hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours} jam lalu`;
+            let days = Math.floor(hours / 24);
+            if (days < 30) return `${days} hari lalu`;
+            let months = Math.floor(days / 30);
+            if (months < 12) return `${months} bulan lalu`;
+            let years = Math.floor(months / 12);
+            return `${years} tahun lalu`;
+        }
+        setInterval(updateCommentTimes, 30000);
+
+    </script>
+    <script>
         $(document).ready(function () {
             let slug = "{{ $slug }}";
 
@@ -1315,6 +1360,7 @@
                 url: `/api/article/${slug}`,
                 type: "GET",
                 success: function (response) {
+                    $(".comment-list").empty();
                     // Update data utama artikel
                     let thumbnailUrl = response.article.thumbnail ?
                         `/storage/${response.article.thumbnail}` :
@@ -1366,12 +1412,13 @@
                                     </div>
                                 </div>
                             `;
-                        });
+                    });
                     $("#recommended-articles").html(recommendedHtml);
 
                     let categoryHtml = "";
                     response.categories.forEach(category => {
-                        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                        let randomColor = '#' + Math.floor(Math.random() * 16777215)
+                            .toString(16);
                         categoryHtml += `
                             <li>
                                 <a href="/category/${category.slug}" class="category-link ${category.slug}">
@@ -1386,9 +1433,9 @@
 
                     let latestHtml = "";
                     response.latest_articles.forEach(article => {
-                        let articleThumbnail = article.thumbnail
-                            ? `/storage/${article.thumbnail}`
-                            : "{{ asset('images/default-thumbnail.jpg') }}";
+                        let articleThumbnail = article.thumbnail ?
+                            `/storage/${article.thumbnail}` :
+                            "{{ asset('images/default-thumbnail.jpg') }}";
 
                         latestHtml += `
                             <li class="carousel-item">
@@ -1402,6 +1449,17 @@
                         `;
                     });
 
+                    response.comments.forEach(comment => {
+                        let newComment = `
+                            <div class="comment">
+                                <div class="comment-author">${comment.username}</div>
+                                <p class="comment-text">${comment.comment}</p>
+                                 <p class="comment-time" data-time="${comment.timestamp}">${comment.time_ago}</p>
+                            </div>
+                        `;
+                        $(".comment-list").append(newComment);
+                    });
+
                     // Masukkan artikel terbaru ke dalam carousel
                     $(".carousel").html(latestHtml);
 
@@ -1411,53 +1469,55 @@
                     $("#article-content").html("<p>Maaf, artikel ini tidak tersedia.</p>");
                     $("#recommended-articles").html("<p>Katgori gagal dimuat.</p>");
                     $(".carousel").html("<p>Gagal mengambil artikel terbaru.</p>");
+                    $(".comment-list").html("<p>Gagal memuat komentar.</p>");
                 }
             });
         });
 
     </script>
-
     <script>
         $(document).ready(function () {
-            $(".comment-form").submit(function (e) {
-                e.preventDefault(); // Mencegah reload halaman
+            $("#commentForm").submit(function (e) {
+                e.preventDefault(); // Hindari reload
 
-                let articleId = "{{ $article->id }}"; // Ambil ID artikel dari view
+                let articleId = $(this).data("article-id"); // Ambil ID dari atribut data
                 let username = $("#username").val();
                 let email = $("#email").val();
                 let comment = $("#comment").val();
 
                 $.ajax({
-                    url: "/api/articles/" + articleId + "/comment",
+                    url: "{{ route('post-comment') }}", // Ambil dari route Laravel
                     type: "POST",
                     data: {
-                        _token: "{{ csrf_token() }}",
+                        article_id: articleId,
                         username: username,
                         email: email,
                         comment: comment,
+                        _token: "{{ csrf_token() }}" // Laravel CSRF token
                     },
                     success: function (response) {
-                        alert(response.message);
-
-                        // Tambahkan komentar baru ke list tanpa reload
+                        // Jika sukses, tambahkan komentar baru ke daftar tanpa reload
                         let newComment = `
                             <div class="comment">
-                                <div class="comment-author">${response.comment.username}</div>
-                                <p class="comment-text">${response.comment.comment}</p>
+                                <div class="comment-author">${response.username}</div>
+                                <p class="comment-text">${response.comment}</p>
+                                <p class="comment-time" data-time="${response.timestamp}"> ${response.time_ago}</p>
                             </div>
                         `;
-                        $(".comment-list").prepend(newComment); // Tambah komentar baru ke atas
+                        $(".comment-list").prepend(newComment); // Tambahkan ke atas
 
                         // Kosongkan form setelah submit
                         $("#username").val("");
                         $("#email").val("");
                         $("#comment").val("");
+                        
+                        updateCommentTimes();
                     },
-                    error: function (xhr) {
-                        alert("Gagal mengirim komentar, coba lagi!");
+                    error: function () {
+                        alert("Gagal mengirim komentar. Coba lagi.");
                     }
                 });
             });
         });
+
     </script>
-    

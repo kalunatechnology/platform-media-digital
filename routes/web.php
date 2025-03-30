@@ -128,9 +128,7 @@ Route::prefix('api')->group(function () {
     Route::get('/get-categories', [PortalController::class, 'getCategories']);
     Route::get('/category/{id}/articles', [PortalController::class, 'getCategoryArticles']);
     Route::get('/article/{slug}', [PortalController::class, 'getArticleBySlug']);
-    Route::post('/articles/{article}/comment', [PortalController::class, 'store.comment']);
-
-
+    Route::post('/post-comment', [PortalController::class, 'postComment'])->name('post-comment');
 
 });
 
