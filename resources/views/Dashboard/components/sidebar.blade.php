@@ -44,6 +44,12 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor') }}">
                     <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/banner_article_admin') }}">
+                    <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(admin)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/banner_article_editor') }}">
+                    <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(editor)</small></span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -56,7 +62,7 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="{{ url('/backoffice') }}"><i class="fa-brands fa-adversal"></i> <span class="menu-text">Banner
+            <a href="{{ url('/backoffice') }}"><i class="fa-brands fa-adversal"></i> <span class="menu-text">Ads
                     Management</span></a>
         </li>
         <li class="menu-item dropdownku">
@@ -95,6 +101,9 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor') }}">
                     <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/banner_article_editor') }}">
+                    <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(editor)</small></span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -121,6 +130,9 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/artikeladmin') }}">
                     <i class="fa-solid fa-newspaper"></i> <span class="menu-text">Articles<small>(admin)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/banner_article_admin') }}">
+                    <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(admin)</small></span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor_admin') }}">
                     <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(admin)</small></span>
                 </a>
@@ -136,7 +148,7 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="{{ url('/backoffice') }}"><i class="fa-brands fa-adversal"></i> <span class="menu-text">Banner
+            <a href="{{ url('/backoffice') }}"><i class="fa-brands fa-adversal"></i> <span class="menu-text">Ads
                     Management</span></a>
         </li>
         <li class="menu-item dropdownku">

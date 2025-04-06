@@ -692,6 +692,30 @@ class DashboardController extends Controller
     
         return view('Dashboard.pages.pilihan.pilihan_editor_admin', compact('card'));
     }
+    public function banner_home_admin(Request $request)
+    {
+        $username = FacadesSession::get('username');
+        $keyword = $request->keyword;
+    
+        $get_data = Articles::whereIn('banner_home', [0, 1]) // Hanya tampilkan yang memiliki nilai 0 atau 1
+            ->where('status', 2)
+            ->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', '%' . $keyword . '%')
+                      ->orWhereHas('user', function ($query) use ($keyword) {
+                          $query->where('name', 'LIKE', '%' . $keyword . '%');
+                      });
+            })
+            ->orderBy('banner_home', 'desc')
+            ->paginate(15);
+    
+        $card = [
+            'username' => $username,
+            'get_data' => $get_data,
+            'keyword' => $keyword
+        ];
+    
+        return view('Dashboard.pages.banner.banner_home_admin', compact('card'));
+    }
 
 
     
@@ -994,6 +1018,43 @@ class DashboardController extends Controller
         session()->flash('success', 'Pilihan editor berhasil diperbarui.');
 
         return redirect()->route('pilihan_editor');
+    }
+    public function banner_home_editor(Request $request)
+    {
+        $username = FacadesSession::get('username');
+        $keyword = $request->keyword;
+
+        $get_data = Articles::where('status', 2)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+        
+
+
+
+        $card = [
+            'username' => $username,
+            'get_data' => $get_data,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.banner.banner_home_editor', ['card' => $card]);
+    }
+    public function setBannerHome(Request $request)
+    {
+        Articles::query()->update(['banner_home' => 0]);
+
+        if ($request->has('banner_home')) {
+            Articles::whereIn('id', $request->banner_home)->update(['banner_home' => 1]);
+        }
+
+        session()->flash('success', 'Pilihan editor berhasil diperbarui.');
+
+        return redirect()->route('banner_home_editor');
     }
     
 

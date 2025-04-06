@@ -69,6 +69,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/{id}/hapus_hidden_admin', [DashboardController::class, 'hapus_hidden_admin'])->name('hapus_hidden_admin');
     Route::get('/archived_admin', [DashboardController::class, 'archived_admin'])->name('archived_admin');
     Route::get('/pilihan_editor_admin', [DashboardController::class, 'pilihan_editor_admin'])->name('pilihan_editor_admin');
+    Route::get('/banner_article_admin', [DashboardController::class, 'banner_home_admin'])->name('banner_home_admin');
 
     
 
@@ -92,6 +93,10 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::get('/archived_editor', [DashboardController::class, 'archived_editor'])->name('archived_editor');
     Route::get('/pilihan_editor', [DashboardController::class, 'pilihan_editor'])->name('pilihan_editor');
     Route::put('/set-editor-choice', [DashboardController::class, 'setEditorChoice'])->name('artikel.set_editor_choice');
+    Route::get('/banner_article_editor', [DashboardController::class, 'banner_home_editor'])->name('banner_home_editor');
+    Route::put('/set-banner-home', [DashboardController::class, 'setBannerHome'])->name('artikel.set_banner_home');
+
+
 
 
     // khusus author

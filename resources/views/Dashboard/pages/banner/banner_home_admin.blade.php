@@ -36,7 +36,7 @@
 </style>
 <div class="ml-sidebar">
     <nav class="navbar navbar-custom">
-        <span class="title-page">Pilihan Editor</span>
+        <span class="title-page">Banner Home Artikel</span>
         <span class="navbar-text ml-auto">
             <i class="fa fa-user"></i>
             &nbsp;&nbsp;{{ $card['username'] }}
@@ -51,11 +51,11 @@
                             <main class="d-flex flex-column gap-3 grow">
                                 <section class="d-flex gap-2 items-center justify-content-between">
                                     <div style="color: red">1. Hubungi editor jika ingin memberi saran artikel yang
-                                        dipilih. <br> 2. Anda hanya bisa melihat artikel yang sudah dipilih dan belum
-                                        dipilih oleh editor</div>
+                                        dijadikan banner. <br> 2. Anda hanya bisa melihat artikel yang sudah dipilih dan
+                                        belum dipilih oleh editor</div>
                                 </section>
                                 <div class="d-flex align-items-center ml-auto">
-                                    <form method="GET" action="{{ url('/backoffice/pilihan_editor_admin') }}"
+                                    <form method="GET" action="{{ url('/backoffice/banner_home_admin') }}"
                                         class="form-search">
                                         <label for="search">
                                             <input required="" name="keyword" autocomplete="off"
@@ -96,7 +96,7 @@
                                                     <thead class="bg-grey1">
                                                         <tr>
                                                             <th class="text-center">No.</th>
-                                                            <th class="text-center">Pilihan Editor</th>
+                                                            <th class="text-center">Banner Home</th>
                                                             <th class="text-center">Thumbnail</th>
                                                             <th class="text-center">Kategori</th>
                                                             <th class="text-center">Penulis</th>
@@ -112,7 +112,7 @@
                                                             <td class="text-center">{{ $nomor++ }}</td>
                                                             <td class="text-center">
                                                                 <input type="checkbox"
-                                                                    {{ $artikel->editor_pick ? 'checked' : '' }}
+                                                                    {{ $artikel->banner_home ? 'checked' : '' }}
                                                                     disabled>
                                                             </td>
                                                             <td>
@@ -158,7 +158,7 @@
                                                         @empty
                                                         <tr>
                                                             <td colspan="8" class="text-center">Belum ada artikel yang
-                                                                memenuhi kriteria.</td>
+                                                                dijadikan banner.</td>
                                                         </tr>
                                                         @endforelse
                                                     </tbody>
