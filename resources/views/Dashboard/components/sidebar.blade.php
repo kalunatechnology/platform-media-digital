@@ -50,6 +50,9 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/banner_article_editor') }}">
                     <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/trending_article') }}">
+                    <i class="fa-solid fa-chart-line"></i> <span class="menu-text">Trending Article</span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -104,6 +107,9 @@
                 <a class="nav-link baru" href="{{ url('/backoffice/banner_article_editor') }}">
                     <i class="fas fa-desktop"></i> <span class="menu-text">Banner Home<small>(editor)</small></span>
                 </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/trending_article') }}">
+                    <i class="fa-solid fa-chart-line"></i> <span class="menu-text">Trending Article</span>
+                </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>
                 </a>
@@ -135,6 +141,9 @@
                 </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/pilihan_editor_admin') }}">
                     <i class="fa-solid fa-file-signature"></i> <span class="menu-text">Pilihan Editor<small>(admin)</small></span>
+                </a>
+                <a class="nav-link baru" href="{{ url('/backoffice/trending_article') }}">
+                    <i class="fa-solid fa-chart-line"></i> <span class="menu-text">Trending Article</span>
                 </a>
                 <a class="nav-link baru" href="{{ url('/backoffice/table') }}">
                     <i class="fa-solid fa-comments"></i> <span class="menu-text">Comments</span>

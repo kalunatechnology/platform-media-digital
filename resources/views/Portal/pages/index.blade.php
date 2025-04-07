@@ -338,6 +338,52 @@
             /* Added hover scale effect */
         }
 
+        .load-more {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin: 20px auto;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .load-more:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03); 
+            transition: all 0.3s ease;
+        }
+
+        .load-more-2 {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin: 20px auto;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .load-more-2:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03); 
+            transition: all 0.3s ease;
+        }
+
         /* Responsif: Menyusun tombol di sisi kanan dan kiri pada perangkat mobile */
         @media (max-width: 768px) {
             .carousel-item h2 {
@@ -549,12 +595,14 @@
             position: relative;
             max-width: 250px;
             /* Perbesar ukuran card */
-            max-height: 300px;
+            height: 300px;
             /* Tinggi card */
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -576,6 +624,7 @@
             left: 0;
             right: 0;
             bottom: 0;
+            margin-top: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -604,6 +653,10 @@
             font-weight: bold;
             color: #fff;
             margin-bottom: 5px;
+            text-decoration: none;
+        }
+        .card-title:hover {
+            color: #f39c12;
         }
 
         .card-footer {
@@ -924,6 +977,10 @@
             font-weight: bold;
             color: #34495e;
             margin: 0;
+            text-decoration: none;
+        }
+        .authors-popular-author-name:hover {
+            color: #ff5722;
         }
 
         .authors-popular-author-bio {
@@ -950,6 +1007,10 @@
             font-weight: bold;
             color: #34495e;
             margin: 0 0 5px;
+            text-decoration: none;
+        }
+        .authors-popular-news-title:hover {
+            color: #ff5722;
         }
 
         .authors-popular-news-info {
@@ -1140,45 +1201,8 @@
     <!-- CONTAINER -->
     <div class="container1">
         <div class="carousel-container">
-            <div class="carousel">
-                <div class="carousel-item" style="background-image: url('images/image1.jpg');">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="category">Teknologi</span>
-                        <h2>Revolusi AI dalam Kehidupan Sehari-hari</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore nam debitis reiciendis,
-                            nulla culpa explicabo quibusdam, molestiae ex cum molestias, dolorem amet consequatur qui
-                            libero.</p>
-                        <div class="author1">
-                            <img src="images/image1.jpg" alt="Author">
-                            <span>By John Doe</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item" style="background-image: url('images/image2.jpg');">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="category">Politik</span>
-                        <h2>Debat Calon Presiden 2024</h2>
-                        <p>Simak perbandingan visi dan misi para calon presiden dalam debat politik terakhir.</p>
-                        <div class="author1">
-                            <img src="images/user-icon.png" alt="Author">
-                            <span>By Jane Smith</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item" style="background-image: url('images/image3.jpg');">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="category">Ekonomi</span>
-                        <h2>Perkembangan Ekonomi Global 2024</h2>
-                        <p>Bagaimana ekonomi dunia beradaptasi dengan tantangan besar di tahun 2024.</p>
-                        <div class="author1">
-                            <img src="images/user-icon.png" alt="Author">
-                            <span>By Mark Twain</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="carousel" id="carouselBanner">
+
             </div>
             <div class="carousel-buttons">
                 <button onclick="prevSlide()">❮</button>
@@ -1187,45 +1211,13 @@
         </div>
     </div>
 
+
     <!-- NEWS SECTION -->
     <section class="news-section">
         <div class="left-column">
             <h2 class="highlight-left">Rekomendasi Penulis</h2>
-            <div class="news-card">
-                <div class="news-image" style="background-image: url('images/image1.jpg');"></div>
-                <div class="news-content">
-                    <span class="category" style="background-color: #3498db;">Teknologi</span>
-                    <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
-                    <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
-                    <div class="author">
-                        <img src="images/user-icon.png" alt="Author">
-                        <span>By John Doe</span>
-                    </div>
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-image" style="background-image: url('images/image2.jpg');"></div>
-                <div class="news-content">
-                    <span class="category" style="background-color: #3498db;">Teknologi</span>
-                    <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
-                    <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
-                    <div class="author">
-                        <img src="images/user-icon.png" alt="Author">
-                        <span>By John Doe</span>
-                    </div>
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-image" style="background-image: url('images/image3.jpg');"></div>
-                <div class="news-content">
-                    <span class="category" style="background-color: #3498db;">Teknologi</span>
-                    <h3><a href="#">Revolusi Teknologi di Tahun 2024</a></h3>
-                    <p>Teknologi terus berkembang pesat, berikut adalah beberapa tren yang perlu Anda ketahui...</p>
-                    <div class="author">
-                        <img src="images/user-icon.png" alt="Author">
-                        <span>By John Doe</span>
-                    </div>
-                </div>
+            <div class="news-card" id="editorPicks">
+
             </div>
         </div>
 
@@ -1233,60 +1225,8 @@
 
         <div class="right-column">
             <h2 class="highlight-right">Sedang Dibicarakan</h2>
-            <div class="card-container">
-                <div class="card">
-                    <img src="images/image1.jpg" alt="Berita" class="card-image">
-                    <div class="card-content">
-                        <span class="category-label">Kategori</span>
-                        <h3 class="card-title">Judul Berita</h3>
-                        <div class="card-footer">
-                            <div class="author1">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By John Doe</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/image3.jpg" alt="Berita" class="card-image">
-                    <div class="card-content">
-                        <span class="category-label">Kategori</span>
-                        <h3 class="card-title">Judul Berita Lain</h3>
-                        <div class="card-footer">
-                            <div class="author1">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By John Doe</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/image2.jpg" alt="Berita" class="card-image">
-                    <div class="card-content">
-                        <span class="category-label">Kategori</span>
-                        <h3 class="card-title">Judul Berita Lain</h3>
-                        <div class="card-footer">
-                            <div class="author1">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By John Doe</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/image1.jpg" alt="Berita" class="card-image">
-                    <div class="card-content">
-                        <span class="category-label">Kategori</span>
-                        <h3 class="card-title">Judul Berita</h3>
-                        <div class="card-footer">
-                            <div class="author1">
-                                <img src="images/user-icon.png" alt="Author">
-                                <span>By John Doe</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tambahkan card lainnya sesuai kebutuhan -->
+            <div class="card-container" id="trending">
+
             </div>
 
         </div>
@@ -1294,68 +1234,12 @@
 
     <section class="latest-news-section">
         <div class="latest-news-container">
-            <h2 class="latest-news-title">Berita Terakhir</h2>
-            <div class="latest-news-grid">
-                <div class="latest-news-card">
-                    <span class="news-category">Teknologi</span>
-                    <img src="images/image1.jpg" alt="News Image">
-                    <h3><a href="#">Revolusi AI dalam Kehidupan Sehari-hari</a></h3>
-                    <p>Kecerdasan buatan semakin merubah cara kita berinteraksi dengan teknologi.</p>
-                    <div class="news-meta">
-                        <span class="author">By John Doe</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 15 Jan 2025</span>
-                    </div>
-                </div>
-                <div class="latest-news-card">
-                    <span class="news-category">Bisnis</span>
-                    <img src="images/image2.jpg" alt="News Image">
-                    <h3><a href="#">Inovasi Startup Lokal</a></h3>
-                    <p>Bagaimana startup lokal terus bersaing di era globalisasi.</p>
-                    <div class="news-meta">
-                        <span class="author">By Jane Smith</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 14 Jan 2025</span>
-                    </div>
-                </div>
-                <div class="latest-news-card">
-                    <span class="news-category">Gaya Hidup</span>
-                    <img src="images/image3.jpg" alt="News Image">
-                    <h3><a href="#">Tren Minimalisme di Tahun 2025</a></h3>
-                    <p>Gaya hidup minimalis semakin digemari oleh masyarakat urban.</p>
-                    <div class="news-meta">
-                        <span class="author">By Alex Brown</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 13 Jan 2025</span>
-                    </div>
-                </div>
-                <div class="latest-news-card">
-                    <span class="news-category">Bisnis</span>
-                    <img src="images/image2.jpg" alt="News Image">
-                    <h3><a href="#">Inovasi Startup Lokal</a></h3>
-                    <p>Bagaimana startup lokal terus bersaing di era globalisasi.</p>
-                    <div class="news-meta">
-                        <span class="author">By Jane Smith</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 14 Jan 2025</span>
-                    </div>
-                </div>
-                <div class="latest-news-card">
-                    <span class="news-category">Gaya Hidup</span>
-                    <img src="images/image3.jpg" alt="News Image">
-                    <h3><a href="#">Tren Minimalisme di Tahun 2025</a></h3>
-                    <p>Gaya hidup minimalis semakin digemari oleh masyarakat urban.</p>
-                    <div class="news-meta">
-                        <span class="author">By Alex Brown</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 13 Jan 2025</span>
-                    </div>
-                </div>
-                <div class="latest-news-card">
-                    <span class="news-category">Teknologi</span>
-                    <img src="images/image1.jpg" alt="News Image">
-                    <h3><a href="#">Revolusi AI dalam Kehidupan Sehari-hari</a></h3>
-                    <p>Kecerdasan buatan semakin merubah cara kita berinteraksi dengan teknologi.</p>
-                    <div class="news-meta">
-                        <span class="author">By John Doe</span>
-                        <span class="date"><i class="fa fa-calendar"></i> 15 Jan 2025</span>
-                    </div>
-                </div>
+            <h2 class="latest-news-title">Berita Terupdate</h2>
+            <div class="latest-news-grid" id="latest-news-grid">
+
+            </div>
+            <div style="text-align: center;">
+                <a href="{{ url('/article') }}" class="load-more" id="loadMore">Lihat Lebih</a>
             </div>
         </div>
     </section>
@@ -1366,46 +1250,16 @@
                 <!-- Left Column: Authors -->
                 <div class="authors-popular-column authors-popular-column-authors">
                     <h2 class="authors-popular-section-title">Author</h2>
-                    <ul class="authors-popular-author-list">
-                        <li>
-                            <img src="images/user-icon.png" alt="Author 1" class="authors-popular-author-image">
-                            <div class="authors-popular-author-details">
-                                <h3 class="authors-popular-author-name">John Doe</h3>
-                                <p class="authors-popular-author-bio">Ahli Teknologi dan penulis inovasi.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="images/user-icon.png" alt="Author 2" class="authors-popular-author-image">
-                            <div class="authors-popular-author-details">
-                                <h3 class="authors-popular-author-name">Jane Smith</h3>
-                                <p class="authors-popular-author-bio">Pakar Pariwisata dengan banyak karya.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="images/user-icon.png" alt="Author 3" class="authors-popular-author-image">
-                            <div class="authors-popular-author-details">
-                                <h3 class="authors-popular-author-name">Alice Brown</h3>
-                                <p class="authors-popular-author-bio">Mengupas Energi Terbarukan.</p>
-                            </div>
-                        </li>
+                    <ul class="authors-popular-author-list" id="writers">
+
                     </ul>
+                    <a href="{{ url('/author') }}" class="load-more-2" id="loadMore2">Lihat Lebih</a>
                 </div>
                 <!-- Right Column: Popular News -->
                 <div class="authors-popular-column authors-popular-column-popular-news">
                     <h2 class="authors-popular-section-title">Berita Terpopuler</h2>
-                    <ul class="authors-popular-news-list">
-                        <li>
-                            <h3 class="authors-popular-news-title">Revolusi Teknologi di Tahun 2024</h3>
-                            <p class="authors-popular-news-info">Dibaca 10k kali</p>
-                        </li>
-                        <li>
-                            <h3 class="authors-popular-news-title">Keindahan Pariwisata di Indonesia</h3>
-                            <p class="authors-popular-news-info">Dibaca 8k kali</p>
-                        </li>
-                        <li>
-                            <h3 class="authors-popular-news-title">Tren Desain Web Modern</h3>
-                            <p class="authors-popular-news-info">Dibaca 5k kali</p>
-                        </li>
+                    <ul class="authors-popular-news-list" id="most_viewed">
+
                     </ul>
                 </div>
             </div>
@@ -1501,6 +1355,180 @@
         }
 
     </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/index',
+                type: 'GET',
+                success: function (response) {
+                    const banner = response.banner_articles;
+                    const editors = response.editor_picks;
+                    const trending = response.trending_article;
+                    const latest = response.latest_articles;
+                    const writers = response.writers;
+                    const most_viewed = response.most_viewed;
+                    let html = '';
+                    let editorHtml = '';
+                    let trendingHtml = '';
+                    let latestHtml = '';
+                    let mostViewedHtml = '';
+                    let writersHtml = '';
+
+                    banner.forEach(function (article) {
+                        const thumbnail = `/storage/${article.thumbnail}`;
+                        const category = article.category ? article.category.name : 'Kategori';
+                        const title = article.title;
+                        const description = article.short_description ?? '';
+                        const authorName = article.user ? article.user.name : 'Anonim';
+                        const authorPhoto = article.user && article.user.photos
+                            ? `/storage/${article.user.photos}`
+                            : '/images/default-user.png';
+
+                        html += `
+                            <div class="carousel-item" style="background-image: url('${thumbnail}');">
+                                <div class="overlay"></div>
+                                <div class="content">
+                                    <span class="category">${category}</span>
+                                    <h2>${title}</h2>
+                                    <p>${description}</p>
+                                    <div class="author1">
+                                        <img src="${authorPhoto}" alt="Author">
+                                        <span>${authorName}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    editors.forEach(function (article) {
+                        const thumbnail = `/storage/${article.thumbnail}`;
+                        const category = article.category ? article.category.name : 'Kategori';
+                        const title = article.title;
+                        const description = article.short_description ?? '';
+                        const slug = article.slug ?? '#';
+                        const authorName = article.user ? article.user.name : 'Anonim';
+                        const authorPhoto = article.user && article.user.photos
+                            ? `/storage/${article.user.photos}`
+                            : '/images/default-user.png';
+
+                        editorHtml += `
+                                <div class="news-image" style="background-image: url('${thumbnail}');"></div>
+                                <div class="news-content">
+                                    <span class="category" style="background-color: #3498db;">${category}</span>
+                                    <h3><a href="/article/${slug}">${title}</a></h3>
+                                    <p>${description}</p>
+                                    <div class="author">
+                                        <img src="${authorPhoto}" alt="Author">
+                                        <span>${authorName}</span>
+                                    </div>
+                                </div>
+                        `;
+                    });
+
+                    trending.forEach(function (trending) {
+                        const thumbnail = `/storage/${trending.thumbnail}`;
+                        const category = trending.category ? trending.category.name : 'Kategori';
+                        const title = trending.title;
+                        const description = trending.short_description ?? '';
+                        const slug = trending.slug ?? '#';
+                        const authorName = trending.user ? trending.user.name : 'Anonim';
+                        const authorPhoto = trending.user && trending.user.photos
+                            ? `/storage/${trending.user.photos}`
+                            : '/images/default-user.png';
+
+                        trendingHtml += `
+                            <div class="card">
+                                <img src="${thumbnail}" alt="Berita" class="card-image">
+                                <div class="card-content">
+                                    <span class="category-label">${category}</span>
+                                    <a href="/article/${slug}" class="card-title">${title}</a>
+                                    <div class="card-footer">
+                                        <div class="author1">
+                                            <img src="${authorPhoto}" alt="Author">
+                                            <span>${authorName}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        `;
+                    });
+
+                    latest.forEach(function (article) {
+                        const thumbnail = `/storage/${article.thumbnail}`;
+                        const category = article.category ? article.category.name : 'Kategori';
+                        const title = article.title;
+                        const date_start = article.formatted_date;
+                        const description = article.short_description ?? '';
+                        const slug = article.slug ?? '#';
+                        const authorName = article.user ? article.user.name : 'Anonim';
+                        const authorPhoto = article.user && article.user.photos
+                            ? `/storage/${article.user.photos}`
+                            : '/images/default-user.png';
+
+                        latestHtml += `
+                                <div class="latest-news-card">
+                                    <span class="news-category">${category}</span>
+                                    <img src="${thumbnail}" alt="News Image">
+                                    <h3><a href="/article/${slug}">${title}</a></h3>
+                                    <p>${description}</p>
+                                    <div class="news-meta">
+                                        <span class="author">${authorName}</span>
+                                        <span class="date"><i class="fa fa-calendar"></i>${date_start}</span>
+                                    </div>
+                                </div>
+                        `;
+                    });
+
+                    most_viewed.forEach(function (most_viewed) {
+                        const title = most_viewed.title;
+                        const views = most_viewed.views_count;
+                        const slug = most_viewed.slug ?? '#';
+
+
+                        mostViewedHtml += `
+                                <li>
+                                    <a href="/article/${slug}" class="authors-popular-news-title">${title}</a>
+                                    <p class="authors-popular-news-info">Dibaca ${views} kali</p>
+                                </li>
+                        `;
+                    });
+
+                    writers.forEach(function (writers) {
+                        const slug = writers.slug ?? '#';
+                        let authorSlug = encodeURIComponent(writers.name);
+                        const authorName = writers.name ;
+                        const authorDescription = writers.description ;
+                        const authorPhoto = writers.photos
+                            ? `/storage/${writers.photos}`
+                            : '/images/user-icon.png';
+
+                        writersHtml += `
+                            <li>
+                                <img src="${authorPhoto}" alt="Author" class="authors-popular-author-image">
+                                <div class="authors-popular-author-details">
+                                    <a href="/author/${authorSlug}" class="authors-popular-author-name">${authorName}</a>
+                                    <p class="authors-popular-author-bio">${authorDescription}</p>
+                                </div>
+                            </li>
+                        `;
+                    });
+
+                    $('#carouselBanner').html(html);
+                    $('#editorPicks').html(editorHtml);
+                    $('#trending').html(trendingHtml);
+                    $('#latest-news-grid').html(latestHtml);
+                    $('#writers').html(writersHtml);
+                    $('#most_viewed').html(mostViewedHtml);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Gagal memuat data :', error);
+                }
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

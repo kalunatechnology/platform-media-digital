@@ -1679,6 +1679,44 @@ class DashboardController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Data berhasil dihapus.']);
     }
 
+    public function trending_article(Request $request)
+    {
+        $username = FacadesSession::get('username');
+        $keyword = $request->keyword;
+
+        $get_data = Articles::where('status', 2)
+        ->where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('name', 'LIKE', '%' . $keyword . '%');
+                  });
+        })
+        ->paginate(15);
+        
+
+
+
+        $card = [
+            'username' => $username,
+            'get_data' => $get_data,
+            'keyword' => $keyword
+        ];
+
+        return view('Dashboard.pages.trending.trending_article', ['card' => $card]);
+    }
+    public function setTrendingArticle(Request $request)
+    {
+        Articles::query()->update(['trending_article' => 0]);
+
+        if ($request->has('trending_article')) {
+            Articles::whereIn('id', $request->trending_article)->update(['trending_article' => 1]);
+        }
+
+        session()->flash('success', 'Trending Article berhasil diperbarui.');
+
+        return redirect()->route('trending_article');
+    }
+
 
 
     public function approveUser($id)

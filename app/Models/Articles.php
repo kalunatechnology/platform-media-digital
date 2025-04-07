@@ -13,7 +13,7 @@ class Articles extends Model
     protected $fillable = [
         'title', 'slug', 'short_description', 'content',
         'thumbnail', 'user_id', 'category_id',
-        'views_count','time', 'status', 'editor_pick', 'banner_home', 'date_start', 'date_end'
+        'views_count','time', 'status', 'editor_pick', 'banner_home', 'trending_article' ,'date_start', 'date_end'
     ];
 
     public function user()

@@ -9,6 +9,7 @@ use App\Models\Comments;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,6 +59,11 @@ class PortalController extends Controller
     {
 
         return view("Portal.pages.index");
+    }
+    public function test ()
+    {
+
+        return view("Portal.pages.test");
     }
     public function detailberita($slug)
     {
@@ -280,6 +286,78 @@ class PortalController extends Controller
             'timestamp' => Carbon::parse($comment->created_at)->timezone('Asia/Jakarta')->timestamp
         ]);
     }
+    public function indexApi()
+    {
+        // 1. Ambil artikel banner_home
+        $bannerArticles = Articles::where('banner_home', 1)
+            ->with(['user', 'category'])
+            ->orderByDesc('date_start')
+            ->get();
+
+        // 2. Ambil artikel trending
+        $trendingArticle = Articles::where('trending_article', 1)
+            ->with(['user', 'category'])
+            ->orderByDesc('date_start')
+            ->get();
+
+
+        // 3. Ambil artikel editor_pick
+        $editorPicks = Articles::where('editor_pick', 1)
+        ->with(['user', 'category'])
+        ->orderByDesc('date_start')
+        ->get();
+
+        // 4. Ambil semua artikel order by date_start
+        $latestArticles = Articles::orderByDesc('date_start')
+        ->with(['user', 'category'])
+        ->limit(9)
+        ->get()
+        ->map(function ($article) {
+            $article->formatted_date = Carbon::parse($article->date_start)->translatedFormat('d F Y');
+            return $article;
+        });
+
+        // 5. Ambil users dengan role_id 4
+        $writers = User::where('role_id', 4)
+            ->withCount(['articles as total_views' => function ($query) {
+                $query->join('article_views', 'articles.id', '=', 'article_views.article_id')
+                    ->select(DB::raw('count(article_views.id)'));
+            }])
+            ->orderByDesc('total_views')
+            ->limit(5)
+            ->get();
+
+        // 6. Ambil artikel + total views (pakai leftJoin + groupBy)
+        $mostViewedArticles = Articles::leftJoin('article_views', 'articles.id', '=', 'article_views.article_id')
+        ->select(
+            'articles.id',
+            'articles.title',
+            'articles.slug',
+            'articles.thumbnail',
+            'articles.date_start',
+            DB::raw('COUNT(article_views.id) as views_count')
+        )
+        ->groupBy(
+            'articles.id',
+            'articles.title',
+            'articles.slug',
+            'articles.thumbnail',
+            'articles.date_start'
+        )
+        ->orderByDesc('views_count')
+        ->limit(5)
+        ->get();
+
+        return response()->json([
+            'banner_articles' => $bannerArticles,
+            'editor_picks' => $editorPicks,
+            'trending_article' => $trendingArticle,
+            'latest_articles' => $latestArticles,
+            'writers' => $writers,
+            'most_viewed' => $mostViewedArticles,
+        ]);
+    }
+
     
 
         

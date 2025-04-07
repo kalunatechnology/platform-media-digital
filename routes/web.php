@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PortalController::class, 'index'])->name('home');
+Route::get('/test', [PortalController::class, 'test']);
 // Route::get('/article', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/article/{slug}', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/author', [PortalController::class, 'author'])->name('author');
@@ -53,6 +54,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::delete('/role/{id}', [DashboardController::class, 'destroyrole']);
 
     // khusus admin
+    Route::put('/approveuser/{id}', [DashboardController::class, 'approveUser'])->name('approve.user');
+    Route::put('/rejectuser/{id}', [DashboardController::class, 'rejectUser'])->name('reject.user');
     Route::get('/artikeladmin', [DashboardController::class, 'artikeladmin'])->name('artikeladmin');
     Route::get('/draft_articles_admin', [DashboardController::class, 'draft_articles_admin'])->name('draft_articles_admin');
     Route::get('/preview_draft_admin/{id}', [DashboardController::class, 'preview_draft_admin'])->name('preview_draft_admin');
@@ -118,10 +121,8 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
 
     Route::get('/profile/{id}', [DashboardController::class, 'profile'])->name('profile');
     Route::post('/profile/{id}', [DashboardController::class, 'profile']);
-
-
-    Route::put('/approveuser/{id}', [DashboardController::class, 'approveUser'])->name('approve.user');
-    Route::put('/rejectuser/{id}', [DashboardController::class, 'rejectUser'])->name('reject.user');
+    Route::get('/trending_article', [DashboardController::class, 'trending_article'])->name('trending_article');
+    Route::put('/set-trending-article', [DashboardController::class, 'setTrendingArticle'])->name('artikel.set_trending_article');
 
 });
 Route::prefix('api')->group(function () {
@@ -134,7 +135,7 @@ Route::prefix('api')->group(function () {
     Route::get('/category/{id}/articles', [PortalController::class, 'getCategoryArticles']);
     Route::get('/article/{slug}', [PortalController::class, 'getArticleBySlug']);
     Route::post('/post-comment', [PortalController::class, 'postComment'])->name('post-comment');
-
+    Route::get('/index', [PortalController::class, 'indexApi'])->name('api.index');
 });
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');

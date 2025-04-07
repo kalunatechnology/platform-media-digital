@@ -506,7 +506,7 @@
     </nav>
 
     <div class="container">
-        <h1>INDEKS PENULIS</h1>
+        <h1>Penulis Berita Kami</h1>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Cari Penulis" onkeyup="filterAuthors()">
         </div>
