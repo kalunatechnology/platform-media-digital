@@ -595,7 +595,7 @@
             authorList.innerHTML = "";
 
             data.data.forEach(author => {
-                let authorSlug = encodeURIComponent(author.name); // Encode name untuk URL
+                let authorSlug = author.slug;
                 authorList.innerHTML += `
                 <a href="/author/${authorSlug}" class="author-card">
                     <img src="${author.photos ? '/storage/' + author.photos : 'images/user-icon.png'}" alt="${author.name}">

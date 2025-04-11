@@ -101,8 +101,14 @@
                             <input type="number" class="form-control" value="{{ $data->telepon }}" id="telepon" name="telepon" placeholder="Nomor Telepon">
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi Anda</label>
+                            <label for="description" class="form-label">Deskripsi Singkat Anda</label>
                             <input type="text" class="form-control" value="{{ $data->description }}" id="description" name="description" placeholder="Misal. Dosen Universitas x, Sastrawan">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Biografi Anda <small>(opsional)</small></label>
+                            <textarea name="biography" id="summernote" class="form-control" type="text"
+                                rows="10" cols="30">{!! $data['biography'] !!}
+                            </textarea>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
@@ -357,6 +363,17 @@
             }
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder : 'Masukkan isi konten artikel anda disini',
+                tabsize : 2,
+                height : 350
+            });
+        });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.js"></script>
+
 
     
 </div>

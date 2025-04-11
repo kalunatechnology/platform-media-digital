@@ -22,7 +22,7 @@ Route::get('/test', [PortalController::class, 'test']);
 // Route::get('/article', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/article/{slug}', [PortalController::class, 'detailberita'])->name('detailberita');
 Route::get('/author', [PortalController::class, 'author'])->name('author');
-Route::get('/author/{name}', [PortalController::class, 'authorPage'])->name('author.page');
+Route::get('/author/{slug}', [PortalController::class, 'authorPage'])->name('author.page');
 Route::get('/category', [PortalController::class, 'category'])->name('category');
 Route::get('/category/{slug}', [PortalController::class, 'categoryDetail'])->name('category.detail');
 
@@ -121,6 +121,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
 
     Route::get('/profile/{id}', [DashboardController::class, 'profile'])->name('profile');
     Route::post('/profile/{id}', [DashboardController::class, 'profile']);
+    
     Route::get('/trending_article', [DashboardController::class, 'trending_article'])->name('trending_article');
     Route::put('/set-trending-article', [DashboardController::class, 'setTrendingArticle'])->name('artikel.set_trending_article');
 
@@ -130,7 +131,7 @@ Route::prefix('api')->group(function () {
     Route::post('/getkecamatan', [LoginController::class, 'getkecamatan'])->name('getkecamatan.fetch');
     Route::post('/getkelurahan', [LoginController::class, 'getkelurahan'])->name('getkelurahan.fetch');
     Route::get('/get-authors', [PortalController::class, 'getAuthors']);
-    Route::get('/author/{name}/articles', [PortalController::class, 'getAuthorArticles']);
+    Route::get('/author/{slug}/articles', [PortalController::class, 'getAuthorArticles']);
     Route::get('/get-categories', [PortalController::class, 'getCategories']);
     Route::get('/category/{id}/articles', [PortalController::class, 'getCategoryArticles']);
     Route::get('/article/{slug}', [PortalController::class, 'getArticleBySlug']);

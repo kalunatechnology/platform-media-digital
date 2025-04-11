@@ -1496,7 +1496,7 @@
 
                     writers.forEach(function (writers) {
                         const slug = writers.slug ?? '#';
-                        let authorSlug = encodeURIComponent(writers.name);
+                        let authorSlug = writers.slug;
                         const authorName = writers.name ;
                         const authorDescription = writers.description ;
                         const authorPhoto = writers.photos

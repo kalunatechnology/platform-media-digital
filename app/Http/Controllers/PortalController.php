@@ -106,25 +106,55 @@ class PortalController extends Controller
     
         return response()->json($authors);
     }
-    public function authorPage($name)
+    public function authorPage($slug)
     {
-        // Cari user berdasarkan name
-        $user = User::where('name', $name)->firstOrFail();
-    
-        // Kirim user ke view (kita butuh id untuk AJAX nanti)
+        $user = User::where('slug', $slug)->firstOrFail();
+
         return view('Portal.pages.author_articles', compact('user'));
     }
     
-    public function getAuthorArticles($id)
+    public function getAuthorArticles($slug)
     {
-        // Cari user berdasarkan ID
-        $user = User::findOrFail($id);
+        $user = User::where('slug', $slug)->firstOrFail();
+
+        // Ambil artikel yang sudah diterbitkan (status = 2)
+        $articles = $user->articles()
+            ->where('status', 2)
+            ->with(['category', 'user'])
+            ->paginate(1);
     
-        // Ambil artikel berdasarkan user_id
-        $articles = $user->articles()->paginate(10);
+        // Hitung total artikel yang sudah diterbitkan user
+        $publishedArticlesCount = $user->articles()
+            ->where('status', 2)
+            ->count();
     
-        // Return dalam format JSON
-        return response()->json($articles);
+        // Hitung total komentar dari semua artikel user yang sudah diterbitkan
+        $commentsCount = Comments::whereIn('article_id', function ($query) use ($user) {
+                $query->select('id')
+                    ->from('articles')
+                    ->where('user_id', $user->id)
+                    ->where('status', 2);
+            })
+            ->count();
+
+        $groupedComments = Comments::whereIn('article_id', function ($query) use ($user) {
+                $query->select('id')
+                    ->from('articles')
+                    ->where('user_id', $user->id)
+                    ->where('status', 2);
+            })
+            ->with('article') 
+            ->get()
+            ->groupBy('article_id');
+    
+        return response()->json([
+            'user' => $user,
+            'articles' => $articles,
+            'published_articles_count' => $publishedArticlesCount,
+            'total_comments' => $commentsCount,
+            'grouped_comments' => $groupedComments,
+        ]);
+    
     }
     public function getCategories()
     {
@@ -159,12 +189,14 @@ class PortalController extends Controller
     {
             // Ambil artikel dengan view terbanyak
             $mostViewedArticle = Articles::where('category_id', $id)
+                ->where('status', 2)
                 ->with('user', 'category')
                 ->orderByDesc('views_count')
                 ->first();
         
             // Ambil artikel lainnya, kecuali yang sudah jadi "big article"
             $articlesQuery = Articles::where('category_id', $id)
+                ->where('status', 2)
                 ->with('user', 'category')
                 ->orderByDesc('created_at');
         
@@ -221,12 +253,14 @@ class PortalController extends Controller
         $recommendedArticles = Articles::where('user_id', $article->user_id)
             ->with(['user', 'category'])
             ->where('id', '!=', $article->id)
+            ->where('status', 2)
             ->orderByDesc('views_count')
             ->limit(5)
             ->get(); // Ambil semua kolom
     
         // Ambil artikel terbaru berdasarkan `created_at`
         $latestArticles = Articles::orderByDesc('created_at')
+            ->where('status', 2)
             ->limit(5)
             ->get(); // Ambil semua kolom
 
@@ -290,12 +324,14 @@ class PortalController extends Controller
     {
         // 1. Ambil artikel banner_home
         $bannerArticles = Articles::where('banner_home', 1)
+            ->where('status', 2)
             ->with(['user', 'category'])
             ->orderByDesc('date_start')
             ->get();
 
         // 2. Ambil artikel trending
         $trendingArticle = Articles::where('trending_article', 1)
+            ->where('status', 2)
             ->with(['user', 'category'])
             ->orderByDesc('date_start')
             ->get();
@@ -303,12 +339,14 @@ class PortalController extends Controller
 
         // 3. Ambil artikel editor_pick
         $editorPicks = Articles::where('editor_pick', 1)
+        ->where('status', 2)
         ->with(['user', 'category'])
         ->orderByDesc('date_start')
         ->get();
 
         // 4. Ambil semua artikel order by date_start
         $latestArticles = Articles::orderByDesc('date_start')
+        ->where('status', 2)
         ->with(['user', 'category'])
         ->limit(9)
         ->get()
@@ -344,6 +382,7 @@ class PortalController extends Controller
             'articles.thumbnail',
             'articles.date_start'
         )
+        ->where('articles.status', 2)
         ->orderByDesc('views_count')
         ->limit(5)
         ->get();

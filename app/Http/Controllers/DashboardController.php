@@ -226,6 +226,7 @@ class DashboardController extends Controller
     
         $user = new User();
         $user->name = $data['name'];
+        $user->slug = Str::slug($data['name'], '-');
         $user->email = $data['email'];
         $user->role_id = $data['role_id'];
         $user->password = $hashedPassword;
@@ -286,6 +287,7 @@ class DashboardController extends Controller
         $user = User::find($id);
         
         $user->name = $request->input('name');
+        $user->slug = Str::slug($request->name, '-');
         $user->email = $request->input('email');
         $user->role_id = $request->input('role_id');
         $user->telepon = $request->input('telepon');
@@ -1297,9 +1299,11 @@ class DashboardController extends Controller
     
             // Update data user
             $data->name = $request->input('name');
+            $data->slug = Str::slug($request->input('name'), '-');
             $data->email = $request->input('email');
             $data->telepon = $request->input('telepon');
             $data->description = $request->input('description');
+            $data->biography = $request->input('biography');
             $data->role_id = $request->input('role_id');
             $data->provinces_id = $request->input('provinsi');
             $data->regencies_id = $request->input('kota');

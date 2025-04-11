@@ -6,6 +6,11 @@
     <title>HMNS Perfume - Tokopedia Style Responsive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/73c0197af7.js" crossorigin="anonymous"></script>
+
     <style>
         .store-logo {
             width: 80px;
@@ -31,7 +36,7 @@
             border-radius: 10px;
             overflow: hidden;
             transition: 0.3s;
-            text-decoration: 
+            text-decoration:
         }
 
         .store-box {
@@ -71,13 +76,49 @@
             object-fit: cover;
             width: 100%;
         }
+
         .text-artikel-title {
             text-decoration: none;
             color: black;
         }
-        .text-artikel-title:hover{
+
+        .text-artikel-title:hover {
             color: blueviolet;
         }
+
+        .custom-pagination {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .custom-pagination li a {
+            display: block;
+            padding: 8px 14px;
+            background-color: #f2f2f2;
+            border-radius: 6px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .custom-pagination li a:hover {
+            background-color: #d4d4d4;
+        }
+
+        .custom-pagination li.active a {
+            background-color: #1f883d;
+            color: white;
+            font-weight: bold;
+        }
+
+        .custom-pagination li.disabled a {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
 
         @media (max-width: 576px) {
             .product-image {
@@ -112,8 +153,7 @@
             <img src="https://images.tokopedia.net/img/cache/215-square/GAnVPX/2022/10/6/bc1cc268-50f7-4c52-b7f1-4011ec60ffb7.jpg"
                 alt="HMNS Logo" class="store-logo">
             <div>
-                <h5 class="mb-0 fw-bold">Nama Penulis <span class="text-primary"><i
-                            class="bi bi-patch-check-fill"></i></span></h5>
+                <h5 class="mb-0 fw-bold">Nama Penulis <span class="text-primary"></span></h5>
                 <div class="d-flex flex-wrap gap-2 mt-2">
                     {{-- <button class="btn btn-success btn-sm">Follow</button>
                     <button class="btn btn-outline-success btn-sm">Chat Penjual</button> --}}
@@ -122,11 +162,11 @@
             </div>
             <div class="ms-auto text-center store-info-text d-flex gap-4 flex-wrap">
                 <div>
-                    <strong class="text-dark">⭐ 100</strong><br>
+                    <strong class="text-dark"><i class="fa-regular fa-newspaper" style="color: #74C0FC;"></i> &nbsp; 100</strong><br>
                     <small class="text-muted">Artikel Diterbitkan</small>
                 </div>
                 <div>
-                    <strong class="text-dark">± 4 jam</strong><br>
+                    <strong class="text-dark"><i class="fa-solid fa-comment" style="color: #74C0FC;"></i> &nbsp; 4</strong><br>
                     <small class="text-muted">Komentar</small>
                 </div>
                 {{-- <div>
@@ -158,9 +198,27 @@
         <!-- Konten Tab -->
         <div class="tab-content mt-4" id="myTabContent">
             <div class="tab-pane fade show active" id="beranda" role="tabpanel" aria-labelledby="beranda-tab">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil obcaecati quod accusantium est nulla pariatur distinctio temporibus a, vitae qui dolorum magnam autem possimus praesentium numquam reprehenderit ea sit provident.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quo eum explicabo quaerat, adipisci ea iusto! Consequuntur, officia maxime. Quaerat expedita, in sunt veniam corrupti voluptatibus deleniti maiores quam dolorum!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum cum eius velit quisquam qui blanditiis maxime facilis repudiandae libero earum. Unde dolorum magni odio officiis! Asperiores eaque facilis nobis dignissimos iste cupiditate hic natus eos impedit vitae autem ullam, omnis officia alias accusamus reprehenderit repudiandae veritatis porro incidunt quasi dolor. Est minima nemo illo beatae aliquam rem molestiae provident velit architecto doloribus? Deserunt deleniti, aliquid at blanditiis ad odit voluptate eos pariatur ipsa nulla officiis delectus repellendus totam veniam in numquam? Doloremque veniam iste repellendus adipisci repellat cum soluta ipsam inventore? Eum animi dolore voluptatibus officia qui exercitationem corporis debitis. Exercitationem ex accusamus facere necessitatibus assumenda facilis voluptate veritatis quam alias eligendi doloribus modi cum eum dolore, pariatur iure recusandae ipsa. Ea fugit et laudantium debitis harum commodi deleniti voluptatum voluptates, eligendi hic, dolore autem, alias sit fuga sunt. Adipisci pariatur voluptate ea nihil cumque cupiditate accusamus eum, error soluta tempore iusto odit non aliquam, hic exercitationem explicabo enim quibusdam. Laudantium neque quibusdam ab repudiandae! Perspiciatis, ipsam aliquid! Consequatur rem nam laudantium sequi iste enim animi modi quibusdam obcaecati voluptate corrupti officia, cupiditate sed nostrum eligendi molestiae dicta accusantium eveniet laboriosam, ea non quae ipsum. Laboriosam iure aliquid a iste.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil obcaecati quod accusantium est nulla
+                pariatur distinctio temporibus a, vitae qui dolorum magnam autem possimus praesentium numquam
+                reprehenderit ea sit provident.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quo eum explicabo quaerat, adipisci
+                ea iusto! Consequuntur, officia maxime. Quaerat expedita, in sunt veniam corrupti voluptatibus deleniti
+                maiores quam dolorum!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum cum eius velit quisquam qui blanditiis
+                maxime facilis repudiandae libero earum. Unde dolorum magni odio officiis! Asperiores eaque facilis
+                nobis dignissimos iste cupiditate hic natus eos impedit vitae autem ullam, omnis officia alias accusamus
+                reprehenderit repudiandae veritatis porro incidunt quasi dolor. Est minima nemo illo beatae aliquam rem
+                molestiae provident velit architecto doloribus? Deserunt deleniti, aliquid at blanditiis ad odit
+                voluptate eos pariatur ipsa nulla officiis delectus repellendus totam veniam in numquam? Doloremque
+                veniam iste repellendus adipisci repellat cum soluta ipsam inventore? Eum animi dolore voluptatibus
+                officia qui exercitationem corporis debitis. Exercitationem ex accusamus facere necessitatibus assumenda
+                facilis voluptate veritatis quam alias eligendi doloribus modi cum eum dolore, pariatur iure recusandae
+                ipsa. Ea fugit et laudantium debitis harum commodi deleniti voluptatum voluptates, eligendi hic, dolore
+                autem, alias sit fuga sunt. Adipisci pariatur voluptate ea nihil cumque cupiditate accusamus eum, error
+                soluta tempore iusto odit non aliquam, hic exercitationem explicabo enim quibusdam. Laudantium neque
+                quibusdam ab repudiandae! Perspiciatis, ipsam aliquid! Consequatur rem nam laudantium sequi iste enim
+                animi modi quibusdam obcaecati voluptate corrupti officia, cupiditate sed nostrum eligendi molestiae
+                dicta accusantium eveniet laboriosam, ea non quae ipsum. Laboriosam iure aliquid a iste.
             </div>
             <div class="tab-pane fade" id="produk" role="tabpanel" aria-labelledby="produk-tab">
                 <h5 class="mb-3">Produk Terlaris</h5>
@@ -172,7 +230,8 @@
                             <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2023/2/1/f65b3fe3-f26b-474b-b14f-0c8a2990d301.jpg"
                                 class="product-image" alt="ORGAZM">
                             <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection 100ml</a></h6>
+                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
+                                        100ml</a></h6>
                                 <small>Rp323.000</small>
                             </div>
                         </div>
@@ -185,7 +244,8 @@
                             <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2021/10/30/48b2b041-e7e5-40fa-b8df-2b8eb24f1d10.jpg"
                                 class="product-image" alt="Alpha">
                             <div class="p-3">
-                                <h6 class="mb-1"><a href=""  class="text-artikel-title">HMNS Perfume - The Perfection 100ml</a></h6>
+                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
+                                        100ml</a></h6>
                                 <small>Rp320.000</small>
                             </div>
                         </div>
@@ -197,7 +257,8 @@
                             <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2023/2/1/95bcfb52-f5a6-40c2-8a34-17217bca2b2f.jpg"
                                 class="product-image" alt="Farhampton">
                             <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection 100ml</a></h6>
+                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
+                                        100ml</a></h6>
                                 <small>Rp369.000</small>
                             </div>
                         </div>
@@ -209,11 +270,27 @@
                             <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2022/9/6/93c4d902-cd9d-456d-8dc8-21a0d3976d9a.jpg"
                                 class="product-image" alt="The Perfection">
                             <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection 100ml</a></h6>
+                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
+                                        100ml</a></h6>
                                 <small>Rp398.000</small>
                             </div>
                         </div>
                     </div>
+
+                    <div class="pagination-container d-flex justify-content-center mt-4">
+                        <ul class="custom-pagination">
+                            <li class="disabled"><a href="#"><i class="bi bi-chevron-double-left"></i></a></li>
+                            <li class="disabled"><a href="#"><i class="bi bi-chevron-left"></i></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
+                            <li><a href="#"><i class="bi bi-chevron-double-right"></i></a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
             <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">
