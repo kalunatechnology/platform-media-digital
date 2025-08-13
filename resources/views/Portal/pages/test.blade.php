@@ -1,331 +1,425 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>HMNS Perfume - Tokopedia Style Responsive</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/73c0197af7.js" crossorigin="anonymous"></script>
-
-    <style>
-        .store-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .store-logo {
-                width: 60px;
-                height: 60px;
-            }
-
-            .store-info-text {
-                justify-content: flex-start !important;
-                text-align: left !important;
-            }
-        }
-
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: 0.3s;
-            text-decoration:
-        }
-
-        .store-box {
-            border: 1px solid #e0e0e0;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-
-        .product-card:hover {
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .badge-custom,
-        .badge-special {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 0.75rem;
-            padding: 4px 6px;
-            border-radius: 5px;
-        }
-
-        .badge-custom {
-            background-color: #ffc107;
-            color: #000;
-        }
-
-        .badge-special {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-            width: 100%;
-        }
-
-        .text-artikel-title {
-            text-decoration: none;
-            color: black;
-        }
-
-        .text-artikel-title:hover {
-            color: blueviolet;
-        }
-
-        .custom-pagination {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            gap: 8px;
-        }
-
-        .custom-pagination li a {
-            display: block;
-            padding: 8px 14px;
-            background-color: #f2f2f2;
-            border-radius: 6px;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .custom-pagination li a:hover {
-            background-color: #d4d4d4;
-        }
-
-        .custom-pagination li.active a {
-            background-color: #1f883d;
-            color: white;
-            font-weight: bold;
-        }
-
-        .custom-pagination li.disabled a {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-
-        @media (max-width: 576px) {
-            .product-image {
-                height: 160px;
-            }
-        }
-
-        .store-header {
-            flex-wrap: wrap;
-        }
-
-        .store-header>div {
-            flex: 1 1 100%;
-            margin-top: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .store-header>div {
-                flex: initial;
-                margin-top: 0;
-            }
-        }
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{{ asset('css/style_artikel_page.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/media_query.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/owl.theme.default.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('js/modernizr-3.5.0.min.js') }}"></script>
 </head>
 
 <body>
+    <style>
+        .banner-section {
+            font-family: 'Sora', sans-serif;
+            background-image: url('{{ asset('images/artikel-bg.jpg') }}');
+            background-position: center;
+            background-size: cover;
+            color: #000;
+            padding: 150px;
+        }
 
-    <div class="container mt-4">
-        <!-- Store Info -->
-        <div class="store-box p-3 mb-4 rounded shadow-sm bg-white d-flex align-items-center flex-wrap gap-3">
-            <img src="https://images.tokopedia.net/img/cache/215-square/GAnVPX/2022/10/6/bc1cc268-50f7-4c52-b7f1-4011ec60ffb7.jpg"
-                alt="HMNS Logo" class="store-logo">
-            <div>
-                <h5 class="mb-0 fw-bold">Nama Penulis <span class="text-primary"></span></h5>
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    {{-- <button class="btn btn-success btn-sm">Follow</button>
-                    <button class="btn btn-outline-success btn-sm">Chat Penjual</button> --}}
-                    <p>deskripsi kepribasia</p>
-                </div>
-            </div>
-            <div class="ms-auto text-center store-info-text d-flex gap-4 flex-wrap">
-                <div>
-                    <strong class="text-dark"><i class="fa-regular fa-newspaper" style="color: #74C0FC;"></i> &nbsp; 100</strong><br>
-                    <small class="text-muted">Artikel Diterbitkan</small>
-                </div>
-                <div>
-                    <strong class="text-dark"><i class="fa-solid fa-comment" style="color: #74C0FC;"></i> &nbsp; 4</strong><br>
-                    <small class="text-muted">Komentar</small>
-                </div>
-                {{-- <div>
-                    <strong class="text-dark">10:00 - 19:00</strong><br>
-                    <small class="text-muted">Jam operasi toko</small>
-                </div> --}}
-            </div>
+        .banner-section h2 {
+            color: #000000;
+        }
+
+        .fh5co_suceefh5co_height_position_absolute_font .custom-title a {
+            font-size: 30px !important;
+            /* Normal view font size */
+        }
+
+        .fh5co_suceefh5co_height_position_absolute_font_2 .custom-title2 a {
+            font-size: 12px !important;
+            /* Normal view font size */
+        }
+
+        @media (max-width: 768px) {
+            .banner-top {
+                padding-top: 100px;
+            }
+
+            .konten1 {
+                padding: 20px;
+                margin-left: 0;
+            }
+
+            .container-konten {
+                margin-bottom: 20px;
+            }
+
+            .banner-section {
+                padding: 50px;
+            }
+
+            .banner-section h2 {
+                font-size: 15px;
+            }
+
+            .fh5co_suceefh5co_height_position_absolute_font .custom-title a {
+                font-size: 14px !important;
+                /* Smaller font size for screens 768px and below */
+            }
+
+            .fh5co_suceefh5co_height_position_absolute_font_2 .custom-title2 a {
+                font-size: 10px !important;
+                /* Smaller font size for screens 768px and below */
+            }
+
+        }
+
+    </style>
+    <section class="banner-section">
+        <div class="row text-right my-4 banner-top">
+            <h2><b>DESTINASI IMPIAN </b></h2>
+            <h2><span style="color: #000000;"><b>TIPS TERBAIK</b></span></h2>
+            <h2><b>PENGALAMAN TAK TERLUPAKAN</b></h2>
         </div>
+    </section>
+    <div class="container-fluid paddding mb-5">
+        <div class="row mx-0">
 
-
-        <!-- Tabs -->
-        <!-- Navigasi Tab -->
-        <!-- Navigasi Tab -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="beranda-tab" data-bs-toggle="tab" href="#beranda" role="tab"
-                    aria-controls="beranda" aria-selected="true">Sekilas</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="produk-tab" data-bs-toggle="tab" href="#produk" role="tab"
-                    aria-controls="produk" aria-selected="false">Artikel Diterbitkan</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="ulasan-tab" data-bs-toggle="tab" href="#ulasan" role="tab"
-                    aria-controls="ulasan" aria-selected="false">Ulasan & Komentar</a>
-            </li>
-        </ul>
-
-        <!-- Konten Tab -->
-        <div class="tab-content mt-4" id="myTabContent">
-            <div class="tab-pane fade show active" id="beranda" role="tabpanel" aria-labelledby="beranda-tab">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil obcaecati quod accusantium est nulla
-                pariatur distinctio temporibus a, vitae qui dolorum magnam autem possimus praesentium numquam
-                reprehenderit ea sit provident.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quo eum explicabo quaerat, adipisci
-                ea iusto! Consequuntur, officia maxime. Quaerat expedita, in sunt veniam corrupti voluptatibus deleniti
-                maiores quam dolorum!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum cum eius velit quisquam qui blanditiis
-                maxime facilis repudiandae libero earum. Unde dolorum magni odio officiis! Asperiores eaque facilis
-                nobis dignissimos iste cupiditate hic natus eos impedit vitae autem ullam, omnis officia alias accusamus
-                reprehenderit repudiandae veritatis porro incidunt quasi dolor. Est minima nemo illo beatae aliquam rem
-                molestiae provident velit architecto doloribus? Deserunt deleniti, aliquid at blanditiis ad odit
-                voluptate eos pariatur ipsa nulla officiis delectus repellendus totam veniam in numquam? Doloremque
-                veniam iste repellendus adipisci repellat cum soluta ipsam inventore? Eum animi dolore voluptatibus
-                officia qui exercitationem corporis debitis. Exercitationem ex accusamus facere necessitatibus assumenda
-                facilis voluptate veritatis quam alias eligendi doloribus modi cum eum dolore, pariatur iure recusandae
-                ipsa. Ea fugit et laudantium debitis harum commodi deleniti voluptatum voluptates, eligendi hic, dolore
-                autem, alias sit fuga sunt. Adipisci pariatur voluptate ea nihil cumque cupiditate accusamus eum, error
-                soluta tempore iusto odit non aliquam, hic exercitationem explicabo enim quibusdam. Laudantium neque
-                quibusdam ab repudiandae! Perspiciatis, ipsam aliquid! Consequatur rem nam laudantium sequi iste enim
-                animi modi quibusdam obcaecati voluptate corrupti officia, cupiditate sed nostrum eligendi molestiae
-                dicta accusantium eveniet laboriosam, ea non quae ipsum. Laboriosam iure aliquid a iste.
+            {{-- Dummy untuk get_new --}}
+            <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                <div class="fh5co_suceefh5co_height">
+                    <img src="{{ asset('images/dummy-new1.jpg') }}" alt="img" />
+                    <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                    <div class="fh5co_suceefh5co_height_position_absolute_font">
+                        <div>
+                            <a style="text-decoration: none" class="color_fff">
+                                <i class="fa-regular fa-calendar-days"></i>&nbsp;&nbsp;10 April 2025
+                            </a>
+                        </div>
+                        <div class="custom-title">
+                            <a href="#" class="fh5co_good_font">
+                                Judul Utama Dummy 1
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="tab-pane fade" id="produk" role="tabpanel" aria-labelledby="produk-tab">
-                <h5 class="mb-3">Produk Terlaris</h5>
-                <div class="row g-3">
-                    <!-- Contoh produk (copy blok ini untuk tambah produk) -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="product-card position-relative h-100">
-                            <span class="badge badge-custom">Terlaris</span>
-                            <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2023/2/1/f65b3fe3-f26b-474b-b14f-0c8a2990d301.jpg"
-                                class="product-image" alt="ORGAZM">
-                            <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
-                                        100ml</a></h6>
-                                <small>Rp323.000</small>
+
+            {{-- Dummy untuk get_new2 --}}
+            <div class="col-md-6">
+                <div class="row">
+
+                    <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                        <div class="fh5co_suceefh5co_height_2">
+                            <img src="{{ asset('images/dummy-new2.jpg') }}" alt="img" />
+                            <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                            <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                <div>
+                                    <a style="text-decoration: none" class="color_fff">
+                                        <i class="fa-regular fa-calendar-days"></i>&nbsp;&nbsp;11 April 2025
+                                    </a>
+                                </div>
+                                <div class="custom-title2">
+                                    <a href="#" class="fh5co_good_font_2">
+                                        Judul Artikel Dummy 2
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tambahan produk lainnya -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="product-card position-relative h-100">
-                            <span class="badge badge-special">Spesial Untukmu</span>
-                            <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2021/10/30/48b2b041-e7e5-40fa-b8df-2b8eb24f1d10.jpg"
-                                class="product-image" alt="Alpha">
-                            <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
-                                        100ml</a></h6>
-                                <small>Rp320.000</small>
+                    <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                        <div class="fh5co_suceefh5co_height_2">
+                            <img src="{{ asset('images/dummy-new3.jpg') }}" alt="img" />
+                            <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                            <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                <div>
+                                    <a style="text-decoration: none" class="color_fff">
+                                        <i class="fa-regular fa-calendar-days"></i>&nbsp;&nbsp;12 April 2025
+                                    </a>
+                                </div>
+                                <div class="custom-title2">
+                                    <a href="#" class="fh5co_good_font_2">
+                                        Judul Artikel Dummy 3
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="product-card position-relative h-100">
-                            <span class="badge badge-special">Spesial Untukmu</span>
-                            <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2023/2/1/95bcfb52-f5a6-40c2-8a34-17217bca2b2f.jpg"
-                                class="product-image" alt="Farhampton">
-                            <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
-                                        100ml</a></h6>
-                                <small>Rp369.000</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="product-card position-relative h-100">
-                            <span class="badge badge-custom">Terlaris</span>
-                            <img src="https://images.tokopedia.net/img/cache/200-square/VqbcmM/2022/9/6/93c4d902-cd9d-456d-8dc8-21a0d3976d9a.jpg"
-                                class="product-image" alt="The Perfection">
-                            <div class="p-3">
-                                <h6 class="mb-1"><a href="" class="text-artikel-title">HMNS Perfume - The Perfection
-                                        100ml</a></h6>
-                                <small>Rp398.000</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pagination-container d-flex justify-content-center mt-4">
-                        <ul class="custom-pagination">
-                            <li class="disabled"><a href="#"><i class="bi bi-chevron-double-left"></i></a></li>
-                            <li class="disabled"><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-                            <li><a href="#"><i class="bi bi-chevron-double-right"></i></a></li>
-                        </ul>
                     </div>
 
                 </div>
             </div>
-            <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">
-                fszzz
-            </div>
+
         </div>
-
-
-
-
-
-        <!-- Produk Terlaris -->
-
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Pastikan jQuery sudah disertakan -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="container-fluid pt-3">
+        <div class="container animate-box" data-animate-effect="fadeIn">
+            <div>
+                <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Pilihan Editor</div>
+            </div>
+            <div class="owl-carousel owl-theme js" id="slider1">
 
-    <script>
-        $(document).ready(function () {
-            // Fungsi untuk memuat konten saat tab diklik
-            $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-                var target = $(e.target).attr("href"); // Mendapatkan target tab
-                var url = $(e.target).data("url"); // Mendapatkan URL dari atribut data-url
+                <div class="item px-2">
+                    <div class="fh5co_latest_trading_img_position_relative">
+                        <div class="fh5co_latest_trading_img">
+                            <img src="{{ asset('images/dummy-editor1.jpg') }}" alt=""
+                                class="fh5co_img_special_relative" />
+                        </div>
+                        <div class="fh5co_latest_trading_img_position_absolute"></div>
+                        <div class="fh5co_latest_trading_img_position_absolute_1">
+                            <a href="#" class="text-white title-topik">
+                                Judul Artikel Pilihan 1
+                            </a>
+                            <div class="fh5co_latest_trading_date_and_name_color">
+                                Editor Dummy - 03 Januari 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                if (url) {
-                    $(target).load(url); // Memuat konten dari URL ke dalam tab
-                }
-            });
-        });
+                <div class="item px-2">
+                    <div class="fh5co_latest_trading_img_position_relative">
+                        <div class="fh5co_latest_trading_img">
+                            <img src="{{ asset('images/dummy-editor2.jpg') }}" alt=""
+                                class="fh5co_img_special_relative" />
+                        </div>
+                        <div class="fh5co_latest_trading_img_position_absolute"></div>
+                        <div class="fh5co_latest_trading_img_position_absolute_1">
+                            <a href="#" class="text-white title-topik">
+                                Judul Artikel Pilihan 2
+                            </a>
+                            <div class="fh5co_latest_trading_date_and_name_color">
+                                Penulis Contoh - 04 Januari 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="item px-2">
+                    <div class="fh5co_latest_trading_img_position_relative">
+                        <div class="fh5co_latest_trading_img">
+                            <img src="{{ asset('images/dummy-editor3.jpg') }}" alt=""
+                                class="fh5co_img_special_relative" />
+                        </div>
+                        <div class="fh5co_latest_trading_img_position_absolute"></div>
+                        <div class="fh5co_latest_trading_img_position_absolute_1">
+                            <a href="#" class="text-white title-topik">
+                                Judul Artikel Pilihan 3
+                            </a>
+                            <div class="fh5co_latest_trading_date_and_name_color">
+                                Editor Test - 05 Januari 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid fh5co_video_news_bg pb-4">
+        <div class="container animate-box" data-animate-effect="fadeIn">
+            <div>
+                <div class="fh5co_heading fh5co_heading_border_bottom pt-5 pb-2 mb-4 ">Jelajah Alam Indonesia</div>
+            </div>
+            <div>
+                <div class="owl-carousel owl-theme" id="slider3">
+                    <div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_hover_news_img_video_tag_position_relative">
+                                <div class="fh5co_news_img">
+                                    <iframe id="video" width="100%" height="200"
+                                        src="https://www.youtube.com/embed/qjP4QdZK7tc?si=QxeI-L6I7zWgeEpt"
+                                        frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide">
+                                    <img src="images/ariel-lustre-208615.jpg" alt="" />
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide"
+                                    id="play-video">
+                                    <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
+                                        <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
+                                            <span><i class="fa fa-play"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
+                                    <span class="">Wonderful Indonesia | Bali </span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_hover_news_img_video_tag_position_relative">
+                                <div class="fh5co_news_img">
+                                    <iframe id="video_2" width="100%" height="200"
+                                        src="https://www.youtube.com/embed/1V_4-f5Ocy4?si=Me_zu1y1SxLJdr1f"
+                                        frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide_2">
+                                    <img src="images/39-324x235.jpg" alt="" /></div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide_2"
+                                    id="play-video_2">
+                                    <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
+                                        <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
+                                            <span><i class="fa fa-play"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
+                                    <span class="">Wonderful Indonesia | Yogyakarta</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_hover_news_img_video_tag_position_relative">
+                                <div class="fh5co_news_img">
+                                    <iframe id="video_3" width="100%" height="200"
+                                        src="https://www.youtube.com/embed/HZVuxztLDwI?si=mRsOsKQ4G038qu4U"
+                                        frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide_3">
+                                    <img src="images/joe-gardner-75333.jpg" alt="" /></div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide_3"
+                                    id="play-video_3">
+                                    <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
+                                        <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
+                                            <span><i class="fa fa-play"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
+                                    <span class="">Visit KarimunJawa | KarimunJawa</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_hover_news_img_video_tag_position_relative">
+                                <div class="fh5co_news_img">
+                                    <iframe id="video_4" width="100%" height="200"
+                                        src="https://www.youtube.com/embed/ruKqXQ2KtH4?si=ZhVixFQoszSs1Kpw"
+                                        frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide_4">
+                                    <img src="images/vil-son-35490.jpg" alt="" />
+                                </div>
+                                <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide_4"
+                                    id="play-video_4">
+                                    <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
+                                        <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
+                                            <span><i class="fa fa-play"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
+                                    <span class="">Wonderful Indonesia | East Java</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid pb-4 pt-4 paddding">
+        <div class="container paddding">
+            <div class="row mx-0">
+                <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                    <div>
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Jelajahi Artikel</div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div class="col-md-5">
+                            <div class="fh5co_hover_news_img">
+                                <div class="fh5co_news_img">
+                                    <img src="{{ asset('images/dummy-thumbnail.jpg') }}" alt="" />
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 animate-box">
+                            <a href="#" class="fh5co_magna py-2">
+                                Judul Artikel Dummy 1
+                            </a><br>
+                            <a class="fh5co_mini_time py-3"> Penulis Dummy - 01 Januari 2025 </a>
+                            <div class="fh5co_consectetur">
+                                Ini adalah deskripsi singkat artikel dummy yang hanya digunakan sebagai contoh tampilan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div class="col-md-5">
+                            <div class="fh5co_hover_news_img">
+                                <div class="fh5co_news_img">
+                                    <img src="{{ asset('images/dummy-thumbnail2.jpg') }}" alt="" />
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 animate-box">
+                            <a href="#" class="fh5co_magna py-2">
+                                Judul Artikel Dummy 2
+                            </a><br>
+                            <a class="fh5co_mini_time py-3"> Penulis Contoh - 02 Januari 2025 </a>
+                            <div class="fh5co_consectetur">
+                                Deskripsi singkat artikel dummy kedua yang menampilkan ringkasan isi konten.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                    <div>
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Kategori</div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="fh5co_tags_all">
+                        <a href="#" class="fh5co_tagg">Kategori A</a>
+                        <a href="#" class="fh5co_tagg">Kategori B</a>
+                        <a href="#" class="fh5co_tagg">Kategori C</a>
+                        <a href="#" class="fh5co_tagg">Kategori D</a>
+                        <a href="#" class="fh5co_tagg">Kategori E</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
+                <div class="col-12 text-center pb-4 pt-4">
+                    {{-- {{ $data['get_artikel']->links() }} --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
     </script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
+    </script>
+    <!-- Waypoints -->
+    <script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
+    <!-- Main -->
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>

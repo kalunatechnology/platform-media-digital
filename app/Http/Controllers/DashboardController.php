@@ -514,6 +514,22 @@ class DashboardController extends Controller
 
         return view('Dashboard.pages.editor_check.preview_editor_check', ['data' => $data, 'card' => $card]);
     }
+    public function preview_published_admin ($id)
+    {
+        $data = Articles::with('user')->find($id);
+        $username = FacadesSession::get('username');
+        $kategori = Categories::select('*')->get();
+
+
+
+        $card = [
+            'username' => $username,
+            'kategori' => $kategori
+
+        ];
+
+        return view('Dashboard.pages.preview.preview_published_admin', ['data' => $data, 'card' => $card]);
+    }
     public function published_admin (Request $request)
     {
         $keyword = $request->keyword;

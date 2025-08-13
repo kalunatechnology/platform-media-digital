@@ -63,6 +63,7 @@ Route::group(['prefix' => 'backoffice', 'middleware' => 'auth:web'], function ()
     Route::put('/artikel/{id}/publish', [DashboardController::class, 'publishArtikel'])->name('artikel.publish');
     Route::put('/artikel2/{id}/publish', [DashboardController::class, 'publishArtikel2'])->name('artikel.publish2');
     Route::get('/preview_editor_check/{id}', [DashboardController::class, 'preview_editor_check'])->name('preview_editor_check');
+    Route::get('/preview_published_admin/{id}', [DashboardController::class, 'preview_published_admin'])->name('preview_published_admin');
     Route::get('/published_admin', [DashboardController::class, 'published_admin'])->name('published_admin');
     Route::put('/artikel/{id}/perpanjang', [DashboardController::class, 'perpanjangArtikel'])->name('artikel.perpanjang');
     Route::get('/{id}/arsipkan_admin', [DashboardController::class, 'arsipkanAdmin'])->name('arsipkanAdmin');

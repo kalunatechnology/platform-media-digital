@@ -522,7 +522,7 @@
                                         {{ \Carbon\Carbon::parse($artikel->date_end)->translatedFormat('d F Y') }}
                                     </td>
                                     <td class="d-flex">
-                                        <a href="/backoffice/preview_draft/{{ $artikel->id }}"
+                                        <a href="/backoffice/preview_published_admin/{{ $artikel->id }}"
                                             class="btn btn-primary btn-sm bg-primary mx-1 text-white detail-button">Lihat Artikel</a>
                                         <button type="button" class="btn btn-warning btn-sm bg-warning mx-1 text-black" data-bs-toggle="modal"
                                             data-bs-target="#publishModal{{ $artikel->id }}">
