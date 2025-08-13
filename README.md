@@ -1,4 +1,4 @@
-# visualisasi_prapemilu-v2-
+# platform media digital-
 
 # Cara install aplikasi
 
@@ -8,7 +8,7 @@
 - MYSQL
 
 ## cara Install 
-`git clone https://github.com/kalunatechnology/quick_count.git`
+`git clone https://github.com/kalunatechnology/platform-media-digital.git`
 `composer install`
 `php artisan storage:link`
 `npm install` 
